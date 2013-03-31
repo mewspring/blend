@@ -7,13 +7,15 @@ import (
 	"io"
 	"os"
 	"strconv"
+
+	"github.com/mewmew/blend/block"
 )
 
 // Blend represents the information contained within a blend file. It contains a
 // file header and a slice of file blocks.
 type Blend struct {
 	Hdr    *Header
-	Blocks []*Block
+	Blocks []*block.Block
 }
 
 // Parse parsers the provided blend file.
@@ -33,11 +35,11 @@ func Parse(filePath string) (b *Blend, err error) {
 
 	// Parse file blocks.
 	for {
-		blk, err := b.ParseBlock(f)
+		blk, err := block.Parse(f, b.Hdr.Order, b.Hdr.PtrSize)
 		if err != nil {
 			return nil, err
 		}
-		if blk.Hdr.Code == CodeENDB {
+		if blk.Hdr.Code == block.CodeENDB {
 			break
 		}
 

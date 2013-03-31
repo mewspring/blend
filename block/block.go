@@ -1,4 +1,4 @@
-package blend
+package block
 
 import (
 	"encoding/binary"
@@ -9,16 +9,17 @@ import (
 
 // A Block contains a header and a type dependent body.
 type Block struct {
-	Hdr *BlockHeader
+	Hdr *Header
 	// Body contains an *io.SectionReader which is later replaced with a concrete
 	// block type after it has been parsed.
 	Body interface{}
 }
 
-func (b *Blend) ParseBlock(f *os.File) (blk *Block, err error) {
+// Parse parses and returns a file block.
+func Parse(f *os.File, order binary.ByteOrder, ptrSize int) (blk *Block, err error) {
 	// Parse block header.
 	blk = new(Block)
-	blk.Hdr, err = b.ParseBlockHeader(f)
+	blk.Hdr, err = ParseHeader(f, order, ptrSize)
 	if err != nil {
 		return nil, err
 	}
@@ -33,8 +34,8 @@ func (b *Blend) ParseBlock(f *os.File) (blk *Block, err error) {
 	return blk, nil
 }
 
-// BlockHeader contains information about the block's type and size.
-type BlockHeader struct {
+// Header contains information about the block's type and size.
+type Header struct {
 	// Code provides a rough type description of the block.
 	Code BlockCode
 	// Total length of the data after the block header.
@@ -47,7 +48,7 @@ type BlockHeader struct {
 	Count int
 }
 
-// ParseBlockHeader parses and returns a file block header.
+// ParseHeader parses and returns a file block header.
 //
 // Example file block header:
 //    44 41 54 41  E0 00 00 00  88 5E 9D 04  00 00 00 00    DATA.....^......
@@ -58,14 +59,14 @@ type BlockHeader struct {
 //    //  8-15   old addr     (0x00000000049D5E88) // size depends on PtrSize.
 //    // 16-19   sdna index   (0x000000F8 = 248)
 //    // 20-23   count        (0x0000000E = 14)
-func (b *Blend) ParseBlockHeader(r io.Reader) (hdr *BlockHeader, err error) {
+func ParseHeader(r io.Reader, order binary.ByteOrder, ptrSize int) (hdr *Header, err error) {
 	// Block code.
 	buf := make([]byte, 4)
 	_, err = io.ReadFull(r, buf)
 	if err != nil {
 		return nil, err
 	}
-	hdr = new(BlockHeader)
+	hdr = new(Header)
 	code := string(buf)
 	switch code {
 	case "BR\x00\x00":
@@ -103,29 +104,29 @@ func (b *Blend) ParseBlockHeader(r io.Reader) (hdr *BlockHeader, err error) {
 	case "WO\x00\x00":
 		hdr.Code = CodeWO
 	default:
-		return nil, fmt.Errorf("Header.ParseBlockHeader: block code %q not yet implemented.", code)
+		return nil, fmt.Errorf("Header.ParseHeader: block code %q not yet implemented.", code)
 	}
 
 	// Block size.
 	var x int32
-	err = binary.Read(r, b.Hdr.Order, &x)
+	err = binary.Read(r, order, &x)
 	if err != nil {
 		return nil, err
 	}
 	hdr.Size = int64(x)
 
 	// Old memory address.
-	switch b.Hdr.PtrSize {
+	switch ptrSize {
 	case 4:
 		var x uint32
-		err = binary.Read(r, b.Hdr.Order, &x)
+		err = binary.Read(r, order, &x)
 		if err != nil {
 			return nil, err
 		}
 		hdr.OldAddr = uint64(x)
 	case 8:
 		var x uint64
-		err = binary.Read(r, b.Hdr.Order, &x)
+		err = binary.Read(r, order, &x)
 		if err != nil {
 			return nil, err
 		}
@@ -133,14 +134,14 @@ func (b *Blend) ParseBlockHeader(r io.Reader) (hdr *BlockHeader, err error) {
 	}
 
 	// SDNA index.
-	err = binary.Read(r, b.Hdr.Order, &x)
+	err = binary.Read(r, order, &x)
 	if err != nil {
 		return nil, err
 	}
 	hdr.SDNAIndex = int(x)
 
 	// Structure count.
-	err = binary.Read(r, b.Hdr.Order, &x)
+	err = binary.Read(r, order, &x)
 	if err != nil {
 		return nil, err
 	}

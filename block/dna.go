@@ -6,8 +6,6 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-
-	"github.com/mewmew/blend"
 )
 
 // DNA stores information about the various structures contained within a blend
@@ -52,7 +50,7 @@ type DNAField struct {
 }
 
 // ParseDNA parses and returns the body of the "DNA1" block.
-func ParseDNA(r io.Reader, b *blend.Blend) (body *DNA, err error) {
+func ParseDNA(r io.Reader, order binary.ByteOrder) (body *DNA, err error) {
 	br := bufio.NewReader(r)
 	rawId := make([]byte, 4)
 
@@ -78,7 +76,7 @@ func ParseDNA(r io.Reader, b *blend.Blend) (body *DNA, err error) {
 
 	// Name count.
 	var x32 int32
-	err = binary.Read(br, b.Hdr.Order, &x32)
+	err = binary.Read(br, order, &x32)
 	if err != nil {
 		return nil, err
 	}
@@ -112,7 +110,7 @@ func ParseDNA(r io.Reader, b *blend.Blend) (body *DNA, err error) {
 	}
 
 	// Type count.
-	err = binary.Read(br, b.Hdr.Order, &x32)
+	err = binary.Read(br, order, &x32)
 	if err != nil {
 		return nil, err
 	}
@@ -149,7 +147,7 @@ func ParseDNA(r io.Reader, b *blend.Blend) (body *DNA, err error) {
 	body.TypeSizes = make([]int, typeCount)
 	total = 0
 	for i := range body.TypeSizes {
-		err = binary.Read(br, b.Hdr.Order, &x16)
+		err = binary.Read(br, order, &x16)
 		if err != nil {
 			return nil, err
 		}
@@ -172,7 +170,7 @@ func ParseDNA(r io.Reader, b *blend.Blend) (body *DNA, err error) {
 	}
 
 	// Structure count.
-	err = binary.Read(br, b.Hdr.Order, &x32)
+	err = binary.Read(br, order, &x32)
 	if err != nil {
 		return nil, err
 	}
@@ -182,14 +180,14 @@ func ParseDNA(r io.Reader, b *blend.Blend) (body *DNA, err error) {
 	body.Structs = make([]DNAStruct, structCount)
 	for i := range body.Structs {
 		// Structure type.
-		err = binary.Read(br, b.Hdr.Order, &x16)
+		err = binary.Read(br, order, &x16)
 		if err != nil {
 			return nil, err
 		}
 		body.Structs[i].Type = body.Types[x16]
 
 		// Field count.
-		err = binary.Read(br, b.Hdr.Order, &x16)
+		err = binary.Read(br, order, &x16)
 		if err != nil {
 			return nil, err
 		}
@@ -199,14 +197,14 @@ func ParseDNA(r io.Reader, b *blend.Blend) (body *DNA, err error) {
 		// Fields.
 		for j := range body.Structs[i].Fields {
 			// Field type.
-			err = binary.Read(br, b.Hdr.Order, &x16)
+			err = binary.Read(br, order, &x16)
 			if err != nil {
 				return nil, err
 			}
 			body.Structs[i].Fields[j].Type = body.Types[x16]
 
 			// Field name.
-			err = binary.Read(br, b.Hdr.Order, &x16)
+			err = binary.Read(br, order, &x16)
 			if err != nil {
 				return nil, err
 			}
