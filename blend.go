@@ -16,18 +16,22 @@ import (
 type Blend struct {
 	Hdr    *Header
 	Blocks []*block.Block
+	// io.Closer of the underlying file.
+	io.Closer
 }
 
 // Parse parsers the provided blend file.
+//
+// Caller should close b when done reading from it.
 func Parse(filePath string) (b *Blend, err error) {
+	b = new(Blend)
 	f, err := os.Open(filePath)
 	if err != nil {
 		return nil, err
 	}
-	defer f.Close()
+	b.Closer = f
 
 	// Parse file header.
-	b = new(Blend)
 	b.Hdr, err = ParseHeader(f)
 	if err != nil {
 		return nil, err
