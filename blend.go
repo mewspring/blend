@@ -33,15 +33,15 @@ func Parse(filePath string) (b *Blend, err error) {
 
 	// Parse file blocks.
 	for {
-		block, err := b.ParseBlock(f)
+		blk, err := b.ParseBlock(f)
 		if err != nil {
 			return nil, err
 		}
-		if block.Hdr.Code == CodeENDB {
+		if blk.Hdr.Code == CodeENDB {
 			break
 		}
 
-		b.Blocks = append(b.Blocks, block)
+		b.Blocks = append(b.Blocks, blk)
 	}
 
 	return b, nil

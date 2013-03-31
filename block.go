@@ -15,22 +15,22 @@ type Block struct {
 	Body interface{}
 }
 
-func (b *Blend) ParseBlock(f *os.File) (block *Block, err error) {
+func (b *Blend) ParseBlock(f *os.File) (blk *Block, err error) {
 	// Parse block header.
-	block = new(Block)
-	block.Hdr, err = b.ParseBlockHeader(f)
+	blk = new(Block)
+	blk.Hdr, err = b.ParseBlockHeader(f)
 	if err != nil {
 		return nil, err
 	}
 
 	// Store section reader for block body.
-	off, err := f.Seek(block.Hdr.Size, os.SEEK_CUR)
+	off, err := f.Seek(blk.Hdr.Size, os.SEEK_CUR)
 	if err != nil {
 		return nil, err
 	}
-	block.Body = io.NewSectionReader(f, off-block.Hdr.Size, block.Hdr.Size)
+	blk.Body = io.NewSectionReader(f, off-blk.Hdr.Size, blk.Hdr.Size)
 
-	return block, nil
+	return blk, nil
 }
 
 // BlockHeader contains information about the block's type and size.
