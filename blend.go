@@ -21,7 +21,10 @@ type Blend struct {
 	io.Closer
 }
 
-// Parse parsers the provided blend file.
+// Parse parsers the provided blend file. An *io.SectionReader is stored in each
+// individual block body. By default, blocks must be parsed manually using the
+// ParseBody method. Use ParseAll for a complete parsing of the blend file,
+// including all block bodies.
 //
 // Caller should close b when done reading from it.
 func Parse(filePath string) (b *Blend, err error) {
@@ -49,6 +52,28 @@ func Parse(filePath string) (b *Blend, err error) {
 		}
 
 		b.Blocks = append(b.Blocks, blk)
+	}
+
+	return b, nil
+}
+
+// ParseAll parses the blend file and all block bodies.
+func ParseAll(filePath string) (b *Blend, err error) {
+	// Parse file header and block headers.
+	b, err = Parse(filePath)
+	if err != nil {
+		return nil, err
+	}
+
+	// Parse DNA block.
+	dna, err := b.GetDNA()
+	if err != nil {
+		return nil, err
+	}
+
+	// Parse block bodies.
+	for _, blk := range b.Blocks {
+		blk.ParseBody(b.Hdr.Order, dna)
 	}
 
 	return b, nil
