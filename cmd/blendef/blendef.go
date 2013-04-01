@@ -33,11 +33,13 @@ func blendef(filePath string) (err error) {
 		return err
 	}
 
+	// Generate struct.go
 	err = genStruct(b, dna)
 	if err != nil {
 		return err
 	}
 
+	// Generate parse.go
 	err = genParse(b, dna)
 	if err != nil {
 		return err
