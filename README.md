@@ -1,8 +1,8 @@
-WIP
----
+partial implementation
+----------------------
 
-This project is a *work in progress*. The implementation is *incomplete* and
-subject to change. The documentation can be inaccurate.
+This implementation is only *partially complete*. While useable it is still
+missing a lot of features.
 
 blend
 =====
