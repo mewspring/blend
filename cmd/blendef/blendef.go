@@ -19,20 +19,29 @@ func main() {
 
 // blendef parses the provided blend file and generates the following Go files:
 //
-//    block_def.go   // structure definitions
-//    block_parse.go // block parser logic
+//    struct.go // structure definitions
+//    parse.go  // block parser logic
 func blendef(filePath string) (err error) {
 	b, err := blend.Parse(filePath)
 	if err != nil {
 		return err
 	}
-	err = genStruct(b)
+	defer b.Close()
+
+	dna, err := b.GetDNA()
 	if err != nil {
 		return err
 	}
-	err = genParse(b)
+
+	err = genStruct(b, dna)
 	if err != nil {
 		return err
 	}
+
+	err = genParse(b, dna)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
