@@ -91,7 +91,6 @@ func genStruct(b *blend.Blend, dna *block.DNA) (err error) {
 	// Generate Go structure definitions.
 	for index, st := range dna.Structs {
 		fmt.Fprintln(f, "// SDNA index:", index)
-		fmt.Fprintln(f, "// size:", size[st.Type])
 		fmt.Fprintf(f, "type %s struct {\n", strings.Title(st.Type))
 		for _, field := range st.Fields {
 			// Parse and capitalize field name.
