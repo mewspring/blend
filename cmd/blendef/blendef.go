@@ -2,18 +2,30 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
+	"os"
 
 	"github.com/mewmew/blend"
 )
 
+func init() {
+	flag.Usage = usage
+}
+
+func usage() {
+	fmt.Fprintln(os.Stderr, "Usage: blendef FILE.blend")
+}
+
 func main() {
 	flag.Parse()
-	for _, filePath := range flag.Args() {
-		err := blendef(filePath)
-		if err != nil {
-			log.Fatalln(err)
-		}
+	if flag.NArg() != 1 {
+		flag.Usage()
+		os.Exit(1)
+	}
+	err := blendef(flag.Arg(0))
+	if err != nil {
+		log.Fatalln(err)
 	}
 }
 
