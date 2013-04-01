@@ -18,9 +18,11 @@ Documentation
 
 Documentation provided by GoDoc.
 
-   - [blend][]
+- [blend][]
+	- [block][]
 
 [blend]: http://godoc.org/github.com/mewmew/blend
+[block]: http://godoc.org/github.com/mewmew/blend/block
 
 public domain
 -------------
