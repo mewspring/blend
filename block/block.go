@@ -1,3 +1,4 @@
+// Package block implements parsing of blend file blocks.
 package block
 
 import (
