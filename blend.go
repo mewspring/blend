@@ -64,6 +64,7 @@ func ParseAll(filePath string) (b *Blend, err error) {
 	if err != nil {
 		return nil, err
 	}
+	defer b.Close()
 
 	// Parse DNA block.
 	dna, err := b.GetDNA()
