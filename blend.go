@@ -3,6 +3,7 @@ package blend
 
 import (
 	"encoding/binary"
+	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -51,6 +52,31 @@ func Parse(filePath string) (b *Blend, err error) {
 	}
 
 	return b, nil
+}
+
+// GetDNA locates, parses and returns the DNA block.
+func (b *Blend) GetDNA() (dna *block.DNA, err error) {
+	for _, blk := range b.Blocks {
+		dna, ok := blk.Body.(*block.DNA)
+		if ok {
+			// DNA block already parsed.
+			return dna, nil
+		}
+		if blk.Hdr.Code == block.CodeDNA1 {
+			// Parse the DNA block body and store it in blk.Body.
+			r, ok := blk.Body.(io.Reader)
+			if !ok {
+				return nil, errors.New("Blend.GetDNA: unable to locate DNA block body reader.")
+			}
+			dna, err = block.ParseDNA(r, b.Hdr.Order)
+			if err != nil {
+				return nil, err
+			}
+			blk.Body = dna
+			return dna, nil
+		}
+	}
+	return nil, errors.New("Blend.GetDNA: unable to locate DNA block.")
 }
 
 // A Header is present at the beginning of each blend file.
