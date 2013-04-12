@@ -2,7 +2,25 @@
 
 package block
 
+import (
+	"fmt"
+)
+
+// Pointer is the memory address of a structure when it was written to disk.
 type Pointer uint64
+
+// Addr is a map from the memory address of a structure (when it was written to
+// disk) to it's file block.
+var Addr = make(map[uint64]*Block)
+
+// Data translates the memory address into a usable pointer and returns it.
+func (addr Pointer) Data() (data interface{}, err error) {
+	blk, ok := Addr[uint64(addr)]
+	if !ok {
+		return nil, fmt.Errorf("Pointer.Data: unable to locate data for pointer %p.", addr)
+	}
+	return blk.Body, nil
+}
 
 // SDNA index: 0
 type Link struct {

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	blend "."
+	"github.com/mewmew/blend"
 )
 
 func ExampleBlend() {

@@ -80,6 +80,11 @@ func genStruct(b *blend.Blend, dna *block.DNA) (err error) {
 	fmt.Fprintln(f)
 	fmt.Fprintln(f, "package block")
 	fmt.Fprintln(f)
+	fmt.Fprintln(f, "import (")
+	fmt.Fprintln(f, `	"fmt"`)
+	fmt.Fprintln(f, ")")
+	fmt.Fprintln(f)
+	fmt.Fprintln(f, "// Pointer is the memory address of a structure when it was written to disk.")
 	switch b.Hdr.PtrSize {
 	case 4:
 		fmt.Fprintln(f, "type Pointer uint32")
@@ -87,6 +92,7 @@ func genStruct(b *blend.Blend, dna *block.DNA) (err error) {
 		fmt.Fprintln(f, "type Pointer uint64")
 	}
 	fmt.Fprintln(f)
+	fmt.Fprintln(f, pointerCode)
 
 	// Generate Go structure definitions.
 	for index, st := range dna.Structs {
@@ -218,3 +224,17 @@ func parseName(s string) (name string, isFunc bool, ptrCount int, arraySizes []i
 		arraySizes = append(arraySizes, arraySize)
 	}
 }
+
+const pointerCode = `// Addr is a map from the memory address of a structure (when it was written to
+// disk) to it's file block.
+var Addr = make(map[uint64]*Block)
+
+// Data translates the memory address into a usable pointer and returns it.
+func (addr Pointer) Data() (data interface{}, err error) {
+	blk, ok := Addr[uint64(addr)]
+	if !ok {
+		return nil, fmt.Errorf("Pointer.Data: unable to locate data for pointer %p.", addr)
+	}
+	return blk.Body, nil
+}
+`

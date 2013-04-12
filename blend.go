@@ -50,6 +50,11 @@ func Parse(filePath string) (b *Blend, err error) {
 		if blk.Hdr.Code == block.CodeENDB {
 			break
 		}
+		_, ok := block.Addr[blk.Hdr.OldAddr]
+		if ok {
+			return nil, fmt.Errorf("blend.Parse: multiple occurances of struct address %p.", blk.Hdr.OldAddr)
+		}
+		block.Addr[blk.Hdr.OldAddr] = blk
 
 		b.Blocks = append(b.Blocks, blk)
 	}
@@ -58,6 +63,8 @@ func Parse(filePath string) (b *Blend, err error) {
 }
 
 // ParseAll parses the blend file and all block bodies.
+//
+// ParseAll closes b when done reading from it.
 func ParseAll(filePath string) (b *Blend, err error) {
 	// Parse file header and block headers.
 	b, err = Parse(filePath)
