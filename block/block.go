@@ -18,8 +18,8 @@ package block
 
 import (
 	"encoding/binary"
-	"fmt"
 	"io"
+	"log"
 	"os"
 )
 
@@ -120,7 +120,8 @@ func ParseHeader(r io.Reader, order binary.ByteOrder, ptrSize int) (hdr *Header,
 	case "WO\x00\x00":
 		hdr.Code = CodeWO
 	default:
-		return nil, fmt.Errorf("Header.ParseHeader: block code %q not yet implemented.", code)
+		log.Printf("Header.ParseHeader: block code %q not yet implemented.\n", code)
+		hdr.Code = CodeUnknown
 	}
 
 	// Block size.
@@ -215,4 +216,6 @@ const (
 	CodeTEST
 	CodeWM
 	CodeWO
+
+	CodeUnknown BlockCode = -1
 )
