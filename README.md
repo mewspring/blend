@@ -36,6 +36,14 @@ A more detailed description is given under the "self-describing format" section.
 Examples
 --------
 
+* Extract an embedded thumbnail from a blend file.
+
+	go get github.com/mewmew/blend/examples/blendview
+	cd $GOPATH/src/github.com/mewmew/blend/testdata
+	blendview block.blend
+
+![Extracted thumbnail](https://github.com/mewmew/blend/blob/master/examples/blendview/block.png?raw=true)
+
 * Parse a single block in a blend file.
 
 	http://godoc.org/github.com/mewmew/blend#_example_Blend
