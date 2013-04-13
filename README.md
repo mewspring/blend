@@ -38,9 +38,9 @@ Examples
 
 * Extract an embedded thumbnail from a blend file.
 
-	go get github.com/mewmew/blend/examples/blendview
-	cd $GOPATH/src/github.com/mewmew/blend/testdata
-	blendview block.blend
+		go get github.com/mewmew/blend/examples/blendview
+		cd $GOPATH/src/github.com/mewmew/blend/testdata
+		blendview block.blend
 
 ![Extracted thumbnail](https://github.com/mewmew/blend/blob/master/examples/blendview/block.png?raw=true)
 
