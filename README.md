@@ -1,9 +1,3 @@
-partial implementation
-----------------------
-
-This implementation is only *partially complete*. While useable it is still
-missing a lot of features.
-
 blend
 =====
 
@@ -23,6 +17,51 @@ Documentation provided by GoDoc.
 
 [blend]: http://godoc.org/github.com/mewmew/blend
 [block]: http://godoc.org/github.com/mewmew/blend/block
+
+Installation
+------------
+
+	go get github.com/mewmew/blend
+
+To parse more complex blend files "block/struct.go" and "block/parse.go" may
+have to be regenereted. To regenerate these two files for any given blend file,
+use the *blendef* tool.
+
+	go get github.com/mewmew/blend/cmd/blendef
+	cd $GOPATH/src/github.com/mewmew/blend/block
+	blendef /path/to/complex.blend
+
+A more detailed description is given under the "self-describing format" section.
+
+Examples
+--------
+
+* Parse a single block in a blend file.
+
+	http://godoc.org/github.com/mewmew/blend#_example_Blend
+
+* Parse all blocks in a blend file and access the data of a pointer.
+
+	http://godoc.org/github.com/mewmew/blend/block#_example_Pointer
+
+Self-describing format
+----------------------
+
+One unique feature of blend files is that they contain a full definition of
+every structure used in it's file blocks. The structure definitions are stored
+in the DNA block.
+
+All block structure definitions ("block/struct.go") and the block parsing logic
+("block/parse.go") have been generating by parsing the DNA block of
+"testdata/block.blend".
+
+The tool which was used to generate these two files is located at:
+
+	github.com/mewmew/blend/cmd/blendef
+
+More complex blend files may contain structures which are not yet defined in the
+block package. If so, use *blendef* to regenerate "struct.go" and "parse.go" for
+the given blend file.
 
 public domain
 -------------
