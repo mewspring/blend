@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"os"
 	"strconv"
 
@@ -175,6 +176,17 @@ func ParseHeader(r io.Reader) (hdr *Header, err error) {
 	if err != nil {
 		return nil, fmt.Errorf("blend.ParseHeader: invalid version; %s", err)
 	}
+	if WarnVersion {
+		if hdr.Ver != block.BlenderVer {
+			log.Printf("Warning: Version mismatch between file (v%d) and block package (v%d).\n", hdr.Ver, block.BlenderVer)
+			log.Println("Use blendef [1] to update the block package.")
+			log.Println("[1]: github.com/mewmew/blend/cmd/blendef")
+		}
+	}
 
 	return hdr, nil
 }
+
+// When WarnVersion is set to true, ParseHeader will report warnings if the
+// Blender version of the blend file and the block package differs.
+var WarnVersion = true

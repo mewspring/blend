@@ -34,6 +34,7 @@ func main() {
 //    struct.go // structure definitions
 //    parse.go  // block parser logic
 func blendef(filePath string) (err error) {
+	blend.WarnVersion = false
 	b, err := blend.Parse(filePath)
 	if err != nil {
 		return err

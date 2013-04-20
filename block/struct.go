@@ -1,10 +1,15 @@
-// NOTE: generated automatically by blendef.
+// NOTE: generated automatically by blendef for Blender v266.
 
 package block
 
 import (
 	"fmt"
 )
+
+// BlenderVer is the version of Blender used when generating the files
+// "parse.go" and "struct.go" of this package. Use blendef to regenerate these
+// files if this version differs from the blend file's version.
+const BlenderVer = 266
 
 // Pointer is the memory address of a structure when it was written to disk.
 type Pointer uint64

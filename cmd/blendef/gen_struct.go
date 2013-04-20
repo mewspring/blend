@@ -76,13 +76,18 @@ func genStruct(b *blend.Blend, dna *block.DNA) (err error) {
 	}
 
 	// Generate Go pointer definition.
-	fmt.Fprintln(f, "// NOTE: generated automatically by blendef.")
+	fmt.Fprintf(f, "// NOTE: generated automatically by blendef for Blender v%d.\n", b.Hdr.Ver)
 	fmt.Fprintln(f)
 	fmt.Fprintln(f, "package block")
 	fmt.Fprintln(f)
 	fmt.Fprintln(f, "import (")
 	fmt.Fprintln(f, `	"fmt"`)
 	fmt.Fprintln(f, ")")
+	fmt.Fprintln(f)
+	fmt.Fprintln(f, `// BlenderVer is the version of Blender used when generating the files`)
+	fmt.Fprintln(f, `// "parse.go" and "struct.go" of this package. Use blendef to regenerate these`)
+	fmt.Fprintln(f, `// files if this version differs from the blend file's version.`)
+	fmt.Fprintf(f, "const BlenderVer = %d\n", b.Hdr.Ver)
 	fmt.Fprintln(f)
 	fmt.Fprintln(f, "// Pointer is the memory address of a structure when it was written to disk.")
 	switch b.Hdr.PtrSize {

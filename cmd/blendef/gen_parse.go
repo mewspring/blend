@@ -35,7 +35,7 @@ func genParse(b *blend.Blend, dna *block.DNA) (err error) {
 	sort.Strings(typeNames)
 
 	// Generate start of struct.go file.
-	fmt.Fprint(f, preStruct)
+	fmt.Fprintf(f, preStruct, b.Hdr.Ver)
 
 	// Generate block body parsing cases.
 	for _, typeName := range typeNames {
@@ -49,7 +49,7 @@ func genParse(b *blend.Blend, dna *block.DNA) (err error) {
 	return nil
 }
 
-const preStruct = `// NOTE: generated automatically by blendef.
+const preStruct = `// NOTE: generated automatically by blendef for Blender v%d.
 
 package block
 
@@ -94,7 +94,7 @@ func (blk *Block) ParseBody(order binary.ByteOrder, dna *DNA) (err error) {
 				return err
 			}
 		default:
-			return fmt.Errorf("Block.ParseBody: parsing of %q not yet implemented.", blk.Hdr.Code)
+			return fmt.Errorf("Block.ParseBody: parsing of %%q not yet implemented.", blk.Hdr.Code)
 		}
 	} else {
 		// Parse based on SDNA index.
