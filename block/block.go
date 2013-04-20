@@ -85,6 +85,8 @@ func ParseHeader(r io.Reader, order binary.ByteOrder, ptrSize int) (hdr *Header,
 	hdr = new(Header)
 	code := string(buf)
 	switch code {
+	case "AR\x00\x00":
+		hdr.Code = CodeAR
 	case "BR\x00\x00":
 		hdr.Code = CodeBR
 	case "CA\x00\x00":
@@ -97,6 +99,8 @@ func ParseHeader(r io.Reader, order binary.ByteOrder, ptrSize int) (hdr *Header,
 		hdr.Code = CodeENDB
 	case "GLOB":
 		hdr.Code = CodeGLOB
+	case "IM\x00\x00":
+		hdr.Code = CodeIM
 	case "LA\x00\x00":
 		hdr.Code = CodeLA
 	case "MA\x00\x00":
@@ -115,6 +119,8 @@ func ParseHeader(r io.Reader, order binary.ByteOrder, ptrSize int) (hdr *Header,
 		hdr.Code = CodeTE
 	case "TEST":
 		hdr.Code = CodeTEST
+	case "TX\x00\x00":
+		hdr.Code = CodeTX
 	case "WM\x00\x00":
 		hdr.Code = CodeWM
 	case "WO\x00\x00":
@@ -172,12 +178,14 @@ type BlockCode int
 
 func (typ BlockCode) String() string {
 	var m = map[BlockCode]string{
+		CodeAR:   "AR",
 		CodeBR:   "BR",
 		CodeCA:   "CA",
 		CodeDATA: "DATA",
 		CodeDNA1: "DNA1",
 		CodeENDB: "ENDB",
 		CodeGLOB: "GLOB",
+		CodeIM:   "IM",
 		CodeLA:   "LA",
 		CodeMA:   "MA",
 		CodeME:   "ME",
@@ -187,6 +195,7 @@ func (typ BlockCode) String() string {
 		CodeSN:   "SN",
 		CodeTE:   "TE",
 		CodeTEST: "TEST",
+		CodeTX:   "TX",
 		CodeWM:   "WM",
 		CodeWO:   "WO",
 	}
@@ -199,12 +208,14 @@ func (typ BlockCode) String() string {
 
 // Block codes.
 const (
-	CodeBR BlockCode = iota
+	CodeAR BlockCode = iota
+	CodeBR
 	CodeCA
 	CodeDATA
 	CodeDNA1
 	CodeENDB
 	CodeGLOB
+	CodeIM
 	CodeLA
 	CodeMA
 	CodeME
@@ -214,6 +225,7 @@ const (
 	CodeSN
 	CodeTE
 	CodeTEST
+	CodeTX
 	CodeWM
 	CodeWO
 
