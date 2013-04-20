@@ -8,8 +8,8 @@
 // ("parse.go") have been generating by parsing the DNA block of
 // "testdata/block.blend".
 //
-// The tool which was used to generate these two files is located at:
-//    github.com/mewmew/blend/cmd/blendef
+// The tool which was used to generate these two files is available through:
+//    go get github.com/mewmew/blend/cmd/blendef
 //
 // More complex blend files may contain structures which are not yet defined in
 // this package. If so, use blendef to regenerate "struct.go" and "parse.go" for

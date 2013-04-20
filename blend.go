@@ -179,8 +179,13 @@ func ParseHeader(r io.Reader) (hdr *Header, err error) {
 	if WarnVersion {
 		if hdr.Ver != block.BlenderVer {
 			log.Printf("Warning: Version mismatch between file (v%d) and block package (v%d).\n", hdr.Ver, block.BlenderVer)
-			log.Println("Use blendef [1] to update the block package.")
-			log.Println("[1]: github.com/mewmew/blend/cmd/blendef")
+			if hdr.Ver < block.BlenderVer {
+				log.Println("The file's Blender version is too old. Use Blender [1] to open and resave the file.")
+				log.Println("[1]: http://www.blender.org/")
+			} else {
+				log.Println("The block package Blender version is too old. Use blendef [1] to regenerate the block package.")
+				log.Println("[1]: go get github.com/mewmew/blend/cmd/blendef")
+			}
 		}
 	}
 
