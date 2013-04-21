@@ -330,10 +330,12 @@ type Image struct {
 	Lastupdate          float32
 	Lastused            int32
 	Animspeed           int16
-	Gen_x               int16
-	Gen_y               int16
+	Pad2                int16
+	Gen_x               int32
+	Gen_y               int32
 	Gen_type            int8
 	Gen_flag            int8
+	Gen_pad             [2]int8
 	Aspx                float32
 	Aspy                float32
 	Colorspace_settings ColorManagedColorspaceSettings
@@ -842,6 +844,8 @@ type Material struct {
 	Mapto_textured   int32
 	Shadowonly_flag  int16
 	Index            int16
+	Vcol_alpha       int16
+	Pad4             [3]int16
 	Gpumaterial      ListBase
 }
 
@@ -1089,8 +1093,9 @@ type Mesh struct {
 	Loc         [3]float32
 	Size        [3]float32
 	Rot         [3]float32
+	Drawflag    int32
 	Texflag     int16
-	Drawflag    int16
+	Pad2        [3]int16
 	Smoothresh  int16
 	Flag        int16
 	Cd_flag     int8
@@ -1333,6 +1338,18 @@ type MVertSkin struct {
 }
 
 // SDNA index: 78
+type FreestyleEdge struct {
+	Flag int8
+	Pad  [3]int8
+}
+
+// SDNA index: 79
+type FreestyleFace struct {
+	Flag int8
+	Pad  [3]int8
+}
+
+// SDNA index: 80
 type ModifierData struct {
 	Next       Pointer // *ModifierData
 	Prev       Pointer // *ModifierData
@@ -1345,7 +1362,7 @@ type ModifierData struct {
 	Error      Pointer // *int8
 }
 
-// SDNA index: 79
+// SDNA index: 81
 type MappingInfoModifierData struct {
 	Modifier     ModifierData
 	Texture      Pointer // *Tex
@@ -1355,7 +1372,7 @@ type MappingInfoModifierData struct {
 	Texmapping   int32
 }
 
-// SDNA index: 80
+// SDNA index: 82
 type SubsurfModifierData struct {
 	Modifier     ModifierData
 	SubdivType   int16
@@ -1366,7 +1383,7 @@ type SubsurfModifierData struct {
 	MCache       Pointer // *struct{}
 }
 
-// SDNA index: 81
+// SDNA index: 83
 type LatticeModifierData struct {
 	Modifier ModifierData
 	Object   Pointer // *Object
@@ -1375,7 +1392,7 @@ type LatticeModifierData struct {
 	Pad      [4]int8
 }
 
-// SDNA index: 82
+// SDNA index: 84
 type CurveModifierData struct {
 	Modifier ModifierData
 	Object   Pointer // *Object
@@ -1384,7 +1401,7 @@ type CurveModifierData struct {
 	Pad      [6]int8
 }
 
-// SDNA index: 83
+// SDNA index: 85
 type BuildModifierData struct {
 	Modifier  ModifierData
 	Start     float32
@@ -1393,7 +1410,7 @@ type BuildModifierData struct {
 	Seed      int32
 }
 
-// SDNA index: 84
+// SDNA index: 86
 type MaskModifierData struct {
 	Modifier ModifierData
 	Ob_arm   Pointer // *Object
@@ -1402,7 +1419,7 @@ type MaskModifierData struct {
 	Flag     int32
 }
 
-// SDNA index: 85
+// SDNA index: 87
 type ArrayModifierData struct {
 	Modifier    ModifierData
 	Start_cap   Pointer // *Object
@@ -1419,7 +1436,7 @@ type ArrayModifierData struct {
 	Count       int32
 }
 
-// SDNA index: 86
+// SDNA index: 88
 type MirrorModifierData struct {
 	Modifier  ModifierData
 	Axis      int16
@@ -1428,14 +1445,14 @@ type MirrorModifierData struct {
 	Mirror_ob Pointer // *Object
 }
 
-// SDNA index: 87
+// SDNA index: 89
 type EdgeSplitModifierData struct {
 	Modifier    ModifierData
 	Split_angle float32
 	Flags       int32
 }
 
-// SDNA index: 88
+// SDNA index: 90
 type BevelModifierData struct {
 	Modifier    ModifierData
 	Value       float32
@@ -1449,14 +1466,14 @@ type BevelModifierData struct {
 	Defgrp_name [64]int8
 }
 
-// SDNA index: 89
+// SDNA index: 91
 type BMeshModifierData struct {
 	Modifier ModifierData
 	Pad      float32
 	Type     int32
 }
 
-// SDNA index: 90
+// SDNA index: 92
 type SmokeModifierData struct {
 	Modifier ModifierData
 	Domain   Pointer // *SmokeDomainSettings
@@ -1466,7 +1483,7 @@ type SmokeModifierData struct {
 	Type     int32
 }
 
-// SDNA index: 91
+// SDNA index: 93
 type DisplaceModifierData struct {
 	Modifier     ModifierData
 	Texture      Pointer // *Tex
@@ -1481,7 +1498,7 @@ type DisplaceModifierData struct {
 	Pad          int32
 }
 
-// SDNA index: 92
+// SDNA index: 94
 type UVProjectModifierData struct {
 	Modifier       ModifierData
 	Projectors     [10]Pointer // [10]*Object
@@ -1497,7 +1514,7 @@ type UVProjectModifierData struct {
 	Pad            int32
 }
 
-// SDNA index: 93
+// SDNA index: 95
 type DecimateModifierData struct {
 	Modifier    ModifierData
 	Percent     float32
@@ -1511,7 +1528,7 @@ type DecimateModifierData struct {
 	Pad2        int32
 }
 
-// SDNA index: 94
+// SDNA index: 96
 type SmoothModifierData struct {
 	Modifier    ModifierData
 	Fac         float32
@@ -1520,7 +1537,7 @@ type SmoothModifierData struct {
 	Repeat      int16
 }
 
-// SDNA index: 95
+// SDNA index: 97
 type CastModifierData struct {
 	Modifier    ModifierData
 	Object      Pointer // *Object
@@ -1532,7 +1549,7 @@ type CastModifierData struct {
 	Type        int16
 }
 
-// SDNA index: 96
+// SDNA index: 98
 type WaveModifierData struct {
 	Modifier     ModifierData
 	Texture      Pointer // *Tex
@@ -1557,7 +1574,7 @@ type WaveModifierData struct {
 	Pad1         float32
 }
 
-// SDNA index: 97
+// SDNA index: 99
 type ArmatureModifierData struct {
 	Modifier    ModifierData
 	Deformflag  int16
@@ -1568,7 +1585,7 @@ type ArmatureModifierData struct {
 	Defgrp_name [64]int8
 }
 
-// SDNA index: 98
+// SDNA index: 100
 type HookModifierData struct {
 	Modifier  ModifierData
 	Object    Pointer // *Object
@@ -1582,12 +1599,12 @@ type HookModifierData struct {
 	Name      [64]int8
 }
 
-// SDNA index: 99
+// SDNA index: 101
 type SoftbodyModifierData struct {
 	Modifier ModifierData
 }
 
-// SDNA index: 100
+// SDNA index: 102
 type ClothModifierData struct {
 	Modifier    ModifierData
 	Scene       Pointer // *Scene
@@ -1598,7 +1615,7 @@ type ClothModifierData struct {
 	Ptcaches    ListBase
 }
 
-// SDNA index: 101
+// SDNA index: 103
 type CollisionModifierData struct {
 	Modifier     ModifierData
 	X            Pointer // *MVert
@@ -1615,7 +1632,7 @@ type CollisionModifierData struct {
 	Bvhtree      Pointer // *BVHTree
 }
 
-// SDNA index: 102
+// SDNA index: 104
 type SurfaceModifierData struct {
 	Modifier ModifierData
 	X        Pointer // *MVert
@@ -1626,7 +1643,7 @@ type SurfaceModifierData struct {
 	Numverts int32
 }
 
-// SDNA index: 103
+// SDNA index: 105
 type BooleanModifierData struct {
 	Modifier  ModifierData
 	Object    Pointer // *Object
@@ -1634,19 +1651,19 @@ type BooleanModifierData struct {
 	Pad       int32
 }
 
-// SDNA index: 104
+// SDNA index: 106
 type MDefInfluence struct {
 	Vertex int32
 	Weight float32
 }
 
-// SDNA index: 105
+// SDNA index: 107
 type MDefCell struct {
 	Offset       int32
 	Totinfluence int32
 }
 
-// SDNA index: 106
+// SDNA index: 108
 type MeshDeformModifierData struct {
 	Modifier       ModifierData
 	Object         Pointer // *Object
@@ -1674,7 +1691,7 @@ type MeshDeformModifierData struct {
 	Bindfunc       func()
 }
 
-// SDNA index: 107
+// SDNA index: 109
 type ParticleSystemModifierData struct {
 	Modifier  ModifierData
 	Psys      Pointer // *ParticleSystem
@@ -1686,7 +1703,7 @@ type ParticleSystemModifierData struct {
 	Rt        int16
 }
 
-// SDNA index: 108
+// SDNA index: 110
 type ParticleInstanceModifierData struct {
 	Modifier        ModifierData
 	Ob              Pointer // *Object
@@ -1698,7 +1715,7 @@ type ParticleInstanceModifierData struct {
 	Random_position float32
 }
 
-// SDNA index: 109
+// SDNA index: 111
 type ExplodeModifierData struct {
 	Modifier ModifierData
 	Facepa   Pointer // *int32
@@ -1708,7 +1725,7 @@ type ExplodeModifierData struct {
 	Uvname   [64]int8
 }
 
-// SDNA index: 110
+// SDNA index: 112
 type MultiresModifierData struct {
 	Modifier  ModifierData
 	Lvl       int8
@@ -1720,14 +1737,14 @@ type MultiresModifierData struct {
 	Pad       [2]int8
 }
 
-// SDNA index: 111
+// SDNA index: 113
 type FluidsimModifierData struct {
 	Modifier    ModifierData
 	Fss         Pointer // *FluidsimSettings
 	Point_cache Pointer // *PointCache
 }
 
-// SDNA index: 112
+// SDNA index: 114
 type ShrinkwrapModifierData struct {
 	Modifier      ModifierData
 	Target        Pointer // *Object
@@ -1742,7 +1759,7 @@ type ShrinkwrapModifierData struct {
 	Pad           [2]int8
 }
 
-// SDNA index: 113
+// SDNA index: 115
 type SimpleDeformModifierData struct {
 	Modifier    ModifierData
 	Origin      Pointer // *Object
@@ -1755,18 +1772,20 @@ type SimpleDeformModifierData struct {
 	Pad         int8
 }
 
-// SDNA index: 114
+// SDNA index: 116
 type ShapeKeyModifierData struct {
 	Modifier ModifierData
 }
 
-// SDNA index: 115
+// SDNA index: 117
 type SolidifyModifierData struct {
 	Modifier      ModifierData
 	Defgrp_name   [64]int8
 	Offset        float32
 	Offset_fac    float32
 	Offset_fac_vg float32
+	Offset_clamp  float32
+	Pad           float32
 	Crease_inner  float32
 	Crease_outer  float32
 	Crease_rim    float32
@@ -1775,7 +1794,7 @@ type SolidifyModifierData struct {
 	Mat_ofs_rim   int16
 }
 
-// SDNA index: 116
+// SDNA index: 118
 type ScrewModifierData struct {
 	Modifier     ModifierData
 	Ob_axis      Pointer // *Object
@@ -1788,7 +1807,7 @@ type ScrewModifierData struct {
 	Flag         int16
 }
 
-// SDNA index: 117
+// SDNA index: 119
 type OceanModifierData struct {
 	Modifier       ModifierData
 	Ocean          Pointer // *Ocean
@@ -1821,7 +1840,7 @@ type OceanModifierData struct {
 	Pad            int32
 }
 
-// SDNA index: 118
+// SDNA index: 120
 type WarpModifierData struct {
 	Modifier       ModifierData
 	Texture        Pointer // *Tex
@@ -1840,7 +1859,7 @@ type WarpModifierData struct {
 	Pad            [6]int8
 }
 
-// SDNA index: 119
+// SDNA index: 121
 type WeightVGEditModifierData struct {
 	Modifier              ModifierData
 	Defgrp_name           [64]int8
@@ -1860,7 +1879,7 @@ type WeightVGEditModifierData struct {
 	Pad_i1                int32
 }
 
-// SDNA index: 120
+// SDNA index: 122
 type WeightVGMixModifierData struct {
 	Modifier              ModifierData
 	Defgrp_name_a         [64]int8
@@ -1880,7 +1899,7 @@ type WeightVGMixModifierData struct {
 	Pad_i1                int32
 }
 
-// SDNA index: 121
+// SDNA index: 123
 type WeightVGProximityModifierData struct {
 	Modifier              ModifierData
 	Defgrp_name           [64]int8
@@ -1900,7 +1919,7 @@ type WeightVGProximityModifierData struct {
 	Pad_s1                int16
 }
 
-// SDNA index: 122
+// SDNA index: 124
 type DynamicPaintModifierData struct {
 	Modifier ModifierData
 	Canvas   Pointer // *DynamicPaintCanvasSettings
@@ -1909,7 +1928,7 @@ type DynamicPaintModifierData struct {
 	Pad      int32
 }
 
-// SDNA index: 123
+// SDNA index: 125
 type RemeshModifierData struct {
 	Modifier    ModifierData
 	Threshold   float32
@@ -1921,7 +1940,7 @@ type RemeshModifierData struct {
 	Pad         int8
 }
 
-// SDNA index: 124
+// SDNA index: 126
 type SkinModifierData struct {
 	Modifier         ModifierData
 	Branch_smoothing float32
@@ -1930,14 +1949,14 @@ type SkinModifierData struct {
 	Pad              [2]int8
 }
 
-// SDNA index: 125
+// SDNA index: 127
 type TriangulateModifierData struct {
 	Modifier ModifierData
 	Flag     int32
 	Pad      int32
 }
 
-// SDNA index: 126
+// SDNA index: 128
 type LaplacianSmoothModifierData struct {
 	Modifier      ModifierData
 	Lambda        float32
@@ -1948,7 +1967,7 @@ type LaplacianSmoothModifierData struct {
 	Repeat        int16
 }
 
-// SDNA index: 127
+// SDNA index: 129
 type UVWarpModifierData struct {
 	Modifier     ModifierData
 	Axis_u       int8
@@ -1963,7 +1982,7 @@ type UVWarpModifierData struct {
 	Uvlayer_name [64]int8
 }
 
-// SDNA index: 128
+// SDNA index: 130
 type MeshCacheModifierData struct {
 	Modifier     ModifierData
 	Flag         int8
@@ -1985,14 +2004,14 @@ type MeshCacheModifierData struct {
 	Filepath     [1024]int8
 }
 
-// SDNA index: 129
+// SDNA index: 131
 type EditLatt struct {
 	Latt    Pointer // *Lattice
 	Shapenr int32
 	Pad     [4]int8
 }
 
-// SDNA index: 130
+// SDNA index: 132
 type Lattice struct {
 	Id          ID
 	Adt         Pointer // *AnimData
@@ -2025,7 +2044,7 @@ type Lattice struct {
 	Editlatt    Pointer // *EditLatt
 }
 
-// SDNA index: 131
+// SDNA index: 133
 type BDeformGroup struct {
 	Next Pointer // *BDeformGroup
 	Prev Pointer // *BDeformGroup
@@ -2034,14 +2053,14 @@ type BDeformGroup struct {
 	Pad  [7]int8
 }
 
-// SDNA index: 132
+// SDNA index: 134
 type BoundBox struct {
 	Vec  [8][3]float32
 	Flag int32
 	Pad  int32
 }
 
-// SDNA index: 133
+// SDNA index: 135
 type Object struct {
 	Id                           ID
 	Adt                          Pointer // *AnimData
@@ -2179,7 +2198,7 @@ type Object struct {
 	Ima_ofs                      [2]float32
 }
 
-// SDNA index: 134
+// SDNA index: 136
 type ObHook struct {
 	Next      Pointer // *ObHook
 	Prev      Pointer // *ObHook
@@ -2197,7 +2216,7 @@ type ObHook struct {
 	Force     float32
 }
 
-// SDNA index: 135
+// SDNA index: 137
 type DupliObject struct {
 	Next            Pointer // *DupliObject
 	Prev            Pointer // *DupliObject
@@ -2215,7 +2234,7 @@ type DupliObject struct {
 	Particle_system Pointer // *ParticleSystem
 }
 
-// SDNA index: 136
+// SDNA index: 138
 type PartDeflect struct {
 	Flag           int32
 	Deflect        int16
@@ -2260,7 +2279,7 @@ type PartDeflect struct {
 	F_source       Pointer // *Object
 }
 
-// SDNA index: 137
+// SDNA index: 139
 type EffectorWeights struct {
 	Group          Pointer // *Group
 	Weight         [14]float32
@@ -2270,7 +2289,7 @@ type EffectorWeights struct {
 	Pad            int32
 }
 
-// SDNA index: 138
+// SDNA index: 140
 type PTCacheExtra struct {
 	Next    Pointer // *PTCacheExtra
 	Prev    Pointer // *PTCacheExtra
@@ -2279,7 +2298,7 @@ type PTCacheExtra struct {
 	Data    Pointer // *struct{}
 }
 
-// SDNA index: 139
+// SDNA index: 141
 type PTCacheMem struct {
 	Next       Pointer // *PTCacheMem
 	Prev       Pointer // *PTCacheMem
@@ -2292,7 +2311,7 @@ type PTCacheMem struct {
 	Extradata  ListBase
 }
 
-// SDNA index: 140
+// SDNA index: 142
 type PointCache struct {
 	Next          Pointer // *PointCache
 	Prev          Pointer // *PointCache
@@ -2319,12 +2338,12 @@ type PointCache struct {
 	Free_edit     func()
 }
 
-// SDNA index: 141
+// SDNA index: 143
 type SBVertex struct {
 	Vec [4]float32
 }
 
-// SDNA index: 142
+// SDNA index: 144
 type BulletSoftBody struct {
 	Flag                 int32
 	LinStiff             float32
@@ -2358,7 +2377,7 @@ type BulletSoftBody struct {
 	Margin               float32
 }
 
-// SDNA index: 143
+// SDNA index: 145
 type SoftBody struct {
 	Totpoint         int32
 	Totspring        int32
@@ -2416,14 +2435,16 @@ type SoftBody struct {
 	Last_frame       int32
 }
 
-// SDNA index: 144
+// SDNA index: 146
 type FluidVertexVelocity struct {
 	Vel [3]float32
 }
 
-// SDNA index: 145
+// SDNA index: 147
 type FluidsimSettings struct {
 	Fmd                   Pointer // *FluidsimModifierData
+	Threads               int32
+	Pad1                  int32
 	Type                  int16
 	Show_advancedoptions  int16
 	Resolutionxyz         int16
@@ -2440,7 +2461,7 @@ type FluidsimSettings struct {
 	BakeStart             int32
 	BakeEnd               int32
 	FrameOffset           int32
-	Pad                   int32
+	Pad2                  int32
 	Gstar                 float32
 	MaxRefine             int32
 	IniVelx               float32
@@ -2477,7 +2498,7 @@ type FluidsimSettings struct {
 	AnimRate              float32
 }
 
-// SDNA index: 146
+// SDNA index: 148
 type World struct {
 	Id                   ID
 	Adt                  Pointer // *AnimData
@@ -2494,8 +2515,6 @@ type World struct {
 	Ambr                 float32
 	Ambg                 float32
 	Ambb                 float32
-	Pad2                 float32
-	Fastcol              int32
 	Exposure             float32
 	Exp                  float32
 	Range                float32
@@ -2559,7 +2578,7 @@ type World struct {
 	Nodetree             Pointer // *BNodeTree
 }
 
-// SDNA index: 147
+// SDNA index: 149
 type Base struct {
 	Next   Pointer // *Base
 	Prev   Pointer // *Base
@@ -2571,7 +2590,7 @@ type Base struct {
 	Object Pointer // *Object
 }
 
-// SDNA index: 148
+// SDNA index: 150
 type AviCodecData struct {
 	LpFormat          Pointer // *struct{}
 	LpParms           Pointer // *struct{}
@@ -2588,7 +2607,7 @@ type AviCodecData struct {
 	Avicodecname      [128]int8
 }
 
-// SDNA index: 149
+// SDNA index: 151
 type QuicktimeCodecData struct {
 	CdParms     Pointer // *struct{}
 	Pad         Pointer // *struct{}
@@ -2597,7 +2616,7 @@ type QuicktimeCodecData struct {
 	Qtcodecname [128]int8
 }
 
-// SDNA index: 150
+// SDNA index: 152
 type QuicktimeCodecSettings struct {
 	CodecType            int32
 	CodecSpatialQuality  int32
@@ -2618,7 +2637,7 @@ type QuicktimeCodecSettings struct {
 	Pad1                 int32
 }
 
-// SDNA index: 151
+// SDNA index: 153
 type FFMpegCodecData struct {
 	Type            int32
 	Codec           int32
@@ -2639,7 +2658,7 @@ type FFMpegCodecData struct {
 	Properties      Pointer // *IDProperty
 }
 
-// SDNA index: 152
+// SDNA index: 154
 type AudioData struct {
 	Mixrate        int32
 	Main           float32
@@ -2652,24 +2671,25 @@ type AudioData struct {
 	Pad2           float32
 }
 
-// SDNA index: 153
+// SDNA index: 155
 type SceneRenderLayer struct {
-	Next           Pointer // *SceneRenderLayer
-	Prev           Pointer // *SceneRenderLayer
-	Name           [64]int8
-	Mat_override   Pointer // *Material
-	Light_override Pointer // *Group
-	Lay            int32
-	Lay_zmask      int32
-	Lay_exclude    int32
-	Layflag        int32
-	Passflag       int32
-	Pass_xor       int32
-	Samples        int32
-	Pad            int32
+	Next            Pointer // *SceneRenderLayer
+	Prev            Pointer // *SceneRenderLayer
+	Name            [64]int8
+	Mat_override    Pointer // *Material
+	Light_override  Pointer // *Group
+	Lay             int32
+	Lay_zmask       int32
+	Lay_exclude     int32
+	Layflag         int32
+	Passflag        int32
+	Pass_xor        int32
+	Samples         int32
+	Pad             int32
+	FreestyleConfig FreestyleConfig
 }
 
-// SDNA index: 154
+// SDNA index: 156
 type ImageFormatData struct {
 	Imtype           int8
 	Depth            int8
@@ -2689,7 +2709,7 @@ type ImageFormatData struct {
 	Display_settings ColorManagedDisplaySettings
 }
 
-// SDNA index: 155
+// SDNA index: 157
 type RenderData struct {
 	Im_format              ImageFormatData
 	Avicodecdata           Pointer // *AviCodecData
@@ -2723,17 +2743,19 @@ type RenderData struct {
 	Filtertype             int16
 	Size                   int16
 	Maximsize              int16
-	Xsch                   int16
-	Ysch                   int16
+	Pad6                   int16
+	Xsch                   int32
+	Ysch                   int32
 	Xparts                 int16
 	Yparts                 int16
-	Tilex                  int16
-	Tiley                  int16
+	Tilex                  int32
+	Tiley                  int32
 	Planes                 int16
 	Imtype                 int16
 	Subimtype              int16
 	Quality                int16
 	Displaymode            int16
+	Pad7                   int16
 	Scemode                int32
 	Mode                   int32
 	Raytrace_options       int32
@@ -2745,7 +2767,6 @@ type RenderData struct {
 	Osa                    int16
 	Frs_sec                int16
 	Edgeint                int16
-	Pad                    int32
 	Safety                 Rctf
 	Border                 Rctf
 	Disprect               Rcti
@@ -2800,10 +2821,12 @@ type RenderData struct {
 	Domeresbuf             float32
 	Pad2                   float32
 	Dometext               Pointer // *Text
+	Line_thickness_mode    int32
+	Unit_line_thickness    float32
 	Engine                 [32]int8
 }
 
-// SDNA index: 156
+// SDNA index: 158
 type RenderProfile struct {
 	Next              Pointer // *RenderProfile
 	Prev              Pointer // *RenderProfile
@@ -2816,7 +2839,7 @@ type RenderProfile struct {
 	Pad2              float32
 }
 
-// SDNA index: 157
+// SDNA index: 159
 type GameDome struct {
 	Res      int16
 	Mode     int16
@@ -2827,7 +2850,7 @@ type GameDome struct {
 	Warptext Pointer // *Text
 }
 
-// SDNA index: 158
+// SDNA index: 160
 type GameFraming struct {
 	Col  [3]float32
 	Type int8
@@ -2836,7 +2859,7 @@ type GameFraming struct {
 	Pad3 int8
 }
 
-// SDNA index: 159
+// SDNA index: 161
 type RecastData struct {
 	Cellsize             float32
 	Cellheight           float32
@@ -2855,7 +2878,7 @@ type RecastData struct {
 	Pad2                 int16
 }
 
-// SDNA index: 160
+// SDNA index: 162
 type GameData struct {
 	Framing               GameFraming
 	Playerflag            int16
@@ -2895,7 +2918,7 @@ type GameData struct {
 	Pad2                  float32
 }
 
-// SDNA index: 161
+// SDNA index: 163
 type TimeMarker struct {
 	Next   Pointer // *TimeMarker
 	Prev   Pointer // *TimeMarker
@@ -2905,7 +2928,7 @@ type TimeMarker struct {
 	Camera Pointer // *Object
 }
 
-// SDNA index: 162
+// SDNA index: 164
 type Paint struct {
 	Brush             Pointer // *Brush
 	Paint_cursor      Pointer // *struct{}
@@ -2915,7 +2938,7 @@ type Paint struct {
 	Pad               int32
 }
 
-// SDNA index: 163
+// SDNA index: 165
 type ImagePaintSettings struct {
 	Paint            Paint
 	Flag             int16
@@ -2927,7 +2950,7 @@ type ImagePaintSettings struct {
 	Paintcursor      Pointer // *struct{}
 }
 
-// SDNA index: 164
+// SDNA index: 166
 type ParticleBrushData struct {
 	Size     int16
 	Step     int16
@@ -2937,7 +2960,7 @@ type ParticleBrushData struct {
 	Strength float32
 }
 
-// SDNA index: 165
+// SDNA index: 167
 type ParticleEditSettings struct {
 	Flag        int16
 	Totrekey    int16
@@ -2955,7 +2978,7 @@ type ParticleEditSettings struct {
 	Object      Pointer // *Object
 }
 
-// SDNA index: 166
+// SDNA index: 168
 type Sculpt struct {
 	Paint                Paint
 	Flags                int32
@@ -2964,12 +2987,12 @@ type Sculpt struct {
 	Symmetrize_direction int32
 }
 
-// SDNA index: 167
+// SDNA index: 169
 type UvSculpt struct {
 	Paint Paint
 }
 
-// SDNA index: 168
+// SDNA index: 170
 type VPaint struct {
 	Paint       Paint
 	Flag        int16
@@ -2980,7 +3003,7 @@ type VPaint struct {
 	Paintcursor Pointer // *struct{}
 }
 
-// SDNA index: 169
+// SDNA index: 171
 type TransformOrientation struct {
 	Next Pointer // *TransformOrientation
 	Prev Pointer // *TransformOrientation
@@ -2989,26 +3012,41 @@ type TransformOrientation struct {
 	Pad  int32
 }
 
-// SDNA index: 170
+// SDNA index: 172
 type UnifiedPaintSettings struct {
 	Size                   int32
 	Unprojected_radius     float32
 	Alpha                  float32
 	Weight                 float32
 	Flag                   int32
-	Last_x                 float32
-	Last_y                 float32
-	Last_angle             float32
-	Special_rotation       float32
+	Last_rake              [2]float32
+	Pad                    int32
+	Brush_rotation         float32
 	Draw_anchored          int32
 	Anchored_size          int32
-	Anchored_location      [3]float32
 	Anchored_initial_mouse [2]float32
 	Draw_pressure          int32
 	Pressure_value         float32
+	Tex_mouse              [2]float32
+	Pixel_radius           float32
 }
 
-// SDNA index: 171
+// SDNA index: 173
+type MeshStatVis struct {
+	Type              int8
+	_pad1             [2]int8
+	Overhang_axis     int8
+	Overhang_min      float32
+	Overhang_max      float32
+	Thickness_min     float32
+	Thickness_max     float32
+	Thickness_samples int8
+	_pad2             [3]int8
+	Distort_min       float32
+	Distort_max       float32
+}
+
+// SDNA index: 174
 type ToolSettings struct {
 	Vpaint                                  Pointer // *VPaint
 	Wpaint                                  Pointer // *VPaint
@@ -3085,9 +3123,10 @@ type ToolSettings struct {
 	Prop_mode                               int16
 	Proportional_objects                    int8
 	Proportional_mask                       int8
-	Pad4                                    [2]int8
+	Pad4                                    [1]int8
 	Auto_normalize                          int8
 	Multipaint                              int8
+	Weightuser                              int8
 	Use_uv_sculpt                           int32
 	Uv_sculpt_settings                      int32
 	Uv_sculpt_tool                          int32
@@ -3098,9 +3137,10 @@ type ToolSettings struct {
 	Sculpt_paint_unified_unprojected_radius float32
 	Sculpt_paint_unified_alpha              float32
 	Unified_paint_settings                  UnifiedPaintSettings
+	Statvis                                 MeshStatVis
 }
 
-// SDNA index: 172
+// SDNA index: 175
 type BStats struct {
 	Totobj      int32
 	Totlamp     int32
@@ -3112,7 +3152,7 @@ type BStats struct {
 	Totface     int32
 }
 
-// SDNA index: 173
+// SDNA index: 176
 type UnitSettings struct {
 	Scale_length    float32
 	System          int8
@@ -3120,7 +3160,7 @@ type UnitSettings struct {
 	Flag            int16
 }
 
-// SDNA index: 174
+// SDNA index: 177
 type PhysicsSettings struct {
 	Gravity          [3]float32
 	Flag             int32
@@ -3128,7 +3168,7 @@ type PhysicsSettings struct {
 	Rt               int32
 }
 
-// SDNA index: 175
+// SDNA index: 178
 type Scene struct {
 	Id                            ID
 	Adt                           Pointer // *AnimData
@@ -3161,11 +3201,8 @@ type Scene struct {
 	Speaker_handles               Pointer // *struct{}
 	Fps_info                      Pointer // *struct{}
 	TheDag                        Pointer // *DagForest
-	Dagisvalid                    int16
 	Dagflags                      int16
 	Recalc                        int16
-	Pad6                          int16
-	Pad5                          int32
 	Active_keyingset              int32
 	Keyingsets                    ListBase
 	Framing                       GameFraming
@@ -3182,7 +3219,7 @@ type Scene struct {
 	Rigidbody_world               Pointer // *RigidBodyWorld
 }
 
-// SDNA index: 176
+// SDNA index: 179
 type BGpic struct {
 	Next   Pointer // *BGpic
 	Prev   Pointer // *BGpic
@@ -3200,7 +3237,7 @@ type BGpic struct {
 	Pad    int16
 }
 
-// SDNA index: 177
+// SDNA index: 180
 type RegionView3D struct {
 	Winmat        [4][4]float32
 	Viewmat       [4][4]float32
@@ -3217,12 +3254,12 @@ type RegionView3D struct {
 	Ri            Pointer // *RenderInfo
 	Render_engine Pointer // *RenderEngine
 	Depths        Pointer // *ViewDepths
+	Gpuoffscreen  Pointer // *struct{}
 	Sms           Pointer // *SmoothView3DStore
 	Smooth_timer  Pointer // *WmTimer
 	Twmat         [4][4]float32
 	Viewquat      [4]float32
 	Dist          float32
-	Zfac          float32
 	Camdx         float32
 	Camdy         float32
 	Pixsize       float32
@@ -3232,6 +3269,7 @@ type RegionView3D struct {
 	Persp         int8
 	View          int8
 	Viewlock      int8
+	Pad           [4]int8
 	Twdrawflag    int16
 	Rflag         int16
 	Lviewquat     [4]float32
@@ -3243,7 +3281,7 @@ type RegionView3D struct {
 	Rot_axis      [3]float32
 }
 
-// SDNA index: 178
+// SDNA index: 181
 type View3D struct {
 	Next                 Pointer // *SpaceLink
 	Prev                 Pointer // *SpaceLink
@@ -3301,7 +3339,7 @@ type View3D struct {
 	Gpd                  Pointer // *BGPdata
 }
 
-// SDNA index: 179
+// SDNA index: 182
 type View2D struct {
 	Tot          Rctf
 	Cur          Rctf
@@ -3331,7 +3369,7 @@ type View2D struct {
 	Smooth_timer Pointer // *WmTimer
 }
 
-// SDNA index: 180
+// SDNA index: 183
 type SpaceLink struct {
 	Next         Pointer // *SpaceLink
 	Prev         Pointer // *SpaceLink
@@ -3341,7 +3379,7 @@ type SpaceLink struct {
 	Blockhandler [8]int16
 }
 
-// SDNA index: 181
+// SDNA index: 184
 type SpaceInfo struct {
 	Next         Pointer // *SpaceLink
 	Prev         Pointer // *SpaceLink
@@ -3353,7 +3391,7 @@ type SpaceInfo struct {
 	Pad          [7]int8
 }
 
-// SDNA index: 182
+// SDNA index: 185
 type SpaceButs struct {
 	Next            Pointer // *SpaceLink
 	Prev            Pointer // *SpaceLink
@@ -3378,7 +3416,7 @@ type SpaceButs struct {
 	Texuser         Pointer // *struct{}
 }
 
-// SDNA index: 183
+// SDNA index: 186
 type SpaceOops struct {
 	Next          Pointer // *SpaceLink
 	Prev          Pointer // *SpaceLink
@@ -3397,7 +3435,7 @@ type SpaceOops struct {
 	Search_flags  int16
 }
 
-// SDNA index: 184
+// SDNA index: 187
 type SpaceIpo struct {
 	Next         Pointer // *SpaceLink
 	Prev         Pointer // *SpaceLink
@@ -3415,7 +3453,7 @@ type SpaceIpo struct {
 	Around       int32
 }
 
-// SDNA index: 185
+// SDNA index: 188
 type SpaceNla struct {
 	Next         Pointer // *SpaceLink
 	Prev         Pointer // *SpaceLink
@@ -3430,14 +3468,14 @@ type SpaceNla struct {
 	V2d          View2D
 }
 
-// SDNA index: 186
+// SDNA index: 189
 type SpaceTimeCache struct {
 	Next  Pointer // *SpaceTimeCache
 	Prev  Pointer // *SpaceTimeCache
 	Array Pointer // *float32
 }
 
-// SDNA index: 187
+// SDNA index: 190
 type SpaceTime struct {
 	Next          Pointer // *SpaceLink
 	Prev          Pointer // *SpaceLink
@@ -3450,7 +3488,7 @@ type SpaceTime struct {
 	Flag          int32
 }
 
-// SDNA index: 188
+// SDNA index: 191
 type SpaceSeq struct {
 	Next         Pointer // *SpaceLink
 	Prev         Pointer // *SpaceLink
@@ -3473,7 +3511,7 @@ type SpaceSeq struct {
 	Scopes       SequencerScopes
 }
 
-// SDNA index: 189
+// SDNA index: 192
 type MaskSpaceInfo struct {
 	Mask      Pointer // *Mask
 	Draw_flag int8
@@ -3481,7 +3519,7 @@ type MaskSpaceInfo struct {
 	Pad3      [6]int8
 }
 
-// SDNA index: 190
+// SDNA index: 193
 type FileSelectParams struct {
 	Title       [96]int8
 	Dir         [1056]int8
@@ -3501,7 +3539,7 @@ type FileSelectParams struct {
 	Fp_str      [8]int8
 }
 
-// SDNA index: 191
+// SDNA index: 194
 type SpaceFile struct {
 	Next               Pointer // *SpaceLink
 	Prev               Pointer // *SpaceLink
@@ -3521,7 +3559,7 @@ type SpaceFile struct {
 	Pad2               int16
 }
 
-// SDNA index: 192
+// SDNA index: 195
 type SpaceImage struct {
 	Next             Pointer // *SpaceLink
 	Prev             Pointer // *SpaceLink
@@ -3552,7 +3590,7 @@ type SpaceImage struct {
 	Mask_info        MaskSpaceInfo
 }
 
-// SDNA index: 193
+// SDNA index: 196
 type SpaceText struct {
 	Next          Pointer // *SpaceLink
 	Prev          Pointer // *SpaceLink
@@ -3588,7 +3626,7 @@ type SpaceText struct {
 	Drawcache     Pointer // *struct{}
 }
 
-// SDNA index: 194
+// SDNA index: 197
 type Script struct {
 	Id                 ID
 	Py_draw            Pointer // *struct{}
@@ -3602,7 +3640,7 @@ type Script struct {
 	Scriptarg          [256]int8
 }
 
-// SDNA index: 195
+// SDNA index: 198
 type SpaceScript struct {
 	Next       Pointer // *SpaceLink
 	Prev       Pointer // *SpaceLink
@@ -3616,7 +3654,18 @@ type SpaceScript struct {
 	But_refs   Pointer // *struct{}
 }
 
-// SDNA index: 196
+// SDNA index: 199
+type BNodeTreePath struct {
+	Next        Pointer // *BNodeTreePath
+	Prev        Pointer // *BNodeTreePath
+	Nodetree    Pointer // *BNodeTree
+	Parent_key  BNodeInstanceKey
+	Pad         int32
+	View_center [2]float32
+	Node_name   [64]int8
+}
+
+// SDNA index: 200
 type SpaceNode struct {
 	Next         Pointer // *SpaceLink
 	Prev         Pointer // *SpaceLink
@@ -3635,18 +3684,21 @@ type SpaceNode struct {
 	Yof          float32
 	Zoom         float32
 	Cursor       [2]float32
+	Treepath     ListBase
 	Nodetree     Pointer // *BNodeTree
 	Edittree     Pointer // *BNodeTree
+	Tree_idname  [64]int8
 	Treetype     int32
+	Pad3         int32
 	Texfrom      int16
 	Shaderfrom   int16
 	Recalc       int16
-	Pad          [3]int16
+	Pad4         int16
 	Linkdrag     ListBase
 	Gpd          Pointer // *BGPdata
 }
 
-// SDNA index: 197
+// SDNA index: 201
 type SpaceLogic struct {
 	Next         Pointer // *SpaceLink
 	Prev         Pointer // *SpaceLink
@@ -3660,7 +3712,7 @@ type SpaceLogic struct {
 	Gpd          Pointer // *BGPdata
 }
 
-// SDNA index: 198
+// SDNA index: 202
 type ConsoleLine struct {
 	Next      Pointer // *ConsoleLine
 	Prev      Pointer // *ConsoleLine
@@ -3671,7 +3723,7 @@ type ConsoleLine struct {
 	Type      int32
 }
 
-// SDNA index: 199
+// SDNA index: 203
 type SpaceConsole struct {
 	Next         Pointer // *SpaceLink
 	Prev         Pointer // *SpaceLink
@@ -3689,17 +3741,18 @@ type SpaceConsole struct {
 	Sel_end      int32
 }
 
-// SDNA index: 200
+// SDNA index: 204
 type SpaceUserPref struct {
-	Next       Pointer // *SpaceLink
-	Prev       Pointer // *SpaceLink
-	Regionbase ListBase
-	Spacetype  int32
-	Pad        int32
-	Filter     [64]int8
+	Next        Pointer // *SpaceLink
+	Prev        Pointer // *SpaceLink
+	Regionbase  ListBase
+	Spacetype   int32
+	Pad         [3]int8
+	Filter_type int8
+	Filter      [64]int8
 }
 
-// SDNA index: 201
+// SDNA index: 205
 type SpaceClip struct {
 	Next          Pointer // *SpaceLink
 	Prev          Pointer // *SpaceLink
@@ -3726,13 +3779,12 @@ type SpaceClip struct {
 	Postproc_flag int32
 	Gpencil_src   int16
 	Pad2          int16
-	Draw_context  Pointer // *struct{}
 	Around        int32
 	Pad4          int32
 	Mask_info     MaskSpaceInfo
 }
 
-// SDNA index: 202
+// SDNA index: 206
 type UiFont struct {
 	Next      Pointer // *UiFont
 	Prev      Pointer // *UiFont
@@ -3743,7 +3795,7 @@ type UiFont struct {
 	Hinting   int16
 }
 
-// SDNA index: 203
+// SDNA index: 207
 type UiFontStyle struct {
 	Uifont_id   int16
 	Points      int16
@@ -3759,7 +3811,7 @@ type UiFontStyle struct {
 	Shadowcolor float32
 }
 
-// SDNA index: 204
+// SDNA index: 208
 type UiStyle struct {
 	Next           Pointer // *UiStyle
 	Prev           Pointer // *UiStyle
@@ -3781,7 +3833,7 @@ type UiStyle struct {
 	Pad            int16
 }
 
-// SDNA index: 205
+// SDNA index: 209
 type UiWidgetColors struct {
 	Outline     [4]int8
 	Inner       [4]int8
@@ -3795,7 +3847,7 @@ type UiWidgetColors struct {
 	Alpha_check int16
 }
 
-// SDNA index: 206
+// SDNA index: 210
 type UiWidgetStateColors struct {
 	Inner_anim       [4]int8
 	Inner_anim_sel   [4]int8
@@ -3807,7 +3859,7 @@ type UiWidgetStateColors struct {
 	Pad              float32
 }
 
-// SDNA index: 207
+// SDNA index: 211
 type UiPanelColors struct {
 	Header      [4]int8
 	Back        [4]int8
@@ -3816,7 +3868,7 @@ type UiPanelColors struct {
 	Pad         int32
 }
 
-// SDNA index: 208
+// SDNA index: 212
 type UiGradientColors struct {
 	Gradient      [4]int8
 	High_gradient [4]int8
@@ -3824,7 +3876,7 @@ type UiGradientColors struct {
 	Pad2          int32
 }
 
-// SDNA index: 209
+// SDNA index: 213
 type ThemeUI struct {
 	Wcol_regular      UiWidgetColors
 	Wcol_tool         UiWidgetColors
@@ -3855,7 +3907,7 @@ type ThemeUI struct {
 	Zaxis             [4]int8
 }
 
-// SDNA index: 210
+// SDNA index: 214
 type ThemeSpace struct {
 	Back                        [4]int8
 	Title                       [4]int8
@@ -3892,6 +3944,7 @@ type ThemeSpace struct {
 	Transform                   [4]int8
 	Vertex                      [4]int8
 	Vertex_select               [4]int8
+	Vertex_unreferenced         [4]int8
 	Edge                        [4]int8
 	Edge_select                 [4]int8
 	Edge_seam                   [4]int8
@@ -3902,9 +3955,9 @@ type ThemeSpace struct {
 	Face_select                 [4]int8
 	Face_dot                    [4]int8
 	Extra_edge_len              [4]int8
+	Extra_edge_angle            [4]int8
 	Extra_face_angle            [4]int8
 	Extra_face_area             [4]int8
-	Pad3                        [4]int8
 	Normal                      [4]int8
 	Vertex_normal               [4]int8
 	Bone_solid                  [4]int8
@@ -3913,6 +3966,8 @@ type ThemeSpace struct {
 	Strip                       [4]int8
 	Strip_select                [4]int8
 	Cframe                      [4]int8
+	Freestyle_edge_mark         [4]int8
+	Freestyle_face_mark         [4]int8
 	Nurb_uline                  [4]int8
 	Nurb_vline                  [4]int8
 	Act_spline                  [4]int8
@@ -3962,6 +4017,7 @@ type ThemeSpace struct {
 	Editmesh_active             [4]int8
 	Handle_vertex               [4]int8
 	Handle_vertex_select        [4]int8
+	Pad2                        [4]int8
 	Handle_vertex_size          int8
 	Marker_outline              [4]int8
 	Marker                      [4]int8
@@ -3996,7 +4052,7 @@ type ThemeSpace struct {
 	Nla_sound_sel               [4]int8
 }
 
-// SDNA index: 211
+// SDNA index: 215
 type ThemeWireColor struct {
 	Solid  [4]int8
 	Select [4]int8
@@ -4005,7 +4061,7 @@ type ThemeWireColor struct {
 	Pad    int16
 }
 
-// SDNA index: 212
+// SDNA index: 216
 type BTheme struct {
 	Next              Pointer // *BTheme
 	Prev              Pointer // *BTheme
@@ -4033,7 +4089,7 @@ type BTheme struct {
 	Pad               int32
 }
 
-// SDNA index: 213
+// SDNA index: 217
 type BAddon struct {
 	Next   Pointer // *BAddon
 	Prev   Pointer // *BAddon
@@ -4041,7 +4097,7 @@ type BAddon struct {
 	Prop   Pointer // *IDProperty
 }
 
-// SDNA index: 214
+// SDNA index: 218
 type SolidLight struct {
 	Flag int32
 	Pad  int32
@@ -4050,7 +4106,7 @@ type SolidLight struct {
 	Vec  [4]float32
 }
 
-// SDNA index: 215
+// SDNA index: 219
 type UserDef struct {
 	Versionfile              int32
 	Subversionfile           int32
@@ -4137,7 +4193,7 @@ type UserDef struct {
 	Ndof_orbit_sensitivity   float32
 	Ndof_flag                int32
 	Ogl_multisamples         int16
-	Pad4                     int16
+	Image_draw_method        int16
 	Glalphaclip              float32
 	Autokey_mode             int16
 	Autokey_flag             int16
@@ -4154,7 +4210,7 @@ type UserDef struct {
 	Pixelsize                float32
 }
 
-// SDNA index: 216
+// SDNA index: 220
 type BScreen struct {
 	Id                  ID
 	Vertbase            ListBase
@@ -4181,7 +4237,7 @@ type BScreen struct {
 	Context             Pointer // *struct{}
 }
 
-// SDNA index: 217
+// SDNA index: 221
 type ScrVert struct {
 	Next     Pointer // *ScrVert
 	Prev     Pointer // *ScrVert
@@ -4191,7 +4247,7 @@ type ScrVert struct {
 	Editflag int16
 }
 
-// SDNA index: 218
+// SDNA index: 222
 type ScrEdge struct {
 	Next   Pointer // *ScrEdge
 	Prev   Pointer // *ScrEdge
@@ -4202,7 +4258,7 @@ type ScrEdge struct {
 	Pad    int32
 }
 
-// SDNA index: 219
+// SDNA index: 223
 type Panel struct {
 	Next         Pointer // *Panel
 	Prev         Pointer // *Panel
@@ -4226,7 +4282,7 @@ type Panel struct {
 	Activedata   Pointer // *struct{}
 }
 
-// SDNA index: 220
+// SDNA index: 224
 type UiList struct {
 	Next           Pointer // *UiList
 	Prev           Pointer // *UiList
@@ -4241,7 +4297,7 @@ type UiList struct {
 	List_grip_size int32
 }
 
-// SDNA index: 221
+// SDNA index: 225
 type ScrArea struct {
 	Next              Pointer // *ScrArea
 	Prev              Pointer // *ScrArea
@@ -4267,7 +4323,7 @@ type ScrArea struct {
 	Actionzones       ListBase
 }
 
-// SDNA index: 222
+// SDNA index: 226
 type ARegion struct {
 	Next            Pointer // *ARegion
 	Prev            Pointer // *ARegion
@@ -4298,7 +4354,7 @@ type ARegion struct {
 	Regiondata      Pointer // *struct{}
 }
 
-// SDNA index: 223
+// SDNA index: 227
 type FileGlobal struct {
 	Subvstr       [4]int8
 	Subversion    int16
@@ -4316,14 +4372,14 @@ type FileGlobal struct {
 	Filename      [1024]int8
 }
 
-// SDNA index: 224
+// SDNA index: 228
 type StripElem struct {
 	Name        [256]int8
 	Orig_width  int32
 	Orig_height int32
 }
 
-// SDNA index: 225
+// SDNA index: 229
 type StripCrop struct {
 	Top    int32
 	Bottom int32
@@ -4331,13 +4387,13 @@ type StripCrop struct {
 	Right  int32
 }
 
-// SDNA index: 226
+// SDNA index: 230
 type StripTransform struct {
 	Xofs int32
 	Yofs int32
 }
 
-// SDNA index: 227
+// SDNA index: 231
 type StripColorBalance struct {
 	Lift  [3]float32
 	Gamma [3]float32
@@ -4346,7 +4402,7 @@ type StripColorBalance struct {
 	Pad   int32
 }
 
-// SDNA index: 228
+// SDNA index: 232
 type StripProxy struct {
 	Dir              [768]int8
 	File             [256]int8
@@ -4357,7 +4413,7 @@ type StripProxy struct {
 	Build_tc_flags   int16
 }
 
-// SDNA index: 229
+// SDNA index: 233
 type Strip struct {
 	Next                Pointer // *Strip
 	Prev                Pointer // *Strip
@@ -4374,7 +4430,7 @@ type Strip struct {
 	Colorspace_settings ColorManagedColorspaceSettings
 }
 
-// SDNA index: 230
+// SDNA index: 234
 type Sequence struct {
 	Next            Pointer // *Sequence
 	Prev            Pointer // *Sequence
@@ -4430,7 +4486,7 @@ type Sequence struct {
 	Modifiers       ListBase
 }
 
-// SDNA index: 231
+// SDNA index: 235
 type MetaStack struct {
 	Next     Pointer // *MetaStack
 	Prev     Pointer // *MetaStack
@@ -4438,7 +4494,7 @@ type MetaStack struct {
 	Parseq   Pointer // *Sequence
 }
 
-// SDNA index: 232
+// SDNA index: 236
 type Editing struct {
 	Seqbasep     Pointer // *ListBase
 	Seqbase      ListBase
@@ -4453,7 +4509,7 @@ type Editing struct {
 	Over_border  Rctf
 }
 
-// SDNA index: 233
+// SDNA index: 237
 type WipeVars struct {
 	EdgeWidth float32
 	Angle     float32
@@ -4461,7 +4517,7 @@ type WipeVars struct {
 	Wipetype  int16
 }
 
-// SDNA index: 234
+// SDNA index: 238
 type GlowVars struct {
 	FMini    float32
 	FClamp   float32
@@ -4471,7 +4527,7 @@ type GlowVars struct {
 	BNoComp  int32
 }
 
-// SDNA index: 235
+// SDNA index: 239
 type TransformVars struct {
 	ScalexIni     float32
 	ScaleyIni     float32
@@ -4483,13 +4539,13 @@ type TransformVars struct {
 	Uniform_scale int32
 }
 
-// SDNA index: 236
+// SDNA index: 240
 type SolidColorVars struct {
 	Col [3]float32
 	Pad float32
 }
 
-// SDNA index: 237
+// SDNA index: 241
 type SpeedControlVars struct {
 	FrameMap       Pointer // *float32
 	GlobalSpeed    float32
@@ -4498,7 +4554,7 @@ type SpeedControlVars struct {
 	LastValidFrame int32
 }
 
-// SDNA index: 238
+// SDNA index: 242
 type SequenceModifierData struct {
 	Next            Pointer // *SequenceModifierData
 	Prev            Pointer // *SequenceModifierData
@@ -4511,33 +4567,33 @@ type SequenceModifierData struct {
 	Mask_id         Pointer // *Mask
 }
 
-// SDNA index: 239
+// SDNA index: 243
 type ColorBalanceModifierData struct {
 	Modifier       SequenceModifierData
 	Color_balance  StripColorBalance
 	Color_multiply float32
 }
 
-// SDNA index: 240
+// SDNA index: 244
 type CurvesModifierData struct {
 	Modifier      SequenceModifierData
 	Curve_mapping CurveMapping
 }
 
-// SDNA index: 241
+// SDNA index: 245
 type HueCorrectModifierData struct {
 	Modifier      SequenceModifierData
 	Curve_mapping CurveMapping
 }
 
-// SDNA index: 242
+// SDNA index: 246
 type BrightContrastModifierData struct {
 	Modifier SequenceModifierData
 	Bright   float32
 	Contrast float32
 }
 
-// SDNA index: 243
+// SDNA index: 247
 type SequencerScopes struct {
 	Reference_ibuf    Pointer // *ImBuf
 	Zebra_ibuf        Pointer // *ImBuf
@@ -4547,7 +4603,7 @@ type SequencerScopes struct {
 	Histogram_ibuf    Pointer // *ImBuf
 }
 
-// SDNA index: 244
+// SDNA index: 248
 type Effect struct {
 	Next    Pointer // *Effect
 	Prev    Pointer // *Effect
@@ -4557,7 +4613,7 @@ type Effect struct {
 	Rt      int16
 }
 
-// SDNA index: 245
+// SDNA index: 249
 type BuildEff struct {
 	Next    Pointer // *BuildEff
 	Prev    Pointer // *BuildEff
@@ -4569,7 +4625,7 @@ type BuildEff struct {
 	Sfra    float32
 }
 
-// SDNA index: 246
+// SDNA index: 250
 type PartEff struct {
 	Next         Pointer // *PartEff
 	Prev         Pointer // *PartEff
@@ -4618,7 +4674,7 @@ type PartEff struct {
 	Group        Pointer // *Group
 }
 
-// SDNA index: 247
+// SDNA index: 251
 type WaveEff struct {
 	Next     Pointer // *WaveEff
 	Prev     Pointer // *WaveEff
@@ -4638,7 +4694,7 @@ type WaveEff struct {
 	Lifetime float32
 }
 
-// SDNA index: 248
+// SDNA index: 252
 type TreeStoreElem struct {
 	Type int16
 	Nr   int16
@@ -4647,14 +4703,14 @@ type TreeStoreElem struct {
 	Id   Pointer // *ID
 }
 
-// SDNA index: 249
+// SDNA index: 253
 type TreeStore struct {
 	Totelem  int32
 	Usedelem int32
 	Data     Pointer // *TreeStoreElem
 }
 
-// SDNA index: 250
+// SDNA index: 254
 type BProperty struct {
 	Next Pointer // *BProperty
 	Prev Pointer // *BProperty
@@ -4665,7 +4721,7 @@ type BProperty struct {
 	Poin Pointer // *struct{}
 }
 
-// SDNA index: 251
+// SDNA index: 255
 type BNearSensor struct {
 	Name      [64]int8
 	Dist      float32
@@ -4674,7 +4730,7 @@ type BNearSensor struct {
 	Pad       int32
 }
 
-// SDNA index: 252
+// SDNA index: 256
 type BMouseSensor struct {
 	Type int16
 	Flag int16
@@ -4682,7 +4738,7 @@ type BMouseSensor struct {
 	Pad2 int16
 }
 
-// SDNA index: 253
+// SDNA index: 257
 type BTouchSensor struct {
 	Name [64]int8
 	Ma   Pointer // *Material
@@ -4690,7 +4746,7 @@ type BTouchSensor struct {
 	Pad  float32
 }
 
-// SDNA index: 254
+// SDNA index: 258
 type BKeyboardSensor struct {
 	Key        int16
 	Qual       int16
@@ -4700,7 +4756,7 @@ type BKeyboardSensor struct {
 	ToggleName [64]int8
 }
 
-// SDNA index: 255
+// SDNA index: 259
 type BPropertySensor struct {
 	Type     int32
 	Pad      int32
@@ -4709,14 +4765,14 @@ type BPropertySensor struct {
 	Maxvalue [64]int8
 }
 
-// SDNA index: 256
+// SDNA index: 260
 type BActuatorSensor struct {
 	Type int32
 	Pad  int32
 	Name [64]int8
 }
 
-// SDNA index: 257
+// SDNA index: 261
 type BDelaySensor struct {
 	Delay    int16
 	Duration int16
@@ -4724,7 +4780,7 @@ type BDelaySensor struct {
 	Pad      int16
 }
 
-// SDNA index: 258
+// SDNA index: 262
 type BCollisionSensor struct {
 	Name         [64]int8
 	MaterialName [64]int8
@@ -4734,7 +4790,7 @@ type BCollisionSensor struct {
 	Pad2         int16
 }
 
-// SDNA index: 259
+// SDNA index: 263
 type BRadarSensor struct {
 	Name  [64]int8
 	Angle float32
@@ -4743,14 +4799,14 @@ type BRadarSensor struct {
 	Axis  int16
 }
 
-// SDNA index: 260
+// SDNA index: 264
 type BRandomSensor struct {
 	Name  [64]int8
 	Seed  int32
 	Delay int32
 }
 
-// SDNA index: 261
+// SDNA index: 265
 type BRaySensor struct {
 	Name     [64]int8
 	Range    float32
@@ -4761,7 +4817,7 @@ type BRaySensor struct {
 	Axisflag int32
 }
 
-// SDNA index: 262
+// SDNA index: 266
 type BArmatureSensor struct {
 	Posechannel [64]int8
 	Constraint  [64]int8
@@ -4769,14 +4825,14 @@ type BArmatureSensor struct {
 	Value       float32
 }
 
-// SDNA index: 263
+// SDNA index: 267
 type BMessageSensor struct {
 	FromObject Pointer // *Object
 	Subject    [64]int8
 	Body       [64]int8
 }
 
-// SDNA index: 264
+// SDNA index: 268
 type BSensor struct {
 	Next     Pointer // *BSensor
 	Prev     Pointer // *BSensor
@@ -4798,7 +4854,7 @@ type BSensor struct {
 	Pad      int16
 }
 
-// SDNA index: 265
+// SDNA index: 269
 type BJoystickSensor struct {
 	Name        [64]int8
 	Type        int8
@@ -4813,12 +4869,12 @@ type BJoystickSensor struct {
 	Precision   int32
 }
 
-// SDNA index: 266
+// SDNA index: 270
 type BExpressionCont struct {
 	Str [128]int8
 }
 
-// SDNA index: 267
+// SDNA index: 271
 type BPythonCont struct {
 	Text   Pointer // *Text
 	Module [64]int8
@@ -4826,7 +4882,7 @@ type BPythonCont struct {
 	Flag   int32
 }
 
-// SDNA index: 268
+// SDNA index: 272
 type BController struct {
 	Next       Pointer // *BController
 	Prev       Pointer // *BController
@@ -4848,14 +4904,14 @@ type BController struct {
 	State_mask int32
 }
 
-// SDNA index: 269
+// SDNA index: 273
 type BAddObjectActuator struct {
 	Time int32
 	Pad  int32
 	Ob   Pointer // *Object
 }
 
-// SDNA index: 270
+// SDNA index: 274
 type BActionActuator struct {
 	Act          Pointer // *BAction
 	Type         int16
@@ -4874,7 +4930,7 @@ type BActionActuator struct {
 	Layer_weight float32
 }
 
-// SDNA index: 271
+// SDNA index: 275
 type Sound3D struct {
 	Min_gain           float32
 	Max_gain           float32
@@ -4886,7 +4942,7 @@ type Sound3D struct {
 	Cone_outer_gain    float32
 }
 
-// SDNA index: 272
+// SDNA index: 276
 type BSoundActuator struct {
 	Flag    int16
 	Sndnr   int16
@@ -4903,7 +4959,7 @@ type BSoundActuator struct {
 	Pad6    [1]int16
 }
 
-// SDNA index: 273
+// SDNA index: 277
 type BEditObjectActuator struct {
 	Time          int32
 	Type          int16
@@ -4918,7 +4974,7 @@ type BEditObjectActuator struct {
 	Dyn_operation int16
 }
 
-// SDNA index: 274
+// SDNA index: 278
 type BSceneActuator struct {
 	Type   int16
 	Pad1   int16
@@ -4927,7 +4983,7 @@ type BSceneActuator struct {
 	Camera Pointer // *Object
 }
 
-// SDNA index: 275
+// SDNA index: 279
 type BPropertyActuator struct {
 	Pad   int32
 	Type  int32
@@ -4936,7 +4992,7 @@ type BPropertyActuator struct {
 	Ob    Pointer // *Object
 }
 
-// SDNA index: 276
+// SDNA index: 280
 type BObjectActuator struct {
 	Flag            int16
 	Type            int16
@@ -4953,7 +5009,7 @@ type BObjectActuator struct {
 	Reference       Pointer // *Object
 }
 
-// SDNA index: 277
+// SDNA index: 281
 type BIpoActuator struct {
 	Flag      int16
 	Type      int16
@@ -4967,7 +5023,7 @@ type BIpoActuator struct {
 	Pad4      int16
 }
 
-// SDNA index: 278
+// SDNA index: 282
 type BCameraActuator struct {
 	Ob      Pointer // *Object
 	Height  float32
@@ -4979,7 +5035,7 @@ type BCameraActuator struct {
 	Pad2    float32
 }
 
-// SDNA index: 279
+// SDNA index: 283
 type BConstraintActuator struct {
 	Type    int16
 	Mode    int16
@@ -4995,7 +5051,7 @@ type BConstraintActuator struct {
 	Matprop [64]int8
 }
 
-// SDNA index: 280
+// SDNA index: 284
 type BGroupActuator struct {
 	Flag   int16
 	Type   int16
@@ -5008,7 +5064,7 @@ type BGroupActuator struct {
 	Butend int16
 }
 
-// SDNA index: 281
+// SDNA index: 285
 type BRandomActuator struct {
 	Seed         int32
 	Distribution int32
@@ -5019,7 +5075,7 @@ type BRandomActuator struct {
 	Propname     [64]int8
 }
 
-// SDNA index: 282
+// SDNA index: 286
 type BMessageActuator struct {
 	ToPropName [64]int8
 	ToObject   Pointer // *Object
@@ -5030,7 +5086,7 @@ type BMessageActuator struct {
 	Body       [64]int8
 }
 
-// SDNA index: 283
+// SDNA index: 287
 type BGameActuator struct {
 	Flag        int16
 	Type        int16
@@ -5040,12 +5096,12 @@ type BGameActuator struct {
 	Loadaniname [64]int8
 }
 
-// SDNA index: 284
+// SDNA index: 288
 type BVisibilityActuator struct {
 	Flag int32
 }
 
-// SDNA index: 285
+// SDNA index: 289
 type BTwoDFilterActuator struct {
 	Pad       [4]int8
 	Type      int16
@@ -5055,7 +5111,7 @@ type BTwoDFilterActuator struct {
 	Text      Pointer // *Text
 }
 
-// SDNA index: 286
+// SDNA index: 290
 type BParentActuator struct {
 	Pad  [2]int8
 	Flag int16
@@ -5063,13 +5119,13 @@ type BParentActuator struct {
 	Ob   Pointer // *Object
 }
 
-// SDNA index: 287
+// SDNA index: 291
 type BStateActuator struct {
 	Type int32
 	Mask int32
 }
 
-// SDNA index: 288
+// SDNA index: 292
 type BArmatureActuator struct {
 	Posechannel [64]int8
 	Constraint  [64]int8
@@ -5081,7 +5137,7 @@ type BArmatureActuator struct {
 	Subtarget   Pointer // *Object
 }
 
-// SDNA index: 289
+// SDNA index: 293
 type BSteeringActuator struct {
 	Pad          [5]int8
 	Flag         int8
@@ -5096,7 +5152,7 @@ type BSteeringActuator struct {
 	Navmesh      Pointer // *Object
 }
 
-// SDNA index: 290
+// SDNA index: 294
 type BActuator struct {
 	Next  Pointer // *BActuator
 	Prev  Pointer // *BActuator
@@ -5110,7 +5166,7 @@ type BActuator struct {
 	Ob    Pointer // *Object
 }
 
-// SDNA index: 291
+// SDNA index: 295
 type BSound struct {
 	Id              ID
 	Name            [1024]int8
@@ -5131,7 +5187,7 @@ type BSound struct {
 	Playback_handle Pointer // *struct{}
 }
 
-// SDNA index: 292
+// SDNA index: 296
 type GroupObject struct {
 	Next    Pointer // *GroupObject
 	Prev    Pointer // *GroupObject
@@ -5141,7 +5197,7 @@ type GroupObject struct {
 	Pad     [6]int8
 }
 
-// SDNA index: 293
+// SDNA index: 297
 type Group struct {
 	Id        ID
 	Gobject   ListBase
@@ -5149,7 +5205,7 @@ type Group struct {
 	Dupli_ofs [3]float32
 }
 
-// SDNA index: 294
+// SDNA index: 298
 type Bone struct {
 	Next      Pointer // *Bone
 	Prev      Pointer // *Bone
@@ -5181,7 +5237,7 @@ type Bone struct {
 	Pad       [1]int16
 }
 
-// SDNA index: 295
+// SDNA index: 299
 type BArmature struct {
 	Id              ID
 	Adt             Pointer // *AnimData
@@ -5212,13 +5268,13 @@ type BArmature struct {
 	Pathac          int32
 }
 
-// SDNA index: 296
+// SDNA index: 300
 type BMotionPathVert struct {
 	Co   [3]float32
 	Flag int32
 }
 
-// SDNA index: 297
+// SDNA index: 301
 type BMotionPath struct {
 	Points      Pointer // *BMotionPathVert
 	Length      int32
@@ -5227,7 +5283,7 @@ type BMotionPath struct {
 	Flag        int32
 }
 
-// SDNA index: 298
+// SDNA index: 302
 type BAnimVizSettings struct {
 	Ghost_sf      int32
 	Ghost_ef      int32
@@ -5247,7 +5303,7 @@ type BAnimVizSettings struct {
 	Path_ac       int32
 }
 
-// SDNA index: 299
+// SDNA index: 303
 type BPoseChannel struct {
 	Next        Pointer // *BPoseChannel
 	Prev        Pointer // *BPoseChannel
@@ -5291,7 +5347,7 @@ type BPoseChannel struct {
 	Temp        Pointer // *struct{}
 }
 
-// SDNA index: 300
+// SDNA index: 304
 type BPose struct {
 	Chanbase       ListBase
 	Chanhash       Pointer // *GHash
@@ -5311,12 +5367,12 @@ type BPose struct {
 	Proxy_act_bone [64]int8
 }
 
-// SDNA index: 301
+// SDNA index: 305
 type BIKParam struct {
 	Iksolver int32
 }
 
-// SDNA index: 302
+// SDNA index: 306
 type BItasc struct {
 	Iksolver  int32
 	Precision float32
@@ -5332,7 +5388,7 @@ type BItasc struct {
 	Dampeps   float32
 }
 
-// SDNA index: 303
+// SDNA index: 307
 type BActionGroup struct {
 	Next      Pointer // *BActionGroup
 	Prev      Pointer // *BActionGroup
@@ -5343,7 +5399,7 @@ type BActionGroup struct {
 	Cs        ThemeWireColor
 }
 
-// SDNA index: 304
+// SDNA index: 308
 type BAction struct {
 	Id            ID
 	Curves        ListBase
@@ -5356,7 +5412,7 @@ type BAction struct {
 	Pad           int32
 }
 
-// SDNA index: 305
+// SDNA index: 309
 type BDopeSheet struct {
 	Source      Pointer // *ID
 	Chanbase    ListBase
@@ -5368,7 +5424,7 @@ type BDopeSheet struct {
 	Pad         int32
 }
 
-// SDNA index: 306
+// SDNA index: 310
 type SpaceAction struct {
 	Next         Pointer // *SpaceLink
 	Prev         Pointer // *SpaceLink
@@ -5385,7 +5441,7 @@ type SpaceAction struct {
 	Timeslide    float32
 }
 
-// SDNA index: 307
+// SDNA index: 311
 type BActionChannel struct {
 	Next               Pointer // *BActionChannel
 	Prev               Pointer // *BActionChannel
@@ -5397,7 +5453,7 @@ type BActionChannel struct {
 	Temp               int32
 }
 
-// SDNA index: 308
+// SDNA index: 312
 type BConstraintChannel struct {
 	Next Pointer // *BConstraintChannel
 	Prev Pointer // *BConstraintChannel
@@ -5406,7 +5462,7 @@ type BConstraintChannel struct {
 	Name [30]int8
 }
 
-// SDNA index: 309
+// SDNA index: 313
 type BConstraint struct {
 	Next      Pointer // *BConstraint
 	Prev      Pointer // *BConstraint
@@ -5424,7 +5480,7 @@ type BConstraint struct {
 	Rot_error float32
 }
 
-// SDNA index: 310
+// SDNA index: 314
 type BConstraintTarget struct {
 	Next      Pointer // *BConstraintTarget
 	Prev      Pointer // *BConstraintTarget
@@ -5437,7 +5493,7 @@ type BConstraintTarget struct {
 	RotOrder  int16
 }
 
-// SDNA index: 311
+// SDNA index: 315
 type BPythonConstraint struct {
 	Text      Pointer // *Text
 	Prop      Pointer // *IDProperty
@@ -5448,7 +5504,7 @@ type BPythonConstraint struct {
 	Subtarget [64]int8
 }
 
-// SDNA index: 312
+// SDNA index: 316
 type BKinematicConstraint struct {
 	Tar           Pointer // *Object
 	Iterations    int16
@@ -5467,7 +5523,7 @@ type BKinematicConstraint struct {
 	Dist          float32
 }
 
-// SDNA index: 313
+// SDNA index: 317
 type BSplineIKConstraint struct {
 	Tar         Pointer // *Object
 	Points      Pointer // *float32
@@ -5477,7 +5533,7 @@ type BSplineIKConstraint struct {
 	XzScaleMode int16
 }
 
-// SDNA index: 314
+// SDNA index: 318
 type BTrackToConstraint struct {
 	Tar       Pointer // *Object
 	Reserved1 int32
@@ -5487,7 +5543,7 @@ type BTrackToConstraint struct {
 	Subtarget [64]int8
 }
 
-// SDNA index: 315
+// SDNA index: 319
 type BRotateLikeConstraint struct {
 	Tar       Pointer // *Object
 	Flag      int32
@@ -5495,7 +5551,7 @@ type BRotateLikeConstraint struct {
 	Subtarget [64]int8
 }
 
-// SDNA index: 316
+// SDNA index: 320
 type BLocateLikeConstraint struct {
 	Tar       Pointer // *Object
 	Flag      int32
@@ -5503,7 +5559,7 @@ type BLocateLikeConstraint struct {
 	Subtarget [64]int8
 }
 
-// SDNA index: 317
+// SDNA index: 321
 type BSizeLikeConstraint struct {
 	Tar       Pointer // *Object
 	Flag      int32
@@ -5511,19 +5567,19 @@ type BSizeLikeConstraint struct {
 	Subtarget [64]int8
 }
 
-// SDNA index: 318
+// SDNA index: 322
 type BSameVolumeConstraint struct {
 	Flag   int32
 	Volume float32
 }
 
-// SDNA index: 319
+// SDNA index: 323
 type BTransLikeConstraint struct {
 	Tar       Pointer // *Object
 	Subtarget [64]int8
 }
 
-// SDNA index: 320
+// SDNA index: 324
 type BMinMaxConstraint struct {
 	Tar        Pointer // *Object
 	Minmaxflag int32
@@ -5537,7 +5593,7 @@ type BMinMaxConstraint struct {
 	Subtarget  [64]int8
 }
 
-// SDNA index: 321
+// SDNA index: 325
 type BActionConstraint struct {
 	Tar       Pointer // *Object
 	Type      int16
@@ -5551,7 +5607,7 @@ type BActionConstraint struct {
 	Subtarget [64]int8
 }
 
-// SDNA index: 322
+// SDNA index: 326
 type BLockTrackConstraint struct {
 	Tar       Pointer // *Object
 	Trackflag int32
@@ -5559,7 +5615,7 @@ type BLockTrackConstraint struct {
 	Subtarget [64]int8
 }
 
-// SDNA index: 323
+// SDNA index: 327
 type BDampTrackConstraint struct {
 	Tar       Pointer // *Object
 	Trackflag int32
@@ -5567,7 +5623,7 @@ type BDampTrackConstraint struct {
 	Subtarget [64]int8
 }
 
-// SDNA index: 324
+// SDNA index: 328
 type BFollowPathConstraint struct {
 	Tar        Pointer // *Object
 	Offset     float32
@@ -5577,7 +5633,7 @@ type BFollowPathConstraint struct {
 	Upflag     int16
 }
 
-// SDNA index: 325
+// SDNA index: 329
 type BStretchToConstraint struct {
 	Tar       Pointer // *Object
 	Volmode   int32
@@ -5587,7 +5643,7 @@ type BStretchToConstraint struct {
 	Subtarget [64]int8
 }
 
-// SDNA index: 326
+// SDNA index: 330
 type BRigidBodyJointConstraint struct {
 	Tar      Pointer // *Object
 	Child    Pointer // *Object
@@ -5607,14 +5663,14 @@ type BRigidBodyJointConstraint struct {
 	Pad2     int16
 }
 
-// SDNA index: 327
+// SDNA index: 331
 type BClampToConstraint struct {
 	Tar   Pointer // *Object
 	Flag  int32
 	Flag2 int32
 }
 
-// SDNA index: 328
+// SDNA index: 332
 type BChildOfConstraint struct {
 	Tar       Pointer // *Object
 	Flag      int32
@@ -5623,7 +5679,7 @@ type BChildOfConstraint struct {
 	Subtarget [64]int8
 }
 
-// SDNA index: 329
+// SDNA index: 333
 type BTransformConstraint struct {
 	Tar       Pointer // *Object
 	Subtarget [64]int8
@@ -5637,7 +5693,7 @@ type BTransformConstraint struct {
 	To_max    [3]float32
 }
 
-// SDNA index: 330
+// SDNA index: 334
 type BPivotConstraint struct {
 	Tar       Pointer // *Object
 	Subtarget [64]int8
@@ -5646,7 +5702,7 @@ type BPivotConstraint struct {
 	Flag      int16
 }
 
-// SDNA index: 331
+// SDNA index: 335
 type BLocLimitConstraint struct {
 	Xmin  float32
 	Xmax  float32
@@ -5658,7 +5714,7 @@ type BLocLimitConstraint struct {
 	Flag2 int16
 }
 
-// SDNA index: 332
+// SDNA index: 336
 type BRotLimitConstraint struct {
 	Xmin  float32
 	Xmax  float32
@@ -5670,7 +5726,7 @@ type BRotLimitConstraint struct {
 	Flag2 int16
 }
 
-// SDNA index: 333
+// SDNA index: 337
 type BSizeLimitConstraint struct {
 	Xmin  float32
 	Xmax  float32
@@ -5682,7 +5738,7 @@ type BSizeLimitConstraint struct {
 	Flag2 int16
 }
 
-// SDNA index: 334
+// SDNA index: 338
 type BDistLimitConstraint struct {
 	Tar       Pointer // *Object
 	Subtarget [64]int8
@@ -5693,7 +5749,7 @@ type BDistLimitConstraint struct {
 	Pad       int32
 }
 
-// SDNA index: 335
+// SDNA index: 339
 type BShrinkwrapConstraint struct {
 	Target     Pointer // *Object
 	Dist       float32
@@ -5702,7 +5758,7 @@ type BShrinkwrapConstraint struct {
 	Pad        [9]int8
 }
 
-// SDNA index: 336
+// SDNA index: 340
 type BFollowTrackConstraint struct {
 	Clip         Pointer // *MovieClip
 	Track        [64]int8
@@ -5713,14 +5769,14 @@ type BFollowTrackConstraint struct {
 	Depth_ob     Pointer // *Object
 }
 
-// SDNA index: 337
+// SDNA index: 341
 type BCameraSolverConstraint struct {
 	Clip Pointer // *MovieClip
 	Flag int32
 	Pad  int32
 }
 
-// SDNA index: 338
+// SDNA index: 342
 type BObjectSolverConstraint struct {
 	Clip   Pointer // *MovieClip
 	Flag   int32
@@ -5730,7 +5786,7 @@ type BObjectSolverConstraint struct {
 	Camera Pointer // *Object
 }
 
-// SDNA index: 339
+// SDNA index: 343
 type BActionModifier struct {
 	Next        Pointer // *BActionModifier
 	Prev        Pointer // *BActionModifier
@@ -5744,7 +5800,7 @@ type BActionModifier struct {
 	Ob          Pointer // *Object
 }
 
-// SDNA index: 340
+// SDNA index: 344
 type BActionStrip struct {
 	Next          Pointer // *BActionStrip
 	Prev          Pointer // *BActionStrip
@@ -5770,7 +5826,7 @@ type BActionStrip struct {
 	Modifiers     ListBase
 }
 
-// SDNA index: 341
+// SDNA index: 345
 type BNodeStack struct {
 	Vec        [4]float32
 	Min        float32
@@ -5785,17 +5841,21 @@ type BNodeStack struct {
 	Pad        [2]int16
 }
 
-// SDNA index: 342
+// SDNA index: 346
 type BNodeSocket struct {
 	Next          Pointer // *BNodeSocket
 	Prev          Pointer // *BNodeSocket
 	New_sock      Pointer // *BNodeSocket
+	Prop          Pointer // *IDProperty
+	Identifier    [64]int8
 	Name          [64]int8
 	Storage       Pointer // *struct{}
 	Type          int16
 	Flag          int16
 	Limit         int16
-	Pad1          int16
+	In_out        int16
+	Typeinfo      Pointer // *BNodeSocketType
+	Idname        [64]int8
 	Locx          float32
 	Locy          float32
 	Default_value Pointer // *struct{}
@@ -5810,23 +5870,18 @@ type BNodeSocket struct {
 	Ns            BNodeStack
 }
 
-// SDNA index: 343
-type BNodePreview struct {
-	Rect  Pointer // *int8
-	Xsize int16
-	Ysize int16
-	Pad   int32
-}
-
-// SDNA index: 344
+// SDNA index: 347
 type BNode struct {
 	Next           Pointer // *BNode
 	Prev           Pointer // *BNode
 	New_node       Pointer // *BNode
+	Prop           Pointer // *IDProperty
+	Typeinfo       Pointer // *BNodeType
+	Idname         [64]int8
 	Name           [64]int8
 	Flag           int32
 	Type           int16
-	Pad2           int16
+	Pad            int16
 	Done           int16
 	Level          int16
 	Lasty          int16
@@ -5860,12 +5915,34 @@ type BNode struct {
 	Totr           Rctf
 	Butr           Rctf
 	Prvr           Rctf
-	Preview        Pointer // *BNodePreview
+	Preview_xsize  int16
+	Preview_ysize  int16
+	Pad2           int32
 	Block          Pointer // *UiBlock
-	Typeinfo       Pointer // *BNodeType
 }
 
-// SDNA index: 345
+// SDNA index: 348
+type BNodeInstanceKey struct {
+	Value int32
+}
+
+// SDNA index: 349
+type BNodeInstanceHashEntry struct {
+	Key BNodeInstanceKey
+	Tag int16
+	Pad int16
+}
+
+// SDNA index: 350
+type BNodePreview struct {
+	Hash_entry BNodeInstanceHashEntry
+	Rect       Pointer // *int8
+	Xsize      int16
+	Ysize      int16
+	Pad        int32
+}
+
+// SDNA index: 351
 type BNodeLink struct {
 	Next     Pointer // *BNodeLink
 	Prev     Pointer // *BNodeLink
@@ -5877,11 +5954,15 @@ type BNodeLink struct {
 	Pad      int32
 }
 
-// SDNA index: 346
+// SDNA index: 352
 type BNodeTree struct {
 	Id             ID
 	Adt            Pointer // *AnimData
+	Typeinfo       Pointer // *BNodeTreeType
+	Idname         [64]int8
+	Interface_type Pointer // *StructRNA
 	Gpd            Pointer // *BGPdata
+	View_center    [2]float32
 	Nodes          ListBase
 	Links          ListBase
 	Type           int32
@@ -5889,12 +5970,17 @@ type BNodeTree struct {
 	Cur_index      int32
 	Flag           int32
 	Update         int32
+	Is_updating    int16
+	Done           int16
+	Pad2           int32
 	Nodetype       int32
 	Edit_quality   int16
 	Render_quality int16
 	Chunksize      int32
+	Viewer_border  Rctf
 	Inputs         ListBase
 	Outputs        ListBase
+	Previews       Pointer // *BNodeInstanceHash
 	Execdata       Pointer // *BNodeTreeExec
 	Progress       func()
 	Stats_draw     func()
@@ -5906,7 +5992,7 @@ type BNodeTree struct {
 	Udh            Pointer // *struct{}
 }
 
-// SDNA index: 347
+// SDNA index: 353
 type BNodeSocketValueInt struct {
 	Subtype int32
 	Value   int32
@@ -5914,7 +6000,7 @@ type BNodeSocketValueInt struct {
 	Max     int32
 }
 
-// SDNA index: 348
+// SDNA index: 354
 type BNodeSocketValueFloat struct {
 	Subtype int32
 	Value   float32
@@ -5922,13 +6008,13 @@ type BNodeSocketValueFloat struct {
 	Max     float32
 }
 
-// SDNA index: 349
+// SDNA index: 355
 type BNodeSocketValueBoolean struct {
 	Value int8
 	Pad   [3]int8
 }
 
-// SDNA index: 350
+// SDNA index: 356
 type BNodeSocketValueVector struct {
 	Subtype int32
 	Value   [3]float32
@@ -5936,25 +6022,25 @@ type BNodeSocketValueVector struct {
 	Max     float32
 }
 
-// SDNA index: 351
+// SDNA index: 357
 type BNodeSocketValueRGBA struct {
 	Value [4]float32
 }
 
-// SDNA index: 352
+// SDNA index: 358
 type BNodeSocketValueString struct {
 	Subtype int32
 	Pad     int32
 	Value   [1024]int8
 }
 
-// SDNA index: 353
+// SDNA index: 359
 type NodeFrame struct {
 	Flag       int16
 	Label_size int16
 }
 
-// SDNA index: 354
+// SDNA index: 360
 type NodeImageAnim struct {
 	Frames int32
 	Sfra   int32
@@ -5964,7 +6050,7 @@ type NodeImageAnim struct {
 	Pad    int16
 }
 
-// SDNA index: 355
+// SDNA index: 361
 type ColorCorrectionData struct {
 	Saturation float32
 	Contrast   float32
@@ -5974,7 +6060,7 @@ type ColorCorrectionData struct {
 	Pad        int32
 }
 
-// SDNA index: 356
+// SDNA index: 362
 type NodeColorCorrection struct {
 	Master        ColorCorrectionData
 	Shadows       ColorCorrectionData
@@ -5984,7 +6070,7 @@ type NodeColorCorrection struct {
 	Endmidtones   float32
 }
 
-// SDNA index: 357
+// SDNA index: 363
 type NodeBokehImage struct {
 	Angle        float32
 	Flaps        int32
@@ -5993,7 +6079,7 @@ type NodeBokehImage struct {
 	Lensshift    float32
 }
 
-// SDNA index: 358
+// SDNA index: 364
 type NodeBoxMask struct {
 	X        float32
 	Y        float32
@@ -6003,7 +6089,7 @@ type NodeBoxMask struct {
 	Pad      int32
 }
 
-// SDNA index: 359
+// SDNA index: 365
 type NodeEllipseMask struct {
 	X        float32
 	Y        float32
@@ -6013,13 +6099,13 @@ type NodeEllipseMask struct {
 	Pad      int32
 }
 
-// SDNA index: 360
+// SDNA index: 366
 type NodeImageLayer struct {
 	Pass_index int32
 	Pass_flag  int32
 }
 
-// SDNA index: 361
+// SDNA index: 367
 type NodeBlurData struct {
 	Sizex           int16
 	Sizey           int16
@@ -6039,7 +6125,7 @@ type NodeBlurData struct {
 	Image_in_height int32
 }
 
-// SDNA index: 362
+// SDNA index: 368
 type NodeDBlurData struct {
 	Center_x float32
 	Center_y float32
@@ -6052,7 +6138,7 @@ type NodeDBlurData struct {
 	Pad      int8
 }
 
-// SDNA index: 363
+// SDNA index: 369
 type NodeBilateralBlurData struct {
 	Sigma_color float32
 	Sigma_space float32
@@ -6060,14 +6146,14 @@ type NodeBilateralBlurData struct {
 	Pad         int16
 }
 
-// SDNA index: 364
+// SDNA index: 370
 type NodeHueSat struct {
 	Hue float32
 	Sat float32
 	Val float32
 }
 
-// SDNA index: 365
+// SDNA index: 371
 type NodeImageFile struct {
 	Name      [1024]int8
 	Im_format ImageFormatData
@@ -6075,7 +6161,7 @@ type NodeImageFile struct {
 	Efra      int32
 }
 
-// SDNA index: 366
+// SDNA index: 372
 type NodeImageMultiFile struct {
 	Base_path    [1024]int8
 	Format       ImageFormatData
@@ -6085,7 +6171,7 @@ type NodeImageMultiFile struct {
 	Pad          int32
 }
 
-// SDNA index: 367
+// SDNA index: 373
 type NodeImageMultiFileSocket struct {
 	Use_render_format int16
 	Use_node_format   int16
@@ -6096,7 +6182,7 @@ type NodeImageMultiFileSocket struct {
 	Pad2              [2]int8
 }
 
-// SDNA index: 368
+// SDNA index: 374
 type NodeChroma struct {
 	T1        float32
 	T2        float32
@@ -6109,7 +6195,7 @@ type NodeChroma struct {
 	Channel   int16
 }
 
-// SDNA index: 369
+// SDNA index: 375
 type NodeTwoXYs struct {
 	X1     int16
 	X2     int16
@@ -6121,24 +6207,24 @@ type NodeTwoXYs struct {
 	Fac_y2 float32
 }
 
-// SDNA index: 370
+// SDNA index: 376
 type NodeTwoFloats struct {
 	X float32
 	Y float32
 }
 
-// SDNA index: 371
+// SDNA index: 377
 type NodeGeometry struct {
 	Uvname  [64]int8
 	Colname [64]int8
 }
 
-// SDNA index: 372
+// SDNA index: 378
 type NodeVertexCol struct {
 	Name [64]int8
 }
 
-// SDNA index: 373
+// SDNA index: 379
 type NodeDefocus struct {
 	Bktype   int8
 	Pad_c1   int8
@@ -6154,13 +6240,13 @@ type NodeDefocus struct {
 	Pad_f1   float32
 }
 
-// SDNA index: 374
+// SDNA index: 380
 type NodeScriptDict struct {
 	Dict Pointer // *struct{}
 	Node Pointer // *struct{}
 }
 
-// SDNA index: 375
+// SDNA index: 381
 type NodeGlare struct {
 	Quality   int8
 	Type      int8
@@ -6177,7 +6263,7 @@ type NodeGlare struct {
 	Pad_f1    float32
 }
 
-// SDNA index: 376
+// SDNA index: 382
 type NodeTonemap struct {
 	Key    float32
 	Offset float32
@@ -6189,7 +6275,7 @@ type NodeTonemap struct {
 	Type   int32
 }
 
-// SDNA index: 377
+// SDNA index: 383
 type NodeLensDist struct {
 	Jit  int16
 	Proj int16
@@ -6197,7 +6283,7 @@ type NodeLensDist struct {
 	Pad  int16
 }
 
-// SDNA index: 378
+// SDNA index: 384
 type NodeColorBalance struct {
 	Slope     [3]float32
 	Offset    [3]float32
@@ -6209,7 +6295,7 @@ type NodeColorBalance struct {
 	Gamma_inv [3]float32
 }
 
-// SDNA index: 379
+// SDNA index: 385
 type NodeColorspill struct {
 	Limchan  int16
 	Unspill  int16
@@ -6219,32 +6305,32 @@ type NodeColorspill struct {
 	Uspillb  float32
 }
 
-// SDNA index: 380
+// SDNA index: 386
 type NodeDilateErode struct {
 	Falloff int8
 	Pad     [7]int8
 }
 
-// SDNA index: 381
+// SDNA index: 387
 type NodeMask struct {
 	Size_x int32
 	Size_y int32
 }
 
-// SDNA index: 382
+// SDNA index: 388
 type NodeTexBase struct {
 	Tex_mapping   TexMapping
 	Color_mapping ColorMapping
 }
 
-// SDNA index: 383
+// SDNA index: 389
 type NodeTexSky struct {
 	Base          NodeTexBase
 	Sun_direction [3]float32
 	Turbidity     float32
 }
 
-// SDNA index: 384
+// SDNA index: 390
 type NodeTexImage struct {
 	Base             NodeTexBase
 	Iuser            ImageUser
@@ -6254,12 +6340,12 @@ type NodeTexImage struct {
 	Pad              int32
 }
 
-// SDNA index: 385
+// SDNA index: 391
 type NodeTexChecker struct {
 	Base NodeTexBase
 }
 
-// SDNA index: 386
+// SDNA index: 392
 type NodeTexBrick struct {
 	Base        NodeTexBase
 	Offset_freq int32
@@ -6268,7 +6354,7 @@ type NodeTexBrick struct {
 	Squash      float32
 }
 
-// SDNA index: 387
+// SDNA index: 393
 type NodeTexEnvironment struct {
 	Base        NodeTexBase
 	Iuser       ImageUser
@@ -6276,62 +6362,62 @@ type NodeTexEnvironment struct {
 	Projection  int32
 }
 
-// SDNA index: 388
+// SDNA index: 394
 type NodeTexGradient struct {
 	Base          NodeTexBase
 	Gradient_type int32
 	Pad           int32
 }
 
-// SDNA index: 389
+// SDNA index: 395
 type NodeTexNoise struct {
 	Base NodeTexBase
 }
 
-// SDNA index: 390
+// SDNA index: 396
 type NodeTexVoronoi struct {
 	Base     NodeTexBase
 	Coloring int32
 	Pad      int32
 }
 
-// SDNA index: 391
+// SDNA index: 397
 type NodeTexMusgrave struct {
 	Base          NodeTexBase
 	Musgrave_type int32
 	Pad           int32
 }
 
-// SDNA index: 392
+// SDNA index: 398
 type NodeTexWave struct {
 	Base      NodeTexBase
 	Wave_type int32
 	Pad       int32
 }
 
-// SDNA index: 393
+// SDNA index: 399
 type NodeTexMagic struct {
 	Base  NodeTexBase
 	Depth int32
 	Pad   int32
 }
 
-// SDNA index: 394
+// SDNA index: 400
 type NodeShaderAttribute struct {
 	Name [64]int8
 }
 
-// SDNA index: 395
+// SDNA index: 401
 type TexNodeOutput struct {
 	Name [64]int8
 }
 
-// SDNA index: 396
+// SDNA index: 402
 type NodeKeyingScreenData struct {
 	Tracking_object [64]int8
 }
 
-// SDNA index: 397
+// SDNA index: 403
 type NodeKeyingData struct {
 	Screen_balance        float32
 	Despill_factor        float32
@@ -6347,43 +6433,42 @@ type NodeKeyingData struct {
 	Blur_post             int32
 }
 
-// SDNA index: 398
+// SDNA index: 404
 type NodeTrackPosData struct {
 	Tracking_object [64]int8
 	Track_name      [64]int8
 }
 
-// SDNA index: 399
+// SDNA index: 405
 type NodeTranslateData struct {
 	Wrap_axis int8
 	Relative  int8
 	Pad       [6]int8
 }
 
-// SDNA index: 400
+// SDNA index: 406
 type NodeShaderScript struct {
 	Mode          int32
 	Flag          int32
 	Filepath      [1024]int8
 	Bytecode_hash [64]int8
 	Bytecode      Pointer // *int8
-	Prop          Pointer // *IDProperty
 }
 
-// SDNA index: 401
+// SDNA index: 407
 type NodeShaderTangent struct {
 	Direction_type int32
 	Axis           int32
 	Uv_map         [64]int8
 }
 
-// SDNA index: 402
+// SDNA index: 408
 type NodeShaderNormalMap struct {
 	Space  int32
 	Uv_map [64]int8
 }
 
-// SDNA index: 403
+// SDNA index: 409
 type CurveMapPoint struct {
 	X      float32
 	Y      float32
@@ -6391,7 +6476,7 @@ type CurveMapPoint struct {
 	Shorty int16
 }
 
-// SDNA index: 404
+// SDNA index: 410
 type CurveMap struct {
 	Totpoint    int16
 	Flag        int16
@@ -6405,7 +6490,7 @@ type CurveMap struct {
 	Premultable Pointer // *CurveMapPoint
 }
 
-// SDNA index: 405
+// SDNA index: 411
 type CurveMapping struct {
 	Flag              int32
 	Cur               int32
@@ -6420,7 +6505,7 @@ type CurveMapping struct {
 	Sample            [3]float32
 }
 
-// SDNA index: 406
+// SDNA index: 412
 type Histogram struct {
 	Channels     int32
 	X_resolution int32
@@ -6437,7 +6522,7 @@ type Histogram struct {
 	Co           [2][2]float32
 }
 
-// SDNA index: 407
+// SDNA index: 413
 type Scopes struct {
 	Ok              int32
 	Sample_full     int32
@@ -6459,7 +6544,7 @@ type Scopes struct {
 	Pad             int32
 }
 
-// SDNA index: 408
+// SDNA index: 414
 type ColorManagedViewSettings struct {
 	Flag           int32
 	Pad            int32
@@ -6470,17 +6555,17 @@ type ColorManagedViewSettings struct {
 	Pad2           Pointer // *struct{}
 }
 
-// SDNA index: 409
+// SDNA index: 415
 type ColorManagedDisplaySettings struct {
 	Display_device [64]int8
 }
 
-// SDNA index: 410
+// SDNA index: 416
 type ColorManagedColorspaceSettings struct {
 	Name [64]int8
 }
 
-// SDNA index: 411
+// SDNA index: 417
 type BrushClone struct {
 	Image  Pointer // *Image
 	Offset [2]float32
@@ -6488,12 +6573,13 @@ type BrushClone struct {
 	Pad    float32
 }
 
-// SDNA index: 412
+// SDNA index: 418
 type Brush struct {
 	Id                    ID
 	Clone                 BrushClone
 	Curve                 Pointer // *CurveMapping
 	Mtex                  MTex
+	Mask_mtex             MTex
 	Toggle_brush          Pointer // *Brush
 	Icon_imbuf            Pointer // *ImBuf
 	Preview               Pointer // *PreviewImage
@@ -6505,6 +6591,8 @@ type Brush struct {
 	Size                  int32
 	Flag                  int32
 	Jitter                float32
+	Jitter_absolute       int32
+	Overlay_flags         int32
 	Spacing               int32
 	Smooth_stroke_radius  int32
 	Smooth_stroke_factor  float32
@@ -6523,12 +6611,16 @@ type Brush struct {
 	Height                float32
 	Texture_sample_bias   float32
 	Texture_overlay_alpha int32
+	Mask_overlay_alpha    int32
+	Cursor_overlay_alpha  int32
 	Unprojected_radius    float32
 	Add_col               [3]float32
 	Sub_col               [3]float32
+	Stencil_pos           [2]float32
+	Stencil_dimension     [2]float32
 }
 
-// SDNA index: 413
+// SDNA index: 419
 type CustomDataLayer struct {
 	Type         int32
 	Offset       int32
@@ -6542,15 +6634,15 @@ type CustomDataLayer struct {
 	Data         Pointer // *struct{}
 }
 
-// SDNA index: 414
+// SDNA index: 420
 type CustomDataExternal struct {
 	Filename [1024]int8
 }
 
-// SDNA index: 415
+// SDNA index: 421
 type CustomData struct {
 	Layers   Pointer // *CustomDataLayer
-	Typemap  [37]int32
+	Typemap  [39]int32
 	Totlayer int32
 	Maxlayer int32
 	Totsize  int32
@@ -6558,7 +6650,7 @@ type CustomData struct {
 	External Pointer // *CustomDataExternal
 }
 
-// SDNA index: 416
+// SDNA index: 422
 type HairKey struct {
 	Co       [3]float32
 	Time     float32
@@ -6567,7 +6659,7 @@ type HairKey struct {
 	Pad      int16
 }
 
-// SDNA index: 417
+// SDNA index: 423
 type ParticleKey struct {
 	Co   [3]float32
 	Vel  [3]float32
@@ -6576,7 +6668,7 @@ type ParticleKey struct {
 	Time float32
 }
 
-// SDNA index: 418
+// SDNA index: 424
 type BoidParticle struct {
 	Ground  Pointer // *Object
 	Data    BoidData
@@ -6585,14 +6677,14 @@ type BoidParticle struct {
 	Rt      float32
 }
 
-// SDNA index: 419
+// SDNA index: 425
 type ParticleSpring struct {
 	Rest_length    float32
 	Particle_index [2]int32
 	Delete_flag    int32
 }
 
-// SDNA index: 420
+// SDNA index: 426
 type ChildParticle struct {
 	Num     int32
 	Parent  int32
@@ -6603,7 +6695,7 @@ type ChildParticle struct {
 	Rt      float32
 }
 
-// SDNA index: 421
+// SDNA index: 427
 type ParticleTarget struct {
 	Next     Pointer // *ParticleTarget
 	Prev     Pointer // *ParticleTarget
@@ -6615,7 +6707,7 @@ type ParticleTarget struct {
 	Duration float32
 }
 
-// SDNA index: 422
+// SDNA index: 428
 type ParticleDupliWeight struct {
 	Next  Pointer // *ParticleDupliWeight
 	Prev  Pointer // *ParticleDupliWeight
@@ -6626,7 +6718,7 @@ type ParticleDupliWeight struct {
 	Rt    int16
 }
 
-// SDNA index: 423
+// SDNA index: 429
 type ParticleData struct {
 	State       ParticleKey
 	Prev_state  ParticleKey
@@ -6649,7 +6741,7 @@ type ParticleData struct {
 	Alive       int16
 }
 
-// SDNA index: 424
+// SDNA index: 430
 type SPHFluidSettings struct {
 	Radius              float32
 	Spring_k            float32
@@ -6670,7 +6762,7 @@ type SPHFluidSettings struct {
 	Pad                 [3]int16
 }
 
-// SDNA index: 425
+// SDNA index: 431
 type ParticleSettings struct {
 	Id                  ID
 	Adt                 Pointer // *AnimData
@@ -6705,8 +6797,8 @@ type ParticleSettings struct {
 	Disp                int16
 	Omat                int16
 	Interpolation       int16
-	Rotfrom             int16
 	Integrator          int16
+	Rotfrom             int16
 	Kink                int16
 	Kink_axis           int16
 	Bb_align            int16
@@ -6804,7 +6896,7 @@ type ParticleSettings struct {
 	Pd2                 Pointer // *PartDeflect
 }
 
-// SDNA index: 426
+// SDNA index: 432
 type ParticleSystem struct {
 	Next               Pointer // *ParticleSystem
 	Prev               Pointer // *ParticleSystem
@@ -6860,7 +6952,7 @@ type ParticleSystem struct {
 	_pad               float32
 }
 
-// SDNA index: 427
+// SDNA index: 433
 type ClothSimSettings struct {
 	Cache             Pointer // *LinkNode
 	Mingoal           float32
@@ -6902,7 +6994,7 @@ type ClothSimSettings struct {
 	Effector_weights  Pointer // *EffectorWeights
 }
 
-// SDNA index: 428
+// SDNA index: 434
 type ClothCollSettings struct {
 	Collision_list  Pointer // *LinkNode
 	Epsilon         float32
@@ -6920,7 +7012,7 @@ type ClothCollSettings struct {
 	Pad2            int32
 }
 
-// SDNA index: 429
+// SDNA index: 435
 type BGPDspoint struct {
 	X        float32
 	Y        float32
@@ -6929,7 +7021,7 @@ type BGPDspoint struct {
 	Time     float32
 }
 
-// SDNA index: 430
+// SDNA index: 436
 type BGPDstroke struct {
 	Next      Pointer // *BGPDstroke
 	Prev      Pointer // *BGPDstroke
@@ -6941,7 +7033,7 @@ type BGPDstroke struct {
 	Inittime  float64
 }
 
-// SDNA index: 431
+// SDNA index: 437
 type BGPDframe struct {
 	Next     Pointer // *BGPDframe
 	Prev     Pointer // *BGPDframe
@@ -6950,7 +7042,7 @@ type BGPDframe struct {
 	Flag     int32
 }
 
-// SDNA index: 432
+// SDNA index: 438
 type BGPDlayer struct {
 	Next      Pointer // *BGPDlayer
 	Prev      Pointer // *BGPDlayer
@@ -6963,7 +7055,7 @@ type BGPDlayer struct {
 	Info      [128]int8
 }
 
-// SDNA index: 433
+// SDNA index: 439
 type BGPdata struct {
 	Id            ID
 	Layers        ListBase
@@ -6973,7 +7065,7 @@ type BGPdata struct {
 	Sbuffer       Pointer // *struct{}
 }
 
-// SDNA index: 434
+// SDNA index: 440
 type ReportList struct {
 	List        ListBase
 	Printlevel  int32
@@ -6983,7 +7075,7 @@ type ReportList struct {
 	Reporttimer Pointer // *WmTimer
 }
 
-// SDNA index: 435
+// SDNA index: 441
 type WmWindowManager struct {
 	Id            ID
 	Windrawable   Pointer // *WmWindow
@@ -7006,7 +7098,7 @@ type WmWindowManager struct {
 	Autosavetimer Pointer // *WmTimer
 }
 
-// SDNA index: 436
+// SDNA index: 442
 type WmWindow struct {
 	Next          Pointer // *WmWindow
 	Prev          Pointer // *WmWindow
@@ -7042,7 +7134,7 @@ type WmWindow struct {
 	Gesture       ListBase
 }
 
-// SDNA index: 437
+// SDNA index: 443
 type WmKeyMapItem struct {
 	Next          Pointer // *WmKeyMapItem
 	Prev          Pointer // *WmKeyMapItem
@@ -7064,7 +7156,7 @@ type WmKeyMapItem struct {
 	Ptr           Pointer // *PointerRNA
 }
 
-// SDNA index: 438
+// SDNA index: 444
 type WmKeyMapDiffItem struct {
 	Next        Pointer // *WmKeyMapDiffItem
 	Prev        Pointer // *WmKeyMapDiffItem
@@ -7072,7 +7164,7 @@ type WmKeyMapDiffItem struct {
 	Add_item    Pointer // *WmKeyMapItem
 }
 
-// SDNA index: 439
+// SDNA index: 445
 type WmKeyMap struct {
 	Next        Pointer // *WmKeyMap
 	Prev        Pointer // *WmKeyMap
@@ -7087,7 +7179,7 @@ type WmKeyMap struct {
 	Modal_items Pointer // *struct{}
 }
 
-// SDNA index: 440
+// SDNA index: 446
 type WmKeyConfig struct {
 	Next      Pointer // *WmKeyConfig
 	Prev      Pointer // *WmKeyConfig
@@ -7098,7 +7190,7 @@ type WmKeyConfig struct {
 	Flag      int32
 }
 
-// SDNA index: 441
+// SDNA index: 447
 type WmOperator struct {
 	Next        Pointer // *WmOperator
 	Prev        Pointer // *WmOperator
@@ -7116,7 +7208,7 @@ type WmOperator struct {
 	Pad         [3]int16
 }
 
-// SDNA index: 442
+// SDNA index: 448
 type FModifier struct {
 	Next      Pointer // *FModifier
 	Prev      Pointer // *FModifier
@@ -7132,7 +7224,7 @@ type FModifier struct {
 	Blendout  float32
 }
 
-// SDNA index: 443
+// SDNA index: 449
 type FMod_Generator struct {
 	Coefficients Pointer // *float32
 	Arraysize    int32
@@ -7141,7 +7233,7 @@ type FMod_Generator struct {
 	Flag         int32
 }
 
-// SDNA index: 444
+// SDNA index: 450
 type FMod_FunctionGenerator struct {
 	Amplitude        float32
 	Phase_multiplier float32
@@ -7151,7 +7243,7 @@ type FMod_FunctionGenerator struct {
 	Flag             int32
 }
 
-// SDNA index: 445
+// SDNA index: 451
 type FCM_EnvelopeData struct {
 	Min  float32
 	Max  float32
@@ -7160,7 +7252,7 @@ type FCM_EnvelopeData struct {
 	F2   int16
 }
 
-// SDNA index: 446
+// SDNA index: 452
 type FMod_Envelope struct {
 	Data    Pointer // *FCM_EnvelopeData
 	Totvert int32
@@ -7169,7 +7261,7 @@ type FMod_Envelope struct {
 	Max     float32
 }
 
-// SDNA index: 447
+// SDNA index: 453
 type FMod_Cycles struct {
 	Before_mode   int16
 	After_mode    int16
@@ -7177,20 +7269,20 @@ type FMod_Cycles struct {
 	After_cycles  int16
 }
 
-// SDNA index: 448
+// SDNA index: 454
 type FMod_Python struct {
 	Script Pointer // *Text
 	Prop   Pointer // *IDProperty
 }
 
-// SDNA index: 449
+// SDNA index: 455
 type FMod_Limits struct {
 	Rect Rctf
 	Flag int32
 	Pad  int32
 }
 
-// SDNA index: 450
+// SDNA index: 456
 type FMod_Noise struct {
 	Size         float32
 	Strength     float32
@@ -7200,7 +7292,7 @@ type FMod_Noise struct {
 	Modification int16
 }
 
-// SDNA index: 451
+// SDNA index: 457
 type FMod_Stepped struct {
 	Step_size   float32
 	Offset      float32
@@ -7209,7 +7301,7 @@ type FMod_Stepped struct {
 	Flag        int32
 }
 
-// SDNA index: 452
+// SDNA index: 458
 type DriverTarget struct {
 	Id         Pointer // *ID
 	Rna_path   Pointer // *int8
@@ -7219,7 +7311,7 @@ type DriverTarget struct {
 	Idtype     int32
 }
 
-// SDNA index: 453
+// SDNA index: 459
 type DriverVar struct {
 	Next        Pointer // *DriverVar
 	Prev        Pointer // *DriverVar
@@ -7230,7 +7322,7 @@ type DriverVar struct {
 	Curval      float32
 }
 
-// SDNA index: 454
+// SDNA index: 460
 type ChannelDriver struct {
 	Variables  ListBase
 	Expression [256]int8
@@ -7241,14 +7333,14 @@ type ChannelDriver struct {
 	Flag       int32
 }
 
-// SDNA index: 455
+// SDNA index: 461
 type FPoint struct {
 	Vec  [2]float32
 	Flag int32
 	Pad  int32
 }
 
-// SDNA index: 456
+// SDNA index: 462
 type FCurve struct {
 	Next        Pointer // *FCurve
 	Prev        Pointer // *FCurve
@@ -7267,13 +7359,13 @@ type FCurve struct {
 	Color       [3]float32
 }
 
-// SDNA index: 457
+// SDNA index: 463
 type AnimMapPair struct {
 	From [128]int8
 	To   [128]int8
 }
 
-// SDNA index: 458
+// SDNA index: 464
 type AnimMapper struct {
 	Next     Pointer // *AnimMapper
 	Prev     Pointer // *AnimMapper
@@ -7281,7 +7373,7 @@ type AnimMapper struct {
 	Mappings ListBase
 }
 
-// SDNA index: 459
+// SDNA index: 465
 type NlaStrip struct {
 	Next           Pointer // *NlaStrip
 	Prev           Pointer // *NlaStrip
@@ -7310,7 +7402,7 @@ type NlaStrip struct {
 	Pad2           int32
 }
 
-// SDNA index: 460
+// SDNA index: 466
 type NlaTrack struct {
 	Next   Pointer // *NlaTrack
 	Prev   Pointer // *NlaTrack
@@ -7320,7 +7412,7 @@ type NlaTrack struct {
 	Name   [64]int8
 }
 
-// SDNA index: 461
+// SDNA index: 467
 type KS_Path struct {
 	Next        Pointer // *KS_Path
 	Prev        Pointer // *KS_Path
@@ -7335,7 +7427,7 @@ type KS_Path struct {
 	Keyingflag  int16
 }
 
-// SDNA index: 462
+// SDNA index: 468
 type KeyingSet struct {
 	Next        Pointer // *KeyingSet
 	Prev        Pointer // *KeyingSet
@@ -7349,7 +7441,7 @@ type KeyingSet struct {
 	Active_path int32
 }
 
-// SDNA index: 463
+// SDNA index: 469
 type AnimOverride struct {
 	Next        Pointer // *AnimOverride
 	Prev        Pointer // *AnimOverride
@@ -7358,7 +7450,7 @@ type AnimOverride struct {
 	Value       float32
 }
 
-// SDNA index: 464
+// SDNA index: 470
 type AnimData struct {
 	Action         Pointer // *BAction
 	Tmpact         Pointer // *BAction
@@ -7374,13 +7466,13 @@ type AnimData struct {
 	Act_influence  float32
 }
 
-// SDNA index: 465
+// SDNA index: 471
 type IdAdtTemplate struct {
 	Id  ID
 	Adt Pointer // *AnimData
 }
 
-// SDNA index: 466
+// SDNA index: 472
 type BoidRule struct {
 	Next Pointer // *BoidRule
 	Prev Pointer // *BoidRule
@@ -7389,7 +7481,7 @@ type BoidRule struct {
 	Name [32]int8
 }
 
-// SDNA index: 467
+// SDNA index: 473
 type BoidRuleGoalAvoid struct {
 	Rule        BoidRule
 	Ob          Pointer // *Object
@@ -7399,14 +7491,14 @@ type BoidRuleGoalAvoid struct {
 	Channels    int32
 }
 
-// SDNA index: 468
+// SDNA index: 474
 type BoidRuleAvoidCollision struct {
 	Rule       BoidRule
 	Options    int32
 	Look_ahead float32
 }
 
-// SDNA index: 469
+// SDNA index: 475
 type BoidRuleFollowLeader struct {
 	Rule       BoidRule
 	Ob         Pointer // *Object
@@ -7418,7 +7510,7 @@ type BoidRuleFollowLeader struct {
 	Queue_size int32
 }
 
-// SDNA index: 470
+// SDNA index: 476
 type BoidRuleAverageSpeed struct {
 	Rule   BoidRule
 	Wander float32
@@ -7427,14 +7519,14 @@ type BoidRuleAverageSpeed struct {
 	Rt     float32
 }
 
-// SDNA index: 471
+// SDNA index: 477
 type BoidRuleFight struct {
 	Rule          BoidRule
 	Distance      float32
 	Flee_distance float32
 }
 
-// SDNA index: 472
+// SDNA index: 478
 type BoidData struct {
 	Health   float32
 	Acc      [3]float32
@@ -7442,7 +7534,7 @@ type BoidData struct {
 	Mode     int16
 }
 
-// SDNA index: 473
+// SDNA index: 479
 type BoidState struct {
 	Next           Pointer // *BoidState
 	Prev           Pointer // *BoidState
@@ -7460,7 +7552,7 @@ type BoidState struct {
 	Falloff        float32
 }
 
-// SDNA index: 474
+// SDNA index: 480
 type BoidSettings struct {
 	Options             int32
 	Last_state_id       int32
@@ -7487,7 +7579,7 @@ type BoidSettings struct {
 	States              ListBase
 }
 
-// SDNA index: 475
+// SDNA index: 481
 type SmokeDomainSettings struct {
 	Smd               Pointer // *SmokeModifierData
 	Fluid             Pointer // *FLUID_3D
@@ -7552,7 +7644,7 @@ type SmokeDomainSettings struct {
 	Flame_smoke_color [3]float32
 }
 
-// SDNA index: 476
+// SDNA index: 482
 type SmokeFlowSettings struct {
 	Smd              Pointer // *SmokeModifierData
 	Dm               Pointer // *DerivedMesh
@@ -7580,7 +7672,7 @@ type SmokeFlowSettings struct {
 	Flags            int32
 }
 
-// SDNA index: 477
+// SDNA index: 483
 type SmokeCollSettings struct {
 	Smd       Pointer // *SmokeModifierData
 	Dm        Pointer // *DerivedMesh
@@ -7590,7 +7682,7 @@ type SmokeCollSettings struct {
 	Pad       int16
 }
 
-// SDNA index: 478
+// SDNA index: 484
 type Speaker struct {
 	Id                 ID
 	Adt                Pointer // *AnimData
@@ -7609,14 +7701,14 @@ type Speaker struct {
 	Pad1               [3]int16
 }
 
-// SDNA index: 479
+// SDNA index: 485
 type MovieClipUser struct {
 	Framenr     int32
 	Render_size int16
 	Render_flag int16
 }
 
-// SDNA index: 480
+// SDNA index: 486
 type MovieClipProxy struct {
 	Dir             [768]int8
 	Tc              int16
@@ -7625,7 +7717,7 @@ type MovieClipProxy struct {
 	Build_tc_flag   int16
 }
 
-// SDNA index: 481
+// SDNA index: 487
 type MovieClip struct {
 	Id                  ID
 	Adt                 Pointer // *AnimData
@@ -7648,7 +7740,7 @@ type MovieClip struct {
 	Colorspace_settings ColorManagedColorspaceSettings
 }
 
-// SDNA index: 482
+// SDNA index: 488
 type MovieClipScopes struct {
 	Ok                   int16
 	Use_track_mask       int16
@@ -7667,14 +7759,14 @@ type MovieClipScopes struct {
 	Slide_scale          [2]float32
 }
 
-// SDNA index: 483
+// SDNA index: 489
 type MovieReconstructedCamera struct {
 	Framenr int32
 	Error   float32
 	Mat     [4][4]float32
 }
 
-// SDNA index: 484
+// SDNA index: 490
 type MovieTrackingCamera struct {
 	Intrinsics   Pointer // *struct{}
 	Sensor_width float32
@@ -7689,7 +7781,7 @@ type MovieTrackingCamera struct {
 	K3           float32
 }
 
-// SDNA index: 485
+// SDNA index: 491
 type MovieTrackingMarker struct {
 	Pos             [2]float32
 	Pattern_corners [4][2]float32
@@ -7699,7 +7791,7 @@ type MovieTrackingMarker struct {
 	Flag            int32
 }
 
-// SDNA index: 486
+// SDNA index: 492
 type MovieTrackingTrack struct {
 	Next                Pointer // *MovieTrackingTrack
 	Prev                Pointer // *MovieTrackingTrack
@@ -7727,7 +7819,7 @@ type MovieTrackingTrack struct {
 	Gpd                 Pointer // *BGPdata
 }
 
-// SDNA index: 487
+// SDNA index: 493
 type MovieTrackingSettings struct {
 	Flag                             int32
 	Default_motion_model             int16
@@ -7755,7 +7847,7 @@ type MovieTrackingSettings struct {
 	Pad3                             int32
 }
 
-// SDNA index: 488
+// SDNA index: 494
 type MovieTrackingStabilization struct {
 	Flag      int32
 	Tot_track int32
@@ -7771,7 +7863,7 @@ type MovieTrackingStabilization struct {
 	Scaleibuf Pointer // *ImBuf
 }
 
-// SDNA index: 489
+// SDNA index: 495
 type MovieTrackingReconstruction struct {
 	Flag        int32
 	Error       float32
@@ -7780,7 +7872,7 @@ type MovieTrackingReconstruction struct {
 	Cameras     Pointer // *MovieReconstructedCamera
 }
 
-// SDNA index: 490
+// SDNA index: 496
 type MovieTrackingObject struct {
 	Next           Pointer // *MovieTrackingObject
 	Prev           Pointer // *MovieTrackingObject
@@ -7793,12 +7885,12 @@ type MovieTrackingObject struct {
 	Keyframe2      int32
 }
 
-// SDNA index: 491
+// SDNA index: 497
 type MovieTrackingStats struct {
 	Message [256]int8
 }
 
-// SDNA index: 492
+// SDNA index: 498
 type MovieTrackingDopesheetChannel struct {
 	Next         Pointer // *MovieTrackingDopesheetChannel
 	Prev         Pointer // *MovieTrackingDopesheetChannel
@@ -7811,17 +7903,28 @@ type MovieTrackingDopesheetChannel struct {
 	Total_frames int32
 }
 
-// SDNA index: 493
-type MovieTrackingDopesheet struct {
-	Ok          int32
-	Sort_method int16
-	Flag        int16
-	Channels    ListBase
-	Tot_channel int32
+// SDNA index: 499
+type MovieTrackingDopesheetCoverageSegment struct {
+	Next        Pointer // *MovieTrackingDopesheetCoverageSegment
+	Prev        Pointer // *MovieTrackingDopesheetCoverageSegment
+	Coverage    int32
+	Start_frame int32
+	End_frame   int32
 	Pad         int32
 }
 
-// SDNA index: 494
+// SDNA index: 500
+type MovieTrackingDopesheet struct {
+	Ok                int32
+	Sort_method       int16
+	Flag              int16
+	Coverage_segments ListBase
+	Channels          ListBase
+	Tot_channel       int32
+	Pad               int32
+}
+
+// SDNA index: 501
 type MovieTracking struct {
 	Settings       MovieTrackingSettings
 	Camera         MovieTrackingCamera
@@ -7836,7 +7939,7 @@ type MovieTracking struct {
 	Dopesheet      MovieTrackingDopesheet
 }
 
-// SDNA index: 495
+// SDNA index: 502
 type DynamicPaintSurface struct {
 	Next                Pointer // *DynamicPaintSurface
 	Prev                Pointer // *DynamicPaintSurface
@@ -7888,7 +7991,7 @@ type DynamicPaintSurface struct {
 	Output_name2        [64]int8
 }
 
-// SDNA index: 496
+// SDNA index: 503
 type DynamicPaintCanvasSettings struct {
 	Pmd        Pointer // *DynamicPaintModifierData
 	Dm         Pointer // *DerivedMesh
@@ -7899,7 +8002,7 @@ type DynamicPaintCanvasSettings struct {
 	Error      [64]int8
 }
 
-// SDNA index: 497
+// SDNA index: 504
 type DynamicPaintBrushSettings struct {
 	Pmd               Pointer // *DynamicPaintModifierData
 	Dm                Pointer // *DerivedMesh
@@ -7927,7 +8030,7 @@ type DynamicPaintBrushSettings struct {
 	Smudge_strength   float32
 }
 
-// SDNA index: 498
+// SDNA index: 505
 type Mask struct {
 	Id          ID
 	Adt         Pointer // *AnimData
@@ -7940,7 +8043,7 @@ type Mask struct {
 	Pad         int32
 }
 
-// SDNA index: 499
+// SDNA index: 506
 type MaskParent struct {
 	Pad         int32
 	Id_type     int32
@@ -7950,14 +8053,14 @@ type MaskParent struct {
 	Parent_orig [2]float32
 }
 
-// SDNA index: 500
+// SDNA index: 507
 type MaskSplinePointUW struct {
 	U    float32
 	W    float32
 	Flag int32
 }
 
-// SDNA index: 501
+// SDNA index: 508
 type MaskSplinePoint struct {
 	Bezt   BezTriple
 	Pad    int32
@@ -7966,7 +8069,7 @@ type MaskSplinePoint struct {
 	Parent MaskParent
 }
 
-// SDNA index: 502
+// SDNA index: 509
 type MaskSpline struct {
 	Next          Pointer // *MaskSpline
 	Prev          Pointer // *MaskSpline
@@ -7979,7 +8082,7 @@ type MaskSpline struct {
 	Points_deform Pointer // *MaskSplinePoint
 }
 
-// SDNA index: 503
+// SDNA index: 510
 type MaskLayerShape struct {
 	Next     Pointer // *MaskLayerShape
 	Prev     Pointer // *MaskLayerShape
@@ -7990,7 +8093,7 @@ type MaskLayerShape struct {
 	Pad      [7]int8
 }
 
-// SDNA index: 504
+// SDNA index: 511
 type MaskLayer struct {
 	Next           Pointer // *MaskLayer
 	Prev           Pointer // *MaskLayer
@@ -8008,7 +8111,7 @@ type MaskLayer struct {
 	Restrictflag   int8
 }
 
-// SDNA index: 505
+// SDNA index: 512
 type RigidBodyWorld struct {
 	Effector_weights      Pointer // *EffectorWeights
 	Group                 Pointer // *Group
@@ -8026,7 +8129,7 @@ type RigidBodyWorld struct {
 	Physics_world         Pointer // *struct{}
 }
 
-// SDNA index: 506
+// SDNA index: 513
 type RigidBodyOb struct {
 	Physics_object   Pointer // *struct{}
 	Physics_shape    Pointer // *struct{}
@@ -8048,34 +8151,365 @@ type RigidBodyOb struct {
 	Pad1             float32
 }
 
-// SDNA index: 507
+// SDNA index: 514
 type RigidBodyCon struct {
-	Ob1                   Pointer // *Object
-	Ob2                   Pointer // *Object
-	Type                  int16
-	Num_solver_iterations int16
-	Flag                  int32
-	Breaking_threshold    float32
-	Pad                   float32
-	Limit_lin_x_lower     float32
-	Limit_lin_x_upper     float32
-	Limit_lin_y_lower     float32
-	Limit_lin_y_upper     float32
-	Limit_lin_z_lower     float32
-	Limit_lin_z_upper     float32
-	Limit_ang_x_lower     float32
-	Limit_ang_x_upper     float32
-	Limit_ang_y_lower     float32
-	Limit_ang_y_upper     float32
-	Limit_ang_z_lower     float32
-	Limit_ang_z_upper     float32
-	Spring_stiffness_x    float32
-	Spring_stiffness_y    float32
-	Spring_stiffness_z    float32
-	Spring_damping_x      float32
-	Spring_damping_y      float32
-	Spring_damping_z      float32
-	Physics_constraint    Pointer // *struct{}
+	Ob1                       Pointer // *Object
+	Ob2                       Pointer // *Object
+	Type                      int16
+	Num_solver_iterations     int16
+	Flag                      int32
+	Breaking_threshold        float32
+	Pad                       float32
+	Limit_lin_x_lower         float32
+	Limit_lin_x_upper         float32
+	Limit_lin_y_lower         float32
+	Limit_lin_y_upper         float32
+	Limit_lin_z_lower         float32
+	Limit_lin_z_upper         float32
+	Limit_ang_x_lower         float32
+	Limit_ang_x_upper         float32
+	Limit_ang_y_lower         float32
+	Limit_ang_y_upper         float32
+	Limit_ang_z_lower         float32
+	Limit_ang_z_upper         float32
+	Spring_stiffness_x        float32
+	Spring_stiffness_y        float32
+	Spring_stiffness_z        float32
+	Spring_damping_x          float32
+	Spring_damping_y          float32
+	Spring_damping_z          float32
+	Motor_lin_target_velocity float32
+	Motor_ang_target_velocity float32
+	Motor_lin_max_impulse     float32
+	Motor_ang_max_impulse     float32
+	Physics_constraint        Pointer // *struct{}
+}
+
+// SDNA index: 515
+type FreestyleLineSet struct {
+	Next               Pointer // *FreestyleLineSet
+	Prev               Pointer // *FreestyleLineSet
+	Name               [64]int8
+	Flags              int32
+	Selection          int32
+	Qi                 int16
+	Pad1               int16
+	Qi_start           int32
+	Qi_end             int32
+	Edge_types         int32
+	Exclude_edge_types int32
+	Pad2               int32
+	Group              Pointer // *Group
+	Linestyle          Pointer // *FreestyleLineStyle
+}
+
+// SDNA index: 516
+type FreestyleModuleConfig struct {
+	Next         Pointer // *FreestyleModuleConfig
+	Prev         Pointer // *FreestyleModuleConfig
+	Script       Pointer // *Text
+	Is_displayed int16
+	Pad          [3]int16
+}
+
+// SDNA index: 517
+type FreestyleConfig struct {
+	Modules              ListBase
+	Mode                 int32
+	Raycasting_algorithm int32
+	Flags                int32
+	Sphere_radius        float32
+	Dkr_epsilon          float32
+	Crease_angle         float32
+	Linesets             ListBase
+}
+
+// SDNA index: 518
+type LineStyleModifier struct {
+	Next      Pointer // *LineStyleModifier
+	Prev      Pointer // *LineStyleModifier
+	Name      [64]int8
+	Type      int32
+	Influence float32
+	Flags     int32
+	Blend     int32
+}
+
+// SDNA index: 519
+type LineStyleColorModifier_AlongStroke struct {
+	Modifier   LineStyleModifier
+	Color_ramp Pointer // *ColorBand
+}
+
+// SDNA index: 520
+type LineStyleAlphaModifier_AlongStroke struct {
+	Modifier LineStyleModifier
+	Curve    Pointer // *CurveMapping
+	Flags    int32
+	Pad      int32
+}
+
+// SDNA index: 521
+type LineStyleThicknessModifier_AlongStroke struct {
+	Modifier  LineStyleModifier
+	Curve     Pointer // *CurveMapping
+	Flags     int32
+	Value_min float32
+	Value_max float32
+	Pad       int32
+}
+
+// SDNA index: 522
+type LineStyleColorModifier_DistanceFromCamera struct {
+	Modifier   LineStyleModifier
+	Color_ramp Pointer // *ColorBand
+	Range_min  float32
+	Range_max  float32
+}
+
+// SDNA index: 523
+type LineStyleAlphaModifier_DistanceFromCamera struct {
+	Modifier  LineStyleModifier
+	Curve     Pointer // *CurveMapping
+	Flags     int32
+	Range_min float32
+	Range_max float32
+	Pad       int32
+}
+
+// SDNA index: 524
+type LineStyleThicknessModifier_DistanceFromCamera struct {
+	Modifier  LineStyleModifier
+	Curve     Pointer // *CurveMapping
+	Flags     int32
+	Range_min float32
+	Range_max float32
+	Value_min float32
+	Value_max float32
+	Pad       int32
+}
+
+// SDNA index: 525
+type LineStyleColorModifier_DistanceFromObject struct {
+	Modifier   LineStyleModifier
+	Target     Pointer // *Object
+	Color_ramp Pointer // *ColorBand
+	Range_min  float32
+	Range_max  float32
+}
+
+// SDNA index: 526
+type LineStyleAlphaModifier_DistanceFromObject struct {
+	Modifier  LineStyleModifier
+	Target    Pointer // *Object
+	Curve     Pointer // *CurveMapping
+	Flags     int32
+	Range_min float32
+	Range_max float32
+	Pad       int32
+}
+
+// SDNA index: 527
+type LineStyleThicknessModifier_DistanceFromObject struct {
+	Modifier  LineStyleModifier
+	Target    Pointer // *Object
+	Curve     Pointer // *CurveMapping
+	Flags     int32
+	Range_min float32
+	Range_max float32
+	Value_min float32
+	Value_max float32
+	Pad       int32
+}
+
+// SDNA index: 528
+type LineStyleColorModifier_Material struct {
+	Modifier   LineStyleModifier
+	Color_ramp Pointer // *ColorBand
+	Flags      int32
+	Mat_attr   int32
+}
+
+// SDNA index: 529
+type LineStyleAlphaModifier_Material struct {
+	Modifier LineStyleModifier
+	Curve    Pointer // *CurveMapping
+	Flags    int32
+	Mat_attr int32
+}
+
+// SDNA index: 530
+type LineStyleThicknessModifier_Material struct {
+	Modifier  LineStyleModifier
+	Curve     Pointer // *CurveMapping
+	Flags     int32
+	Value_min float32
+	Value_max float32
+	Mat_attr  int32
+}
+
+// SDNA index: 531
+type LineStyleGeometryModifier_Sampling struct {
+	Modifier LineStyleModifier
+	Sampling float32
+	Pad      int32
+}
+
+// SDNA index: 532
+type LineStyleGeometryModifier_BezierCurve struct {
+	Modifier LineStyleModifier
+	Error    float32
+	Pad      int32
+}
+
+// SDNA index: 533
+type LineStyleGeometryModifier_SinusDisplacement struct {
+	Modifier   LineStyleModifier
+	Wavelength float32
+	Amplitude  float32
+	Phase      float32
+	Pad        int32
+}
+
+// SDNA index: 534
+type LineStyleGeometryModifier_SpatialNoise struct {
+	Modifier  LineStyleModifier
+	Amplitude float32
+	Scale     float32
+	Octaves   int32
+	Flags     int32
+}
+
+// SDNA index: 535
+type LineStyleGeometryModifier_PerlinNoise1D struct {
+	Modifier  LineStyleModifier
+	Frequency float32
+	Amplitude float32
+	Angle     float32
+	Octaves   int32
+	Seed      int32
+	Pad1      int32
+}
+
+// SDNA index: 536
+type LineStyleGeometryModifier_PerlinNoise2D struct {
+	Modifier  LineStyleModifier
+	Frequency float32
+	Amplitude float32
+	Angle     float32
+	Octaves   int32
+	Seed      int32
+	Pad1      int32
+}
+
+// SDNA index: 537
+type LineStyleGeometryModifier_BackboneStretcher struct {
+	Modifier        LineStyleModifier
+	Backbone_length float32
+	Pad             int32
+}
+
+// SDNA index: 538
+type LineStyleGeometryModifier_TipRemover struct {
+	Modifier   LineStyleModifier
+	Tip_length float32
+	Pad        int32
+}
+
+// SDNA index: 539
+type LineStyleGeometryModifier_Polygonalization struct {
+	Modifier LineStyleModifier
+	Error    float32
+	Pad      int32
+}
+
+// SDNA index: 540
+type LineStyleGeometryModifier_GuidingLines struct {
+	Modifier LineStyleModifier
+	Offset   float32
+	Pad      int32
+}
+
+// SDNA index: 541
+type LineStyleGeometryModifier_Blueprint struct {
+	Modifier        LineStyleModifier
+	Flags           int32
+	Rounds          int32
+	Backbone_length float32
+	Random_radius   int32
+	Random_center   int32
+	Random_backbone int32
+}
+
+// SDNA index: 542
+type LineStyleGeometryModifier_2DOffset struct {
+	Modifier LineStyleModifier
+	Start    float32
+	End      float32
+	X        float32
+	Y        float32
+}
+
+// SDNA index: 543
+type LineStyleGeometryModifier_2DTransform struct {
+	Modifier LineStyleModifier
+	Pivot    int32
+	Scale_x  float32
+	Scale_y  float32
+	Angle    float32
+	Pivot_u  float32
+	Pivot_x  float32
+	Pivot_y  float32
+	Pad      int32
+}
+
+// SDNA index: 544
+type LineStyleThicknessModifier_Calligraphy struct {
+	Modifier      LineStyleModifier
+	Min_thickness float32
+	Max_thickness float32
+	Orientation   float32
+	Pad           int32
+}
+
+// SDNA index: 545
+type FreestyleLineStyle struct {
+	Id                  ID
+	Adt                 Pointer // *AnimData
+	R                   float32
+	G                   float32
+	B                   float32
+	Alpha               float32
+	Thickness           float32
+	Thickness_position  int32
+	Thickness_ratio     float32
+	Flag                int32
+	Caps                int32
+	Chaining            int32
+	Rounds              int32
+	Split_length        float32
+	Min_angle           float32
+	Max_angle           float32
+	Min_length          float32
+	Max_length          float32
+	Split_dash1         int16
+	Split_gap1          int16
+	Split_dash2         int16
+	Split_gap2          int16
+	Split_dash3         int16
+	Split_gap3          int16
+	Pad                 int32
+	Dash1               int16
+	Gap1                int16
+	Dash2               int16
+	Gap2                int16
+	Dash3               int16
+	Gap3                int16
+	Panel               int32
+	Color_modifiers     ListBase
+	Alpha_modifiers     ListBase
+	Thickness_modifiers ListBase
+	Geometry_modifiers  ListBase
 }
 
 type FileData struct{}
@@ -8117,8 +8551,12 @@ type UiListType struct{}
 type SpaceType struct{}
 type ARegionType struct{}
 type Particle struct{}
-type UiBlock struct{}
+type BNodeSocketType struct{}
 type BNodeType struct{}
+type UiBlock struct{}
+type BNodeTreeType struct{}
+type StructRNA struct{}
+type BNodeInstanceHash struct{}
 type BNodeTreeExec struct{}
 type ParticleCacheKey struct{}
 type KDTree struct{}

@@ -103,6 +103,8 @@ func ParseHeader(r io.Reader, order binary.ByteOrder, ptrSize int) (hdr *Header,
 		hdr.Code = CodeIM
 	case "LA\x00\x00":
 		hdr.Code = CodeLA
+	case "LS\x00\x00":
+		hdr.Code = CodeLS
 	case "MA\x00\x00":
 		hdr.Code = CodeMA
 	case "ME\x00\x00":
@@ -189,6 +191,7 @@ func (typ BlockCode) String() string {
 		CodeGLOB: "GLOB",
 		CodeIM:   "IM",
 		CodeLA:   "LA",
+		CodeLS:   "LS",
 		CodeMA:   "MA",
 		CodeME:   "ME",
 		CodeOB:   "OB",
@@ -220,6 +223,7 @@ const (
 	CodeGLOB
 	CodeIM
 	CodeLA
+	CodeLS
 	CodeMA
 	CodeME
 	CodeOB

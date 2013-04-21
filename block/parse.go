@@ -3409,6 +3409,216 @@ func (blk *Block) ParseBody(order binary.ByteOrder, dna *DNA) (err error) {
 				os.Exit(1)
 			}
 			/// ### [/ tmp ] ###
+		case "FreestyleConfig":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*FreestyleConfig, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(FreestyleConfig)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(FreestyleConfig)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "FreestyleEdge":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*FreestyleEdge, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(FreestyleEdge)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(FreestyleEdge)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "FreestyleFace":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*FreestyleFace, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(FreestyleFace)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(FreestyleFace)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "FreestyleLineSet":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*FreestyleLineSet, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(FreestyleLineSet)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(FreestyleLineSet)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "FreestyleLineStyle":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*FreestyleLineStyle, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(FreestyleLineStyle)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(FreestyleLineStyle)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "FreestyleModuleConfig":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*FreestyleModuleConfig, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(FreestyleModuleConfig)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(FreestyleModuleConfig)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
 		case "GameData":
 			if blk.Hdr.Count > 1 {
 				// Parse block body structures.
@@ -4510,6 +4720,951 @@ func (blk *Block) ParseBody(order binary.ByteOrder, dna *DNA) (err error) {
 			} else {
 				// Parse block body structure.
 				body := new(Library)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleAlphaModifier_AlongStroke":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleAlphaModifier_AlongStroke, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleAlphaModifier_AlongStroke)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleAlphaModifier_AlongStroke)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleAlphaModifier_DistanceFromCamera":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleAlphaModifier_DistanceFromCamera, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleAlphaModifier_DistanceFromCamera)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleAlphaModifier_DistanceFromCamera)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleAlphaModifier_DistanceFromObject":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleAlphaModifier_DistanceFromObject, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleAlphaModifier_DistanceFromObject)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleAlphaModifier_DistanceFromObject)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleAlphaModifier_Material":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleAlphaModifier_Material, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleAlphaModifier_Material)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleAlphaModifier_Material)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleColorModifier_AlongStroke":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleColorModifier_AlongStroke, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleColorModifier_AlongStroke)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleColorModifier_AlongStroke)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleColorModifier_DistanceFromCamera":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleColorModifier_DistanceFromCamera, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleColorModifier_DistanceFromCamera)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleColorModifier_DistanceFromCamera)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleColorModifier_DistanceFromObject":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleColorModifier_DistanceFromObject, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleColorModifier_DistanceFromObject)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleColorModifier_DistanceFromObject)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleColorModifier_Material":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleColorModifier_Material, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleColorModifier_Material)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleColorModifier_Material)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleGeometryModifier_2DOffset":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleGeometryModifier_2DOffset, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleGeometryModifier_2DOffset)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleGeometryModifier_2DOffset)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleGeometryModifier_2DTransform":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleGeometryModifier_2DTransform, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleGeometryModifier_2DTransform)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleGeometryModifier_2DTransform)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleGeometryModifier_BackboneStretcher":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleGeometryModifier_BackboneStretcher, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleGeometryModifier_BackboneStretcher)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleGeometryModifier_BackboneStretcher)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleGeometryModifier_BezierCurve":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleGeometryModifier_BezierCurve, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleGeometryModifier_BezierCurve)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleGeometryModifier_BezierCurve)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleGeometryModifier_Blueprint":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleGeometryModifier_Blueprint, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleGeometryModifier_Blueprint)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleGeometryModifier_Blueprint)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleGeometryModifier_GuidingLines":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleGeometryModifier_GuidingLines, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleGeometryModifier_GuidingLines)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleGeometryModifier_GuidingLines)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleGeometryModifier_PerlinNoise1D":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleGeometryModifier_PerlinNoise1D, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleGeometryModifier_PerlinNoise1D)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleGeometryModifier_PerlinNoise1D)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleGeometryModifier_PerlinNoise2D":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleGeometryModifier_PerlinNoise2D, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleGeometryModifier_PerlinNoise2D)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleGeometryModifier_PerlinNoise2D)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleGeometryModifier_Polygonalization":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleGeometryModifier_Polygonalization, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleGeometryModifier_Polygonalization)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleGeometryModifier_Polygonalization)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleGeometryModifier_Sampling":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleGeometryModifier_Sampling, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleGeometryModifier_Sampling)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleGeometryModifier_Sampling)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleGeometryModifier_SinusDisplacement":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleGeometryModifier_SinusDisplacement, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleGeometryModifier_SinusDisplacement)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleGeometryModifier_SinusDisplacement)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleGeometryModifier_SpatialNoise":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleGeometryModifier_SpatialNoise, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleGeometryModifier_SpatialNoise)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleGeometryModifier_SpatialNoise)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleGeometryModifier_TipRemover":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleGeometryModifier_TipRemover, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleGeometryModifier_TipRemover)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleGeometryModifier_TipRemover)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleModifier":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleModifier, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleModifier)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleModifier)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleThicknessModifier_AlongStroke":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleThicknessModifier_AlongStroke, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleThicknessModifier_AlongStroke)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleThicknessModifier_AlongStroke)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleThicknessModifier_Calligraphy":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleThicknessModifier_Calligraphy, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleThicknessModifier_Calligraphy)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleThicknessModifier_Calligraphy)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleThicknessModifier_DistanceFromCamera":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleThicknessModifier_DistanceFromCamera, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleThicknessModifier_DistanceFromCamera)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleThicknessModifier_DistanceFromCamera)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleThicknessModifier_DistanceFromObject":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleThicknessModifier_DistanceFromObject, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleThicknessModifier_DistanceFromObject)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleThicknessModifier_DistanceFromObject)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LineStyleThicknessModifier_Material":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LineStyleThicknessModifier_Material, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LineStyleThicknessModifier_Material)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LineStyleThicknessModifier_Material)
 				err = binary.Read(r, order, body)
 				if err != nil {
 					return err
@@ -5894,6 +7049,41 @@ func (blk *Block) ParseBody(order binary.ByteOrder, dna *DNA) (err error) {
 				os.Exit(1)
 			}
 			/// ### [/ tmp ] ###
+		case "MeshStatVis":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*MeshStatVis, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(MeshStatVis)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(MeshStatVis)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
 		case "MetaBall":
 			if blk.Hdr.Count > 1 {
 				// Parse block body structures.
@@ -6365,6 +7555,41 @@ func (blk *Block) ParseBody(order binary.ByteOrder, dna *DNA) (err error) {
 			} else {
 				// Parse block body structure.
 				body := new(MovieTrackingDopesheetChannel)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "MovieTrackingDopesheetCoverageSegment":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*MovieTrackingDopesheetCoverageSegment, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(MovieTrackingDopesheetCoverageSegment)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(MovieTrackingDopesheetCoverageSegment)
 				err = binary.Read(r, order, body)
 				if err != nil {
 					return err
@@ -15379,6 +16604,76 @@ func (blk *Block) ParseBody(order binary.ByteOrder, dna *DNA) (err error) {
 				os.Exit(1)
 			}
 			/// ### [/ tmp ] ###
+		case "bNodeInstanceHashEntry":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*BNodeInstanceHashEntry, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(BNodeInstanceHashEntry)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(BNodeInstanceHashEntry)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "bNodeInstanceKey":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*BNodeInstanceKey, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(BNodeInstanceKey)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(BNodeInstanceKey)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
 		case "bNodeLink":
 			if blk.Hdr.Count > 1 {
 				// Parse block body structures.
@@ -15745,6 +17040,41 @@ func (blk *Block) ParseBody(order binary.ByteOrder, dna *DNA) (err error) {
 			} else {
 				// Parse block body structure.
 				body := new(BNodeTree)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "bNodeTreePath":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*BNodeTreePath, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(BNodeTreePath)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(BNodeTreePath)
 				err = binary.Read(r, order, body)
 				if err != nil {
 					return err
