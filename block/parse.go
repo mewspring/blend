@@ -1,4 +1,4 @@
-// NOTE: generated automatically by blendef for Blender v266.
+// NOTE: generated automatically by blendef for Blender v267.
 
 package block
 

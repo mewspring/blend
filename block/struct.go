@@ -1,4 +1,4 @@
-// NOTE: generated automatically by blendef for Blender v266.
+// NOTE: generated automatically by blendef for Blender v267.
 
 package block
 
@@ -9,7 +9,7 @@ import (
 // BlenderVer is the version of Blender used when generating the files
 // "parse.go" and "struct.go" of this package. Use blendef to regenerate these
 // files if this version differs from the blend file's version.
-const BlenderVer = 266
+const BlenderVer = 267
 
 // Pointer is the memory address of a structure when it was written to disk.
 type Pointer uint64
@@ -3028,6 +3028,7 @@ type UnifiedPaintSettings struct {
 	Draw_pressure          int32
 	Pressure_value         float32
 	Tex_mouse              [2]float32
+	Mask_tex_mouse         [2]float32
 	Pixel_radius           float32
 }
 
@@ -3044,6 +3045,8 @@ type MeshStatVis struct {
 	_pad2             [3]int8
 	Distort_min       float32
 	Distort_max       float32
+	Sharp_min         float32
+	Sharp_max         float32
 }
 
 // SDNA index: 174
@@ -4267,10 +4270,10 @@ type Panel struct {
 	Panelname    [64]int8
 	Tabname      [64]int8
 	Drawname     [64]int8
-	Ofsx         int16
-	Ofsy         int16
-	Sizex        int16
-	Sizey        int16
+	Ofsx         int32
+	Ofsy         int32
+	Sizex        int32
+	Sizey        int32
 	Labelofs     int16
 	Pad          int16
 	Flag         int16
@@ -5956,40 +5959,42 @@ type BNodeLink struct {
 
 // SDNA index: 352
 type BNodeTree struct {
-	Id             ID
-	Adt            Pointer // *AnimData
-	Typeinfo       Pointer // *BNodeTreeType
-	Idname         [64]int8
-	Interface_type Pointer // *StructRNA
-	Gpd            Pointer // *BGPdata
-	View_center    [2]float32
-	Nodes          ListBase
-	Links          ListBase
-	Type           int32
-	Init           int32
-	Cur_index      int32
-	Flag           int32
-	Update         int32
-	Is_updating    int16
-	Done           int16
-	Pad2           int32
-	Nodetype       int32
-	Edit_quality   int16
-	Render_quality int16
-	Chunksize      int32
-	Viewer_border  Rctf
-	Inputs         ListBase
-	Outputs        ListBase
-	Previews       Pointer // *BNodeInstanceHash
-	Execdata       Pointer // *BNodeTreeExec
-	Progress       func()
-	Stats_draw     func()
-	Test_break     func() int32
-	Update_draw    func()
-	Tbh            Pointer // *struct{}
-	Prh            Pointer // *struct{}
-	Sdh            Pointer // *struct{}
-	Udh            Pointer // *struct{}
+	Id                ID
+	Adt               Pointer // *AnimData
+	Typeinfo          Pointer // *BNodeTreeType
+	Idname            [64]int8
+	Interface_type    Pointer // *StructRNA
+	Gpd               Pointer // *BGPdata
+	View_center       [2]float32
+	Nodes             ListBase
+	Links             ListBase
+	Type              int32
+	Init              int32
+	Cur_index         int32
+	Flag              int32
+	Update            int32
+	Is_updating       int16
+	Done              int16
+	Pad2              int32
+	Nodetype          int32
+	Edit_quality      int16
+	Render_quality    int16
+	Chunksize         int32
+	Viewer_border     Rctf
+	Inputs            ListBase
+	Outputs           ListBase
+	Previews          Pointer // *BNodeInstanceHash
+	Active_viewer_key BNodeInstanceKey
+	Pad               int32
+	Execdata          Pointer // *BNodeTreeExec
+	Progress          func()
+	Stats_draw        func()
+	Test_break        func() int32
+	Update_draw       func()
+	Tbh               Pointer // *struct{}
+	Prh               Pointer // *struct{}
+	Sdh               Pointer // *struct{}
+	Udh               Pointer // *struct{}
 }
 
 // SDNA index: 353
@@ -6575,49 +6580,51 @@ type BrushClone struct {
 
 // SDNA index: 418
 type Brush struct {
-	Id                    ID
-	Clone                 BrushClone
-	Curve                 Pointer // *CurveMapping
-	Mtex                  MTex
-	Mask_mtex             MTex
-	Toggle_brush          Pointer // *Brush
-	Icon_imbuf            Pointer // *ImBuf
-	Preview               Pointer // *PreviewImage
-	Icon_filepath         [1024]int8
-	Normal_weight         float32
-	Blend                 int16
-	Ob_mode               int16
-	Weight                float32
-	Size                  int32
-	Flag                  int32
-	Jitter                float32
-	Jitter_absolute       int32
-	Overlay_flags         int32
-	Spacing               int32
-	Smooth_stroke_radius  int32
-	Smooth_stroke_factor  float32
-	Rate                  float32
-	Rgb                   [3]float32
-	Alpha                 float32
-	Sculpt_plane          int32
-	Plane_offset          float32
-	Sculpt_tool           int8
-	Vertexpaint_tool      int8
-	Imagepaint_tool       int8
-	Mask_tool             int8
-	Autosmooth_factor     float32
-	Crease_pinch_factor   float32
-	Plane_trim            float32
-	Height                float32
-	Texture_sample_bias   float32
-	Texture_overlay_alpha int32
-	Mask_overlay_alpha    int32
-	Cursor_overlay_alpha  int32
-	Unprojected_radius    float32
-	Add_col               [3]float32
-	Sub_col               [3]float32
-	Stencil_pos           [2]float32
-	Stencil_dimension     [2]float32
+	Id                     ID
+	Clone                  BrushClone
+	Curve                  Pointer // *CurveMapping
+	Mtex                   MTex
+	Mask_mtex              MTex
+	Toggle_brush           Pointer // *Brush
+	Icon_imbuf             Pointer // *ImBuf
+	Preview                Pointer // *PreviewImage
+	Icon_filepath          [1024]int8
+	Normal_weight          float32
+	Blend                  int16
+	Ob_mode                int16
+	Weight                 float32
+	Size                   int32
+	Flag                   int32
+	Jitter                 float32
+	Jitter_absolute        int32
+	Overlay_flags          int32
+	Spacing                int32
+	Smooth_stroke_radius   int32
+	Smooth_stroke_factor   float32
+	Rate                   float32
+	Rgb                    [3]float32
+	Alpha                  float32
+	Sculpt_plane           int32
+	Plane_offset           float32
+	Sculpt_tool            int8
+	Vertexpaint_tool       int8
+	Imagepaint_tool        int8
+	Mask_tool              int8
+	Autosmooth_factor      float32
+	Crease_pinch_factor    float32
+	Plane_trim             float32
+	Height                 float32
+	Texture_sample_bias    float32
+	Texture_overlay_alpha  int32
+	Mask_overlay_alpha     int32
+	Cursor_overlay_alpha   int32
+	Unprojected_radius     float32
+	Add_col                [3]float32
+	Sub_col                [3]float32
+	Stencil_pos            [2]float32
+	Stencil_dimension      [2]float32
+	Mask_stencil_pos       [2]float32
+	Mask_stencil_dimension [2]float32
 }
 
 // SDNA index: 419
@@ -7583,6 +7590,7 @@ type BoidSettings struct {
 type SmokeDomainSettings struct {
 	Smd               Pointer // *SmokeModifierData
 	Fluid             Pointer // *FLUID_3D
+	Fluid_mutex       Pointer // *struct{}
 	Fluid_group       Pointer // *Group
 	Eff_group         Pointer // *Group
 	Coll_group        Pointer // *Group
@@ -7860,7 +7868,6 @@ type MovieTrackingStabilization struct {
 	Filter    int32
 	Ok        int32
 	Scale     float32
-	Scaleibuf Pointer // *ImBuf
 }
 
 // SDNA index: 495
