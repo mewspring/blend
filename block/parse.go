@@ -11704,6 +11704,41 @@ func (blk *Block) ParseBody(order binary.ByteOrder, dna *DNA) (err error) {
 				os.Exit(1)
 			}
 			/// ### [/ tmp ] ###
+		case "SequencerMaskModifierData":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*SequencerMaskModifierData, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(SequencerMaskModifierData)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(SequencerMaskModifierData)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
 		case "SequencerScopes":
 			if blk.Hdr.Count > 1 {
 				// Parse block body structures.
