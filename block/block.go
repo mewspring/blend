@@ -69,7 +69,7 @@ type Header struct {
 // Example file block header:
 //    44 41 54 41  E0 00 00 00  88 5E 9D 04  00 00 00 00    DATA.....^......
 //    F8 00 00 00  0E 00 00 00                              ........
-
+//
 //    //   0-3   block code   ("DATA")
 //    //   4-7   size         (0x000000E0 = 224)
 //    //  8-15   old addr     (0x00000000049D5E88) // size depends on PtrSize.

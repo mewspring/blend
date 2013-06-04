@@ -52,26 +52,26 @@ type DNAField struct {
 // ParseDNA parses and returns the body of the "DNA1" block.
 func ParseDNA(r io.Reader, order binary.ByteOrder) (body *DNA, err error) {
 	br := bufio.NewReader(r)
-	rawId := make([]byte, 4)
+	rawID := make([]byte, 4)
 
 	// Identifier.
-	_, err = io.ReadFull(br, rawId)
+	_, err = io.ReadFull(br, rawID)
 	if err != nil {
 		return nil, err
 	}
-	id := string(rawId)
+	id := string(rawID)
 	if id != "SDNA" {
 		return nil, fmt.Errorf("block.ParseDNA: invalid identifier %q.", id)
 	}
 
 	// Name identifier.
-	_, err = io.ReadFull(br, rawId)
+	_, err = io.ReadFull(br, rawID)
 	if err != nil {
 		return nil, err
 	}
-	nameId := string(rawId)
-	if nameId != "NAME" {
-		return nil, fmt.Errorf("block.ParseDNA: invalid name identifier %q.", nameId)
+	nameID := string(rawID)
+	if nameID != "NAME" {
+		return nil, fmt.Errorf("block.ParseDNA: invalid name identifier %q.", nameID)
 	}
 
 	// Name count.
@@ -100,13 +100,13 @@ func ParseDNA(r io.Reader, order binary.ByteOrder) (body *DNA, err error) {
 	}
 
 	// Type identifier.
-	_, err = io.ReadFull(br, rawId)
+	_, err = io.ReadFull(br, rawID)
 	if err != nil {
 		return nil, err
 	}
-	typeId := string(rawId)
-	if typeId != "TYPE" {
-		return nil, fmt.Errorf("block.ParseDNA: invalid type identifier %q.", typeId)
+	typeID := string(rawID)
+	if typeID != "TYPE" {
+		return nil, fmt.Errorf("block.ParseDNA: invalid type identifier %q.", typeID)
 	}
 
 	// Type count.
@@ -133,13 +133,13 @@ func ParseDNA(r io.Reader, order binary.ByteOrder) (body *DNA, err error) {
 	}
 
 	// Type length identifier.
-	_, err = io.ReadFull(br, rawId)
+	_, err = io.ReadFull(br, rawID)
 	if err != nil {
 		return nil, err
 	}
-	lenId := string(rawId)
-	if lenId != "TLEN" {
-		return nil, fmt.Errorf("block.ParseDNA: invalid type length identifier %q.", lenId)
+	lenID := string(rawID)
+	if lenID != "TLEN" {
+		return nil, fmt.Errorf("block.ParseDNA: invalid type length identifier %q.", lenID)
 	}
 
 	// Type sizes.
@@ -160,13 +160,13 @@ func ParseDNA(r io.Reader, order binary.ByteOrder) (body *DNA, err error) {
 	}
 
 	// Structure identifier.
-	_, err = io.ReadFull(br, rawId)
+	_, err = io.ReadFull(br, rawID)
 	if err != nil {
 		return nil, err
 	}
-	structId := string(rawId)
-	if structId != "STRC" {
-		return nil, fmt.Errorf("block.ParseDNA: invalid structure identifier %q.", structId)
+	structID := string(rawID)
+	if structID != "STRC" {
+		return nil, fmt.Errorf("block.ParseDNA: invalid structure identifier %q.", structID)
 	}
 
 	// Structure count.
