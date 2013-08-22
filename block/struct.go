@@ -22,7 +22,7 @@ var Addr = make(map[uint64]*Block)
 func (addr Pointer) Data() (data interface{}, err error) {
 	blk, ok := Addr[uint64(addr)]
 	if !ok {
-		return nil, fmt.Errorf("Pointer.Data: unable to locate data for pointer %p.", addr)
+		return nil, fmt.Errorf("Pointer.Data: unable to locate data for pointer %#x.", addr)
 	}
 	return blk.Body, nil
 }

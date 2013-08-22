@@ -53,7 +53,7 @@ func Parse(filePath string) (b *Blend, err error) {
 		}
 		_, ok := block.Addr[blk.Hdr.OldAddr]
 		if ok {
-			return nil, fmt.Errorf("blend.Parse: multiple occurances of struct address %p.", blk.Hdr.OldAddr)
+			return nil, fmt.Errorf("blend.Parse: multiple occurances of struct address %#x.", blk.Hdr.OldAddr)
 		}
 		block.Addr[blk.Hdr.OldAddr] = blk
 
