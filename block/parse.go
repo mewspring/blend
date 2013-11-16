@@ -1,4 +1,4 @@
-// NOTE: generated automatically by blendef for Blender v268.
+// NOTE: generated automatically by blendef for Blender v269.
 
 package block
 
@@ -380,41 +380,6 @@ func (blk *Block) ParseBody(order binary.ByteOrder, dna *DNA) (err error) {
 			} else {
 				// Parse block body structure.
 				body := new(BGpic)
-				err = binary.Read(r, order, body)
-				if err != nil {
-					return err
-				}
-				blk.Body = body
-			}
-			/// ### [ tmp ] ###
-			// Verify that all bytes in the block body have been read.
-			buf, err := ioutil.ReadAll(r)
-			if err != nil {
-				return err
-			}
-			if len(buf) > 0 {
-				log.Printf("%d unread bytes in %q.", len(buf), typ)
-				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
-				log.Println(hex.Dump(buf))
-				os.Exit(1)
-			}
-			/// ### [/ tmp ] ###
-		case "BMeshModifierData":
-			if blk.Hdr.Count > 1 {
-				// Parse block body structures.
-				bodies := make([]*BMeshModifierData, blk.Hdr.Count)
-				for i := range bodies {
-					body := new(BMeshModifierData)
-					err = binary.Read(r, order, body)
-					if err != nil {
-						return err
-					}
-					bodies[i] = body
-				}
-				blk.Body = bodies
-			} else {
-				// Parse block body structure.
-				body := new(BMeshModifierData)
 				err = binary.Read(r, order, body)
 				if err != nil {
 					return err
@@ -7679,6 +7644,76 @@ func (blk *Block) ParseBody(order binary.ByteOrder, dna *DNA) (err error) {
 				os.Exit(1)
 			}
 			/// ### [/ tmp ] ###
+		case "MovieTrackingPlaneMarker":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*MovieTrackingPlaneMarker, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(MovieTrackingPlaneMarker)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(MovieTrackingPlaneMarker)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "MovieTrackingPlaneTrack":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*MovieTrackingPlaneTrack, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(MovieTrackingPlaneTrack)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(MovieTrackingPlaneTrack)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
 		case "MovieTrackingReconstruction":
 			if blk.Hdr.Count > 1 {
 				// Parse block body structures.
@@ -9044,6 +9079,41 @@ func (blk *Block) ParseBody(order binary.ByteOrder, dna *DNA) (err error) {
 				os.Exit(1)
 			}
 			/// ### [/ tmp ] ###
+		case "NodePlaneTrackDeformData":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*NodePlaneTrackDeformData, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(NodePlaneTrackDeformData)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(NodePlaneTrackDeformData)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
 		case "NodeScriptDict":
 			if blk.Hdr.Count > 1 {
 				// Parse block body structures.
@@ -9200,6 +9270,41 @@ func (blk *Block) ParseBody(order binary.ByteOrder, dna *DNA) (err error) {
 			} else {
 				// Parse block body structure.
 				body := new(NodeShaderTangent)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "NodeShaderVectTransform":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*NodeShaderVectTransform, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(NodeShaderVectTransform)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(NodeShaderVectTransform)
 				err = binary.Read(r, order, body)
 				if err != nil {
 					return err
