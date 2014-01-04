@@ -12,8 +12,8 @@ Documentation
 
 Documentation provided by GoDoc.
 
-- [blend][]
-	- [block][]
+- [blend][]: implements parsing of Blender files.
+	- [block][]: implements parsing of blend file blocks.
 
 [blend]: http://godoc.org/github.com/mewmew/blend
 [block]: http://godoc.org/github.com/mewmew/blend/block
