@@ -4564,6 +4564,41 @@ func (blk *Block) ParseBody(order binary.ByteOrder, dna *DNA) (err error) {
 				os.Exit(1)
 			}
 			/// ### [/ tmp ] ###
+		case "LaplacianDeformModifierData":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LaplacianDeformModifierData, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LaplacianDeformModifierData)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LaplacianDeformModifierData)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
 		case "LaplacianSmoothModifierData":
 			if blk.Hdr.Count > 1 {
 				// Parse block body structures.
@@ -5735,6 +5770,41 @@ func (blk *Block) ParseBody(order binary.ByteOrder, dna *DNA) (err error) {
 			} else {
 				// Parse block body structure.
 				body := new(ListBase)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "LodLevel":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*LodLevel, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(LodLevel)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(LodLevel)
 				err = binary.Read(r, order, body)
 				if err != nil {
 					return err
@@ -10374,6 +10444,41 @@ func (blk *Block) ParseBody(order binary.ByteOrder, dna *DNA) (err error) {
 				os.Exit(1)
 			}
 			/// ### [/ tmp ] ###
+		case "PanelCategoryStack":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*PanelCategoryStack, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(PanelCategoryStack)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(PanelCategoryStack)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
 		case "PartDeflect":
 			if blk.Hdr.Count > 1 {
 				// Parse block body structures.
@@ -14434,6 +14539,41 @@ func (blk *Block) ParseBody(order binary.ByteOrder, dna *DNA) (err error) {
 				os.Exit(1)
 			}
 			/// ### [/ tmp ] ###
+		case "WalkNavigation":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*WalkNavigation, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(WalkNavigation)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(WalkNavigation)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
 		case "WarpModifierData":
 			if blk.Hdr.Count > 1 {
 				// Parse block body structures.
@@ -14660,6 +14800,41 @@ func (blk *Block) ParseBody(order binary.ByteOrder, dna *DNA) (err error) {
 			} else {
 				// Parse block body structure.
 				body := new(WipeVars)
+				err = binary.Read(r, order, body)
+				if err != nil {
+					return err
+				}
+				blk.Body = body
+			}
+			/// ### [ tmp ] ###
+			// Verify that all bytes in the block body have been read.
+			buf, err := ioutil.ReadAll(r)
+			if err != nil {
+				return err
+			}
+			if len(buf) > 0 {
+				log.Printf("%d unread bytes in %q.", len(buf), typ)
+				log.Printf("blk.Hdr: %#v\n", blk.Hdr)
+				log.Println(hex.Dump(buf))
+				os.Exit(1)
+			}
+			/// ### [/ tmp ] ###
+		case "WireframeModifierData":
+			if blk.Hdr.Count > 1 {
+				// Parse block body structures.
+				bodies := make([]*WireframeModifierData, blk.Hdr.Count)
+				for i := range bodies {
+					body := new(WireframeModifierData)
+					err = binary.Read(r, order, body)
+					if err != nil {
+						return err
+					}
+					bodies[i] = body
+				}
+				blk.Body = bodies
+			} else {
+				// Parse block body structure.
+				body := new(WireframeModifierData)
 				err = binary.Read(r, order, body)
 				if err != nil {
 					return err
