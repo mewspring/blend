@@ -46,11 +46,11 @@ Examples
 
 * Parse a single block in a blend file.
 
-	http://godoc.org/github.com/mewmew/blend#_example_Blend
+	http://godoc.org/github.com/mewmew/blend#example_Blend
 
 * Parse all blocks in a blend file and access the data of a pointer.
 
-	http://godoc.org/github.com/mewmew/blend/block#_example_Pointer
+	http://godoc.org/github.com/mewmew/blend/block#example_Pointer
 
 Self-describing format
 ----------------------
