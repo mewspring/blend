@@ -110,6 +110,11 @@ func genStruct(b *blend.Blend, dna *block.DNA) (err error) {
 				return err
 			}
 			name = strings.Title(name)
+			if strings.HasPrefix(name, "_") {
+				// Somewhat ugly fix for the following binary.Read error:
+				//    "reflect: reflect.Value.SetInt using value obtained using unexported field"
+				name = "X" + name
+			}
 
 			typ := field.Type
 			def, ok := basic[typ]

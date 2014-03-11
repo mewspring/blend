@@ -489,7 +489,7 @@ type VoxelData struct {
 	Smoked_type    int16
 	Data_type      int16
 	Pad            int16
-	_pad           int32
+	X_pad          int32
 	Object         Pointer // *Object
 	Int_multiplier float32
 	Still_frame    int32
@@ -1013,7 +1013,8 @@ type Curve struct {
 	Resolu_ren      int16
 	Resolv_ren      int16
 	Actnu           int32
-	Lastsel         Pointer // *struct{}
+	Actvert         int32
+	Pad             [4]int8
 	Lines           int16
 	Spacemode       int8
 	Pad1            int8
@@ -1047,7 +1048,7 @@ type Curve struct {
 	Ctime           float32
 	Bevfac1         float32
 	Bevfac2         float32
-	Pad             [4]int8
+	Pad2            [4]int8
 }
 
 // SDNA index: 48
@@ -1740,7 +1741,8 @@ type ShrinkwrapModifierData struct {
 	Vgroup_name   [64]int8
 	KeepDist      float32
 	ShrinkType    int16
-	ShrinkOpts    int16
+	ShrinkOpts    int8
+	Pad1          int8
 	ProjLimit     float32
 	ProjAxis      int8
 	SubsurfLevels int8
@@ -2697,20 +2699,20 @@ type AudioData struct {
 
 // SDNA index: 157
 type SceneRenderLayer struct {
-	Next            Pointer // *SceneRenderLayer
-	Prev            Pointer // *SceneRenderLayer
-	Name            [64]int8
-	Mat_override    Pointer // *Material
-	Light_override  Pointer // *Group
-	Lay             int32
-	Lay_zmask       int32
-	Lay_exclude     int32
-	Layflag         int32
-	Passflag        int32
-	Pass_xor        int32
-	Samples         int32
-	Pad             int32
-	FreestyleConfig FreestyleConfig
+	Next                 Pointer // *SceneRenderLayer
+	Prev                 Pointer // *SceneRenderLayer
+	Name                 [64]int8
+	Mat_override         Pointer // *Material
+	Light_override       Pointer // *Group
+	Lay                  int32
+	Lay_zmask            int32
+	Lay_exclude          int32
+	Layflag              int32
+	Passflag             int32
+	Pass_xor             int32
+	Samples              int32
+	Pass_alpha_threshold float32
+	FreestyleConfig      FreestyleConfig
 }
 
 // SDNA index: 158
@@ -2779,7 +2781,8 @@ type RenderData struct {
 	Subimtype              int16
 	Quality                int16
 	Displaymode            int16
-	Pad7                   int16
+	Use_lock_interface     int8
+	Pad7                   int8
 	Scemode                int32
 	Mode                   int32
 	Raytrace_options       int32
@@ -3065,14 +3068,14 @@ type UnifiedPaintSettings struct {
 // SDNA index: 175
 type MeshStatVis struct {
 	Type              int8
-	_pad1             [2]int8
+	X_pad1            [2]int8
 	Overhang_axis     int8
 	Overhang_min      float32
 	Overhang_max      float32
 	Thickness_min     float32
 	Thickness_max     float32
 	Thickness_samples int8
-	_pad2             [3]int8
+	X_pad2            [3]int8
 	Distort_min       float32
 	Distort_max       float32
 	Sharp_min         float32
@@ -6600,16 +6603,18 @@ type CurveMapPoint struct {
 
 // SDNA index: 418
 type CurveMap struct {
-	Totpoint    int16
-	Flag        int16
-	Range       float32
-	Mintable    float32
-	Maxtable    float32
-	Ext_in      [2]float32
-	Ext_out     [2]float32
-	Curve       Pointer // *CurveMapPoint
-	Table       Pointer // *CurveMapPoint
-	Premultable Pointer // *CurveMapPoint
+	Totpoint       int16
+	Flag           int16
+	Range          float32
+	Mintable       float32
+	Maxtable       float32
+	Ext_in         [2]float32
+	Ext_out        [2]float32
+	Curve          Pointer // *CurveMapPoint
+	Table          Pointer // *CurveMapPoint
+	Premultable    Pointer // *CurveMapPoint
+	Premul_ext_in  [2]float32
+	Premul_ext_out [2]float32
 }
 
 // SDNA index: 419
@@ -7077,7 +7082,7 @@ type ParticleSystem struct {
 	Pdd                 Pointer // *ParticleDrawData
 	Frand               Pointer // *float32
 	Dt_frac             float32
-	_pad                float32
+	X_pad               float32
 }
 
 // SDNA index: 441
@@ -7095,6 +7100,7 @@ type ClothSimSettings struct {
 	Max_bend          float32
 	Max_struct        float32
 	Max_shear         float32
+	Max_sewing        float32
 	Avg_spring_len    float32
 	Timescale         float32
 	Maxgoal           float32
@@ -7107,6 +7113,8 @@ type ClothSimSettings struct {
 	Velocity_smooth   float32
 	Collider_friction float32
 	Vel_damping       float32
+	Shrink_min        float32
+	Shrink_max        float32
 	StepsPerFrame     int32
 	Flags             int32
 	Preroll           int32
@@ -7115,10 +7123,11 @@ type ClothSimSettings struct {
 	Vgroup_bend       int16
 	Vgroup_mass       int16
 	Vgroup_struct     int16
+	Vgroup_shrink     int16
 	Shapekey_rest     int16
 	Presets           int16
 	Reset             int16
-	Pad               int16
+	Pad               [4]int8
 	Effector_weights  Pointer // *EffectorWeights
 }
 
@@ -7205,25 +7214,27 @@ type ReportList struct {
 
 // SDNA index: 449
 type WmWindowManager struct {
-	Id            ID
-	Windrawable   Pointer // *WmWindow
-	Winactive     Pointer // *WmWindow
-	Windows       ListBase
-	Initialized   int32
-	File_saved    int16
-	Op_undo_depth int16
-	Operators     ListBase
-	Queue         ListBase
-	Reports       ReportList
-	Jobs          ListBase
-	Paintcursors  ListBase
-	Drags         ListBase
-	Keyconfigs    ListBase
-	Defaultconf   Pointer // *WmKeyConfig
-	Addonconf     Pointer // *WmKeyConfig
-	Userconf      Pointer // *WmKeyConfig
-	Timers        ListBase
-	Autosavetimer Pointer // *WmTimer
+	Id                  ID
+	Windrawable         Pointer // *WmWindow
+	Winactive           Pointer // *WmWindow
+	Windows             ListBase
+	Initialized         int32
+	File_saved          int16
+	Op_undo_depth       int16
+	Operators           ListBase
+	Queue               ListBase
+	Reports             ReportList
+	Jobs                ListBase
+	Paintcursors        ListBase
+	Drags               ListBase
+	Keyconfigs          ListBase
+	Defaultconf         Pointer // *WmKeyConfig
+	Addonconf           Pointer // *WmKeyConfig
+	Userconf            Pointer // *WmKeyConfig
+	Timers              ListBase
+	Autosavetimer       Pointer // *WmTimer
+	Is_interface_locked int8
+	Par                 [7]int8
 }
 
 // SDNA index: 450
@@ -7414,7 +7425,7 @@ type FMod_Noise struct {
 	Size         float32
 	Strength     float32
 	Phase        float32
-	Pad          float32
+	Offset       float32
 	Depth        int16
 	Modification int16
 }
@@ -7988,12 +7999,12 @@ type MovieTrackingSettings struct {
 	Default_margin              int16
 	Default_pattern_match       int16
 	Default_flag                int16
+	Default_weight              float32
 	Motion_flag                 int16
 	Speed                       int16
 	Keyframe1                   int32
 	Keyframe2                   int32
 	Reconstruction_flag         int32
-	Pad                         int32
 	Refine_camera_intrinsics    int16
 	Pad2                        int16
 	Dist                        float32

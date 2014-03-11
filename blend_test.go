@@ -30,5 +30,5 @@ func ExampleBlend() {
 	fmt.Printf("%#v\n", blk.Body)
 
 	// Output:
-	// &block.ScrVert{Next:0x0, Prev:0x49ced28, Newv:0x0, Vec:block.Vec2s{X:1920, Y:1053}, Flag:1, Editflag:1}
+	// &block.ScrVert{Next:0x0, Prev:0x4de9208, Newv:0x0, Vec:block.Vec2s{X:1920, Y:1053}, Flag:1, Editflag:1}
 }

@@ -1,8 +1,8 @@
 // Package block implements parsing of blend file blocks.
 //
 // One unique feature of blend files is that they contain a full definition of
-// every structure used in it's file blocks. The structure definitions are
-// stored in the DNA block.
+// every structure used in its file blocks. The structure definitions are stored
+// in the DNA block.
 //
 // All block structure definitions ("struct.go") and the block parsing logic
 // ("parse.go") have been generating by parsing the DNA block of
