@@ -15,7 +15,7 @@ const BlenderVer = 269
 type Pointer uint64
 
 // Addr is a map from the memory address of a structure (when it was written to
-// disk) to it's file block.
+// disk) to its file block.
 var Addr = make(map[uint64]*Block)
 
 // Data translates the memory address into a usable pointer and returns it.

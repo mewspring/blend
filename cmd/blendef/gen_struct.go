@@ -236,7 +236,7 @@ func parseName(s string) (name string, isFunc bool, ptrCount int, arraySizes []i
 }
 
 const pointerCode = `// Addr is a map from the memory address of a structure (when it was written to
-// disk) to it's file block.
+// disk) to its file block.
 var Addr = make(map[uint64]*Block)
 
 // Data translates the memory address into a usable pointer and returns it.
