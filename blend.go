@@ -53,7 +53,7 @@ func Parse(filePath string) (b *Blend, err error) {
 		}
 		_, ok := block.Addr[blk.Hdr.OldAddr]
 		if ok {
-			return nil, fmt.Errorf("blend.Parse: multiple occurances of struct address %#x.", blk.Hdr.OldAddr)
+			return nil, fmt.Errorf("blend.Parse: multiple occurances of struct address %#x", blk.Hdr.OldAddr)
 		}
 		block.Addr[blk.Hdr.OldAddr] = blk
 
@@ -100,7 +100,7 @@ func (b *Blend) GetDNA() (dna *block.DNA, err error) {
 			// Parse the DNA block body and store it in blk.Body.
 			r, ok := blk.Body.(io.Reader)
 			if !ok {
-				return nil, errors.New("Blend.GetDNA: unable to locate DNA block body reader.")
+				return nil, errors.New("Blend.GetDNA: unable to locate DNA block body reader")
 			}
 			dna, err = block.ParseDNA(r, b.Hdr.Order)
 			if err != nil {
@@ -110,7 +110,7 @@ func (b *Blend) GetDNA() (dna *block.DNA, err error) {
 			return dna, nil
 		}
 	}
-	return nil, errors.New("Blend.GetDNA: unable to locate DNA block.")
+	return nil, errors.New("Blend.GetDNA: unable to locate DNA block")
 }
 
 // A Header is present at the beginning of each blend file.
@@ -141,7 +141,7 @@ func ParseHeader(r io.Reader) (hdr *Header, err error) {
 	// File identifier.
 	magic := string(buf[0:7])
 	if magic != "BLENDER" {
-		return nil, fmt.Errorf("blend.ParseHeader: invalid file identifier %q.", magic)
+		return nil, fmt.Errorf("blend.ParseHeader: invalid file identifier %q", magic)
 	}
 
 	// Pointer size.
@@ -155,7 +155,7 @@ func ParseHeader(r io.Reader) (hdr *Header, err error) {
 		// - = 8 byte pointer
 		hdr.PtrSize = 8
 	default:
-		return nil, fmt.Errorf("blend.ParseHeader: invalid pointer size character '%c'.", size)
+		return nil, fmt.Errorf("blend.ParseHeader: invalid pointer size character '%c'", size)
 	}
 
 	// Byte order.
@@ -168,7 +168,7 @@ func ParseHeader(r io.Reader) (hdr *Header, err error) {
 		// V = big endian
 		hdr.Order = binary.BigEndian
 	default:
-		return nil, fmt.Errorf("blend.ParseHeader: invalid byte order character '%c'.", order)
+		return nil, fmt.Errorf("blend.ParseHeader: invalid byte order character '%c'", order)
 	}
 
 	// Version.

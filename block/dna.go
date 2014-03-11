@@ -61,7 +61,7 @@ func ParseDNA(r io.Reader, order binary.ByteOrder) (body *DNA, err error) {
 	}
 	id := string(rawID)
 	if id != "SDNA" {
-		return nil, fmt.Errorf("block.ParseDNA: invalid identifier %q.", id)
+		return nil, fmt.Errorf("block.ParseDNA: invalid identifier %q", id)
 	}
 
 	// Name identifier.
@@ -71,7 +71,7 @@ func ParseDNA(r io.Reader, order binary.ByteOrder) (body *DNA, err error) {
 	}
 	nameID := string(rawID)
 	if nameID != "NAME" {
-		return nil, fmt.Errorf("block.ParseDNA: invalid name identifier %q.", nameID)
+		return nil, fmt.Errorf("block.ParseDNA: invalid name identifier %q", nameID)
 	}
 
 	// Name count.
@@ -106,7 +106,7 @@ func ParseDNA(r io.Reader, order binary.ByteOrder) (body *DNA, err error) {
 	}
 	typeID := string(rawID)
 	if typeID != "TYPE" {
-		return nil, fmt.Errorf("block.ParseDNA: invalid type identifier %q.", typeID)
+		return nil, fmt.Errorf("block.ParseDNA: invalid type identifier %q", typeID)
 	}
 
 	// Type count.
@@ -139,7 +139,7 @@ func ParseDNA(r io.Reader, order binary.ByteOrder) (body *DNA, err error) {
 	}
 	lenID := string(rawID)
 	if lenID != "TLEN" {
-		return nil, fmt.Errorf("block.ParseDNA: invalid type length identifier %q.", lenID)
+		return nil, fmt.Errorf("block.ParseDNA: invalid type length identifier %q", lenID)
 	}
 
 	// Type sizes.

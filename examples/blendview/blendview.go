@@ -50,7 +50,7 @@ func blendview(filePath string) (err error) {
 		}
 		buf, ok := blk.Body.([]byte)
 		if !ok {
-			return fmt.Errorf("blendview: invalid body type of %q block; expected []byte, got %T.", blk.Hdr.Code, blk.Body)
+			return fmt.Errorf("blendview: invalid body type of %q block; expected []byte, got %T", blk.Hdr.Code, blk.Body)
 		}
 		t, err := NewThumb(buf)
 		if err != nil {
@@ -64,7 +64,7 @@ func blendview(filePath string) (err error) {
 		fmt.Println("Created:", thumbPath)
 		return nil
 	}
-	return fmt.Errorf("unable to locate %q block in %q.", block.CodeTEST, filePath)
+	return fmt.Errorf("unable to locate %q block in %q", block.CodeTEST, filePath)
 }
 
 // Thumb is a thumbnail image based on the body of a TEST block.
@@ -81,7 +81,7 @@ type Thumb struct {
 // NewThumb returns an image.Image based on the body of a TEST block.
 func NewThumb(buf []byte) (t *Thumb, err error) {
 	if len(buf) < 8 {
-		return nil, fmt.Errorf("NewThumb: %q block body length (%d) below 8.", block.CodeTEST, len(buf))
+		return nil, fmt.Errorf("NewThumb: %q block body length (%d) below 8", block.CodeTEST, len(buf))
 	}
 	t = &Thumb{
 		w:   int(binary.LittleEndian.Uint32(buf)),
@@ -91,7 +91,7 @@ func NewThumb(buf []byte) (t *Thumb, err error) {
 	// Verify length of pix buf.
 	want := 4 * t.w * t.h
 	if len(t.pix) != want {
-		return nil, fmt.Errorf("NewThumb: invalid pix buf length; expected %d got %d.", want, len(t.pix))
+		return nil, fmt.Errorf("NewThumb: invalid pix buf length; expected %d got %d", want, len(t.pix))
 	}
 	return t, nil
 }
