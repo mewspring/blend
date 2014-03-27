@@ -7080,7 +7080,6 @@ type ParticleSystem struct {
 	Tree                Pointer // *KDTree
 	Bvhtree             Pointer // *BVHTree
 	Pdd                 Pointer // *ParticleDrawData
-	Frand               Pointer // *float32
 	Dt_frac             float32
 	X_pad               float32
 }
