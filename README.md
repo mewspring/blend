@@ -1,6 +1,10 @@
 blend
 =====
 
+[![Build Status](https://travis-ci.org/mewmew/blend.svg?branch=master)](https://travis-ci.org/mewmew/blend)
+[![Coverage Status](https://img.shields.io/coveralls/mewmew/blend.svg)](https://coveralls.io/r/mewmew/blend?branch=master)
+[![GoDoc](https://godoc.org/github.com/mewmew/blend?status.svg)](https://godoc.org/github.com/mewmew/blend)
+
 This package provides support for reading [blend][1] files, which are used by
 [Blender][].
 
