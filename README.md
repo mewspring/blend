@@ -24,7 +24,7 @@ Installation
 	go get github.com/mewmew/blend
 
 To parse more complex blend files "block/struct.go" and "block/parse.go" may
-have to be regenereted. To regenerate these two files for any given blend file,
+need to be regenereted. To regenerate these two files for any given blend file,
 use the *blendef* tool.
 
 	go get github.com/mewmew/blend/cmd/blendef
