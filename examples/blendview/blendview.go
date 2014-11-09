@@ -1,4 +1,4 @@
-// blendview extracts embedded thumbnails from blend files.
+// blendview is a tool which extracts embedded thumbnails from blend files.
 package main
 
 import (
