@@ -1,3 +1,5 @@
+// blendef regenerates the block structure definitions and the block parsing
+// logic of the block package.
 package main
 
 import (

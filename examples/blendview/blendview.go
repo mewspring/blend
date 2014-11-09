@@ -1,3 +1,4 @@
+// blendview extracts embedded thumbnails from blend files.
 package main
 
 import (
