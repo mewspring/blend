@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/mewmew/blend"
-	"github.com/mewmew/blend/block"
+	"github.com/mewspring/blend"
+	"github.com/mewspring/blend/block"
 )
 
 // predef maps C types to untyped Go types.

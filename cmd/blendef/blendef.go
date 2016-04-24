@@ -8,7 +8,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/mewmew/blend"
+	"github.com/mewspring/blend"
 )
 
 func init() {

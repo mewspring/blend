@@ -10,7 +10,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/mewmew/blend/block"
+	"github.com/mewspring/blend/block"
 )
 
 // Blend represents the information contained within a blend file. It contains a
@@ -184,7 +184,7 @@ func ParseHeader(r io.Reader) (hdr *Header, err error) {
 				log.Println("[1]: http://www.blender.org/")
 			} else {
 				log.Println("The block package Blender version is too old. Use blendef [1] to regenerate the block package.")
-				log.Println("[1]: go get github.com/mewmew/blend/cmd/blendef")
+				log.Println("[1]: go get github.com/mewspring/blend/cmd/blendef")
 			}
 		}
 	}

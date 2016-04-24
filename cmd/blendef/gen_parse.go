@@ -6,8 +6,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/mewmew/blend"
-	"github.com/mewmew/blend/block"
+	"github.com/mewspring/blend"
+	"github.com/mewspring/blend/block"
 )
 
 // genParse generates the block parser logic required to parse the provided

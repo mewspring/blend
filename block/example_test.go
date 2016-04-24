@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/mewmew/blend"
-	"github.com/mewmew/blend/block"
+	"github.com/mewspring/blend"
+	"github.com/mewspring/blend/block"
 )
 
 func ExamplePointer() {
